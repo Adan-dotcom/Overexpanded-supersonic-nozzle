@@ -1,0 +1,19 @@
+{
+  "source_wall_file": "wall_relax2_npr100.vtk",
+  "iteration": 6000,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.1210852984468006
+  ],
+  "persistent_reattachment_crossings_m": [],
+  "provisional_shock_pressure_rise_x_m": 0.1211093,
+  "su2_cf_reference_dynamic_pressure_pa": 3.11556464388,
+  "wall_shear_min_pa": -634.27701605839,
+  "wall_shear_max_pa": 14075.361309641896,
+  "yplus_median": 0.08466516,
+  "yplus_p95": 0.6728006,
+  "yplus_max": 1.350749,
+  "wall_pressure_min_pa": 28909.0,
+  "wall_pressure_max_pa": 2287052.0
+}

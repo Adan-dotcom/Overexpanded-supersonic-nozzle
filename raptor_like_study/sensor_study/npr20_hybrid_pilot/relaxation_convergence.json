@@ -1,0 +1,27 @@
+{
+  "checkpoint_count": 512,
+  "last_iteration": 5613,
+  "last_time_us": 162.82500000000002,
+  "last_features": {
+    "iteration": 5613,
+    "time_us": 162.82500000000002,
+    "separation_x_mm": 35.801848980621784,
+    "reattachment_x_mm": 54.02799132455255,
+    "shock_x_mm": 84.29204999999999,
+    "wall_shear_min_kpa": -0.8125257975165135,
+    "wall_pressure_max_bar": 21.70972,
+    "yplus_p95": 0.6042036150000003
+  },
+  "last_10_checkpoint_span": {
+    "physical_time_us": 2.075000000000017,
+    "separation_x_range_mm": 0.019338350735800702,
+    "shock_x_range_mm": 49.48887000000001,
+    "wall_shear_min_range_kpa": 0.04923519531054665
+  },
+  "criteria": {
+    "window_checkpoint_count": 10,
+    "separation_x_range_mm_max": 0.05,
+    "shock_x_range_mm_max": 0.2
+  },
+  "feature_plateau": false
+}

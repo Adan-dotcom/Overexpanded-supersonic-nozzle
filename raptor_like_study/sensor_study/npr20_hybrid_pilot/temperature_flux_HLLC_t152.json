@@ -1,0 +1,44 @@
+{
+  "source": "flow_npr20_flux_HLLC_00152.vtk",
+  "inlet_total_temperature_k": 3485.33,
+  "static_temperature_max": {
+    "value_k": 5360.502,
+    "x_m": 0.133038,
+    "r_m": 0.03222484,
+    "mach": 0.7704206,
+    "pressure_pa": 476868.1,
+    "density_kg_m3": 0.2277513,
+    "velocity_m_s": [
+      -1219.057,
+      -55.7803,
+      0.0
+    ],
+    "local_total_temperature_k": 5675.959617564244,
+    "stored_energy_density_j_m3": 2574994.0,
+    "reconstructed_energy_density_j_m3": 2574437.6836482845
+  },
+  "local_total_temperature_max": {
+    "value_k": 5741.474264949008,
+    "x_m": 0.1330967,
+    "r_m": 0.03308887,
+    "static_temperature_k": 5220.279,
+    "mach": 1.003491
+  },
+  "spatial_split": {
+    "inside_nozzle_static_temperature_max_k": 4504.146,
+    "inside_nozzle_static_temperature_max_location_m": [
+      0.1244661,
+      0.0
+    ],
+    "inside_nozzle_total_temperature_max_k": 4618.057218381749,
+    "inside_nozzle_total_temperature_max_location_m": [
+      0.1244661,
+      0.0
+    ],
+    "downstream_plume_static_temperature_max_k": 5360.502,
+    "downstream_plume_total_temperature_max_k": 5741.474264949008
+  },
+  "point_fraction_static_temperature_above_inlet_t0": 0.14481120759967375,
+  "point_fraction_total_temperature_above_inlet_t0": 0.3127572806217915,
+  "interpretation": "A local total temperature above the prescribed inlet total temperature demonstrates that the overshoot is in the computed energy field, not only the static-temperature plot."
+}

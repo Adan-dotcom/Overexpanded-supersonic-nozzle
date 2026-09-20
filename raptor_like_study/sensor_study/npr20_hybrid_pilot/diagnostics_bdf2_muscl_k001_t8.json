@@ -1,0 +1,21 @@
+{
+  "source_wall_file": "wall_npr20_bdf2_muscl_cal_k001_00008.vtk",
+  "iteration": 8,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.12367082545854649
+  ],
+  "persistent_reattachment_crossings_m": [
+    0.12500369280003842
+  ],
+  "provisional_shock_pressure_rise_x_m": 0.1246288,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -2328.5791971856697,
+  "wall_shear_max_pa": 13038.975417233381,
+  "yplus_median": 0.09142783,
+  "yplus_p95": 0.215846685,
+  "yplus_max": 0.775778,
+  "wall_pressure_min_pa": 18760.82,
+  "wall_pressure_max_pa": 2071765.0
+}

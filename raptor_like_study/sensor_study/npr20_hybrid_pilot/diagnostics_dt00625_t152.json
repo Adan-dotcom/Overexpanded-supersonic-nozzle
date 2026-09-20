@@ -1,0 +1,21 @@
+{
+  "source_wall_file": "wall_npr20_dt00625_SLAU2_bdf2_00152.vtk",
+  "iteration": 152,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.11894486079586003
+  ],
+  "persistent_reattachment_crossings_m": [
+    0.12456282178188634
+  ],
+  "provisional_shock_pressure_rise_x_m": 0.1191578,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -32679.65314929724,
+  "wall_shear_max_pa": 14860.833499100518,
+  "yplus_median": 0.07018684,
+  "yplus_p95": 0.6772417650000008,
+  "yplus_max": 1.738458,
+  "wall_pressure_min_pa": 39107.5,
+  "wall_pressure_max_pa": 2185776.0
+}

@@ -1,0 +1,1 @@
+case_id,geometry_id,area_ratio,throat_radius_m,divergent_length_m,chamber_pressure_pa,chamber_temperature_k,back_pressure_pa,of_ratio,chemistry_model,turbulence_model,wall_temperature_k,reynolds_throat,separated,x_sep_m,x_reattach_m,shock_x_m,wall_pressure_rms_pa,side_load_rms_n,mesh_cells,converged

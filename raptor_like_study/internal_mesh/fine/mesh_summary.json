@@ -1,0 +1,25 @@
+{
+  "profile": "fine",
+  "purpose": "equilibrium-products internal-nozzle RANS",
+  "topology": "wall-normal clustered structured quadrilaterals",
+  "contour_file": "D:\\PRUEBA SU2_2026\\DLR_PAR_full_contour.csv",
+  "settings": {
+    "axial_cells": 3200,
+    "radial_cells": 320,
+    "first_wall_cell_m": 2.5e-07
+  },
+  "inlet_growth_ratio": 1.0238940562248304,
+  "exit_growth_ratio": 1.0275823518656018,
+  "nodes": 1027904,
+  "elements_2d": {
+    "Quadrilateral 4": 1024000
+  },
+  "min_scaled_jacobian": 0.9951277841090149,
+  "mean_scaled_jacobian": 0.9996439067067104,
+  "boundaries": [
+    "WALL",
+    "INLET",
+    "AXIS",
+    "OUTLET"
+  ]
+}

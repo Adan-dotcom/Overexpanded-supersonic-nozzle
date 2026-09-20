@@ -1,0 +1,81 @@
+{
+  "case_id": "effective_ideal_npr20",
+  "stage": "production",
+  "all_checks_pass": false,
+  "physics_accepted": false,
+  "training_eligible": false,
+  "screening_survivor": null,
+  "failed_checks": [
+    "relative_mass_imbalance",
+    "relative_total_energy_flux_imbalance",
+    "local_total_enthalpy_overshoot_fraction"
+  ],
+  "checks": {
+    "solver_exit_success": {
+      "value": true,
+      "pass": true
+    },
+    "finite_values_everywhere": {
+      "value": true,
+      "pass": true
+    },
+    "nonpositive_density_pressure_temperature_points": {
+      "value": 0,
+      "pass": true
+    },
+    "lut_out_of_domain_points": {
+      "value": 0,
+      "pass": true
+    },
+    "relative_mass_imbalance": {
+      "value": null,
+      "criterion": "max 0.005",
+      "pass": false
+    },
+    "relative_total_energy_flux_imbalance": {
+      "value": null,
+      "criterion": "max 0.01",
+      "pass": false
+    },
+    "local_total_enthalpy_overshoot_fraction": {
+      "value": 0.149356,
+      "criterion": "max 0.01",
+      "pass": false
+    },
+    "inner_residual_drop_decades": {
+      "value": 2.0,
+      "criterion": "min 2.0",
+      "pass": true
+    },
+    "wall_y_plus_p95": {
+      "value": 0.30127,
+      "criterion": "max 1.0",
+      "pass": true
+    },
+    "wall_y_plus_max": {
+      "value": 0.711697,
+      "criterion": "max 2.0",
+      "pass": true
+    },
+    "separation_persistence_m": {
+      "value": 0.001,
+      "criterion": "min 0.001",
+      "pass": true
+    },
+    "flow_through_times_before_sampling": {
+      "value": 3.8,
+      "criterion": "min 3.0",
+      "pass": true
+    },
+    "x_sep_final_window_drift_m": {
+      "value": 1.0498e-05,
+      "criterion": "max 0.0001",
+      "pass": true
+    },
+    "medium_fine_x_sep_difference_m": {
+      "value": 6.908e-06,
+      "criterion": "max 0.0003",
+      "pass": true
+    }
+  }
+}

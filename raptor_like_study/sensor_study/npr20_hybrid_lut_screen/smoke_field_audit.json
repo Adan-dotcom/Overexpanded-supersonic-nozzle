@@ -1,0 +1,23 @@
+{
+  "case": "npr20_hybrid_lut_smoke",
+  "purpose": "software_feasibility_only",
+  "iterations": 105,
+  "solver_exit_success": true,
+  "finite_solution": true,
+  "positive_density_pressure_temperature": true,
+  "minimum_density_kg_m3": 0.0277207,
+  "minimum_pressure_Pa": 17909.07,
+  "maximum_pressure_Pa": 5356784.0,
+  "minimum_temperature_K": 283.3063,
+  "maximum_temperature_K": 3503.614,
+  "lut_out_of_domain_points": 0,
+  "minimum_total_enthalpy_J_kg": -10663904.615096074,
+  "maximum_total_enthalpy_J_kg": -773716.8310163493,
+  "wall_y_plus_p95": 3.1098080999999964,
+  "wall_y_plus_max": 7.586243,
+  "negative_cf_runs": [],
+  "persistent_separation_runs": [],
+  "physics_accepted": false,
+  "training_eligible": false,
+  "limitation": "single equilibrium-products LUT also represents the exterior; ambient is not air"
+}

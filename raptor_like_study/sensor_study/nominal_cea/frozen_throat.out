@@ -1,0 +1,83 @@
+
+ problem rocket frozen nfz=2
+   p,bar=52.0
+   o/f=3.20
+   supar=30.0
+ reactant
+   fuel CH4(L) wt%=100 t(k)=111.66
+   oxid O2(L) wt%=100 t(k)=90.17
+ only CO CO2 H H2 H2O H2O2 HO2 O O2 OH CH4
+ output massf transport trace=1e-8
+ end
+
+THEORETICAL ROCKET PERFORMANCE ASSUMING FROZEN
+COMPOSITION DURING EXPANSION FROM INFINITE AREA COMBUSTOR
+ 
+Pc =  52.00 bar
+ 
+supar =    30.0000
+ 
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     CH4(L)            100.000  -89233.000    111.66
+     O2(L)             100.000  -12979.000     90.17
+ 
+O/F =    3.20000    % Fuel =  23.80952    r, Eq. Ratio =  1.24664    phi, Eq. Ratio =  1.24664
+ 
+
+                        CHAMBER       THROAT         EXIT
+ Pinf/P                  1.0000       1.7289      363.056
+ P, bar                 52.0000      30.0769       0.1432
+ T, K                   3485.36      3312.09      1267.00
+ Density, kg/m^3      0.3772E+1    0.2325E+1    0.2894E-1
+ H, kJ/kg             -1633.393    -2364.634    -6876.308
+ U, kJ/kg             -3012.071    -3658.342    -7371.199
+ G, kJ/kg             -45197.38    -43762.95    -22712.68
+ S, kJ/kg-K              12.499       12.499       12.499
+ 
+ M, (1/n)               21.0194      21.2864      21.2864
+ Cp, kJ/(kg-K)           6.8530       6.5061       1.9493
+ Gamma_s                 1.1327       1.1305       1.2506
+ Son. Vel., m/s         1249.63      1209.33       786.70
+ Mach                    0.0000       1.0000       4.1161
+ 
+ TRANSPORT PROPERTIES (GASES ONLY)
+    CONDUCTIVITY IN UNITS OF MILLIWATTS/(CM)(K)
+ 
+  Visc, Millipois        1.1072       1.0707       0.5190
+ 
+ WITH FROZEN REACTIONS
+  Cp, kJ/(kg-K)          2.3732       2.3604       1.9493
+  Conductivity           3.9310       3.7506       1.4112
+  Prandtl Number         0.6684       0.6738       0.7169
+ 
+ 
+ PERFORMANCE PARAMETERS
+ 
+ Ae/At                                1.0000      30.0000
+ C*, m/s                             1849.53      1849.53
+ Cf                                   0.6539       1.7508
+ Ivac, m/s                           2279.10      3391.01
+ Isp, m/s                            1209.33      3238.18
+ 
+MASS FRACTIONS
+ 
+ CO                    0.254593
+ CO2                   0.253152
+ H                     0.001023
+ H2                    0.009340
+ H2O                   0.421648
+ H2O2                  1.248E-5
+ HO2                   6.613E-5
+ O                     0.004369
+ O2                    0.017142
+ OH                    0.038654
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MASS FRACTIONS
+WERE LESS THAN 1.000000E-08 FOR ALL ASSIGNED CONDITIONS
+
+ CH4            
+
+NOTE. WEIGHT FRACTION OF FUEL IN TOTAL FUELS AND OF OXIDANT IN TOTAL OXIDANTS
+

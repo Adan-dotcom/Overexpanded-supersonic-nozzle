@@ -1,0 +1,496 @@
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 8.5.0 "Harrier"                           |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Computational Fluid Dynamics Code)         |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Project Website: https://su2code.github.io                        |
+|                                                                       |
+| The SU2 Project is maintained by the SU2 Foundation                   |
+| (http://su2foundation.org)                                            |
+-------------------------------------------------------------------------
+| Copyright 2012-2026, SU2 Contributors                                 |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+Parsing config file for zone 0
+
+----------------- Physical Case Definition ( Zone 0 ) -------------------
+Compressible RANS equations.
+Turbulence model: Menter's k-omega SST-2003m with compressibility correction of Sarkar
+using default hard coded lower limit clipping.
+Hybrid RANS/LES: No Hybrid RANS/LES
+Mach number: 0.001.
+Angle of attack (AoA): 0 deg, and angle of sideslip (AoS): 0 deg.
+Reynolds number: 0. Reference length 1.
+Reading and writing binary SU2 native restart files.
+Read flow solution from: ../sensor_study/sea_level_hybrid_lut_screen/restart_smoke.
+Dimensional simulation.
+The reference area is 1 m^2.
+The semi-span will be computed using the max y(3D) value.
+The reference length is 1 m.
+Reference origin for moment evaluation is (0, 0, 0).
+Surface(s) where the force coefficients are evaluated: WALL.
+
+Surface(s) plotted in the output file: WALL.
+Input mesh file name: ../ambient_mesh/hybrid_pilot/dlr_par_hybrid.su2
+
+--------------- Space Numerical Integration ( Zone 0 ) ------------------
+HLLC solver for the flow inviscid terms.
+Standard Roe without low-dissipation function.
+First order integration in space.
+Scalar upwind solver for the turbulence model.
+First order integration in space.
+Average of gradients with correction (viscous flow terms).
+Average of gradients with correction (viscous turbulence terms).
+Gradient for upwind reconstruction: inverse-distance weighted Least-Squares.
+Gradient for viscous and source terms: inverse-distance weighted Least-Squares.
+
+--------------- Time Numerical Integration  ( Zone 0 ) ------------------
+Local time stepping (steady state simulation).
+Euler implicit method for the flow equations.
+FGMRES is used for solving the linear system.
+Using a ILU(0) preconditioning.
+Convergence criteria of the linear solver: 0.0001.
+Max number of linear iterations: 10.
+No CFL adaptation.
+Courant-Friedrichs-Lewy number:     0.02
+Euler implicit time integration for the turbulence model.
+
+------------------ Convergence Criteria  ( Zone 0 ) ---------------------
+Maximum number of solver subiterations: 100.
+Begin convergence monitoring at iteration 20.
+Residual minimum value: 1e-20.
+Cauchy series min. value: 1e-10.
+Number of Cauchy elements: 100.
+Begin windowed time average at iteration 0.
+
+-------------------- Output Information ( Zone 0 ) ----------------------
+File writing frequency: 
++------------------------------------+
+|                     File| Frequency|
++------------------------------------+
+|                  RESTART|       100|
+|           PARAVIEW_ASCII|       100|
+|              SURFACE_CSV|       100|
++------------------------------------+
+Writing the convergence history file every 1 inner iterations.
+Writing the screen convergence history every 1 inner iterations.
+The tabular file format is CSV (.csv).
+Convergence history file name: ../sensor_study/sea_level_hybrid_lut_screen/history_continue.
+Forces breakdown file name: forces_breakdown.dat.
+Surface file name: ../sensor_study/sea_level_hybrid_lut_screen/wall_continue.
+Volume file name: ../sensor_study/sea_level_hybrid_lut_screen/flow_continue.
+Restart file name: ../sensor_study/sea_level_hybrid_lut_screen/restart_continue.
+
+------------- Config File Boundary Information ( Zone 0 ) ---------------
++-----------------------------------------------------------------------+
+|                        Marker Type|                        Marker Name|
++-----------------------------------------------------------------------+
+|                     Symmetry plane|                               AXIS|
++-----------------------------------------------------------------------+
+|                   Riemann boundary|                              INLET|
+|                                   |                           FARFIELD|
++-----------------------------------------------------------------------+
+|                     Heat flux wall|                               WALL|
++-----------------------------------------------------------------------+
+
+-------------------- Output Preprocessing ( Zone 0 ) --------------------
+
+WARNING: SURFACE_PRESSURE_DROP can only be computed for at least 2 surfaces (outlet, inlet, ...)
+
+Screen output fields: INNER_ITER, RMS_DENSITY, RMS_ENERGY
+History output group(s): ITER, RMS_RES
+Convergence field(s): RMS_DENSITY
+Warning: No (valid) fields chosen for time convergence monitoring. Time convergence monitoring inactive.
+Volume output fields: COORDINATES, SOLUTION, PRIMITIVE
+
+------------------- Geometry Preprocessing ( Zone 0 ) -------------------
+Two dimensional problem.
+208430 grid points before partitioning.
+311958 volume elements before partitioning.
+4 surface markers.
+800 boundary elements in index 0 (Marker = WALL).
+128 boundary elements in index 1 (Marker = INLET).
+1261 boundary elements in index 2 (Marker = AXIS).
+311 boundary elements in index 3 (Marker = FARFIELD).
+Executing the partitioning functions.
+Building the graph adjacency structure.
+Calling ParMETIS... graph partitioning complete (1583 edge cuts).
+Distributing ParMETIS coloring.
+Rebalancing vertices.
+Rebalancing volume element connectivity.
+Rebalancing markers and surface elements.
+210382 vertices including ghost points. 
+313537 interior elements including halo cells. 
+210774 triangles.
+102763 quadrilaterals.
+Establishing MPI communication patterns.
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+All volume elements are correctly oriented.
+All surface elements are correctly oriented.
+Identifying edges and vertices.
+Setting the control volume structure.
+Area of the computational grid: 0.61267.
+Searching for the closest normal neighbors to the surfaces.
+Storing a mapping from global to local point index.
+Compute the surface curvature.
+Max K: 10069.8. Mean K: 21.6169. Standard deviation K: 398.532.
+Computing mesh quality statistics for the dual control volumes.
++--------------------------------------------------------------+
+|           Mesh Quality Metric|        Minimum|        Maximum|
++--------------------------------------------------------------+
+|    Orthogonality Angle (deg.)|        45.8271|             90|
+|     CV Face Area Aspect Ratio|              1|        681.684|
+|           CV Sub-Volume Ratio|              1|        227.251|
++--------------------------------------------------------------+
+Finding max control volume width.
+Communicating number of neighbors.
+Wetted area = 0.03293 m^2.
+Area projection in the x-plane = 0.00999917 m, y-plane = 0.1477 m.
+Max. coordinate in the x-direction = 0.12502 m, y-direction = 0.0547723 m.
+Min. coordinate in the x-direction = -0.02268 m, y-direction = 0.0100004 m.
+Computing wall distances.
+
+-------------------- Solver Preprocessing ( Zone 0 ) --------------------
+Loading lookup table, filename = ../thermochemistry/LUT_lox_ch4_equilibrium.drg ...
+allocating memory for the data, size = ( 8 , 2592 )
+allocating memory for the triangles, size = 4970
+allocating memory for the hull points, size = 212
+
+loading data block
+loading connectivity block
+loading hull block
+ done.
+Detecting all unique edges and setting edge to triangle connectivity ...
+ done.
+
++------------------------------------------------------------------+
+|                     Look-Up-Table (LUT) info                     |
++------------------------------------------------------------------+
+| File name:        ../thermochemistry/LUT_lox_ch4_equilibrium.drg |
+| Table version:                                             1.0.1 |
+| Table reader version:                                      1.1.0 |
+| Table dimension:                                               2 |
+| Number of variables:                                           8 |
+| Number of points:                                           2592 |
+| Number of triangles:                                        4970 |
+| Number of edges:                                            7561 |
++------------------------------------------------------------------+
+| Minimum Y:                                            -1.078e+07 |
+| Maximum Y:                                               1.2e+07 |
+| Minimum X:                                                  0.02 |
+| Maximum X:                                                     8 |
++------------------------------------------------------------------+
+| Variable names:                                                  |
+|                                                                  |
+|   0: Density                                                     |
+|   1: Energy                                                      |
+|   2: s                                                           |
+|   3: dsde                                                        |
+|   4: dsdrho_e                                                    |
+|   5: d2sde2                                                      |
+|   6: d2sdedrho                                                   |
+|   7: d2sdrho2                                                    |
++------------------------------------------------------------------+
+
+Building a trapezoidal map for the (Density, Energy) space ...
+
+
++------------------------------------------------------------------+
+|                       Trapezoidal map info                       |
++------------------------------------------------------------------+
+| Time to construct trapezoidal map:                0.00176909 sec |
+| Size of unique_bands in memory:                     0.000288 MB  |
+| Size of edge_limits_x in memory:                    0.241952 MB  |
+| Size of edge_limits_y in memory:                    0.241952 MB  |
+| Size of edge_to_triangle in memory:                  0.11928 MB  |
+| Size of y_edge_at_band_mid in memory:                0.08008 MB  |
+| Total:                                              0.683552 MB  |
++------------------------------------------------------------------+
+
+
+[>                                                               ] 0%
+Construction of trapezoidal map took 0.00198807 seconds
+
+Trapezoidal map memory footprint: 0.683552 MB
+Table data memory footprint: 0.020736 MB
+
+LUT fluid model ready for use
+Loading lookup table, filename = ../thermochemistry/LUT_lox_ch4_equilibrium.drg ...
+allocating memory for the data, size = ( 8 , 2592 )
+allocating memory for the triangles, size = 4970
+allocating memory for the hull points, size = 212
+
+loading data block
+loading connectivity block
+loading hull block
+ done.
+Detecting all unique edges and setting edge to triangle connectivity ...
+ done.
+
++------------------------------------------------------------------+
+|                     Look-Up-Table (LUT) info                     |
++------------------------------------------------------------------+
+| File name:        ../thermochemistry/LUT_lox_ch4_equilibrium.drg |
+| Table version:                                             1.0.1 |
+| Table reader version:                                      1.1.0 |
+| Table dimension:                                               2 |
+| Number of variables:                                           8 |
+| Number of points:                                           2592 |
+| Number of triangles:                                        4970 |
+| Number of edges:                                            7561 |
++------------------------------------------------------------------+
+| Minimum Y:                                            -1.078e+07 |
+| Maximum Y:                                               1.2e+07 |
+| Minimum X:                                                  0.02 |
+| Maximum X:                                                     8 |
++------------------------------------------------------------------+
+| Variable names:                                                  |
+|                                                                  |
+|   0: Density                                                     |
+|   1: Energy                                                      |
+|   2: s                                                           |
+|   3: dsde                                                        |
+|   4: dsdrho_e                                                    |
+|   5: d2sde2                                                      |
+|   6: d2sdedrho                                                   |
+|   7: d2sdrho2                                                    |
++------------------------------------------------------------------+
+
+Building a trapezoidal map for the (Density, Energy) space ...
+
+
++------------------------------------------------------------------+
+|                       Trapezoidal map info                       |
++------------------------------------------------------------------+
+| Time to construct trapezoidal map:                0.00168786 sec |
+| Size of unique_bands in memory:                     0.000288 MB  |
+| Size of edge_limits_x in memory:                    0.241952 MB  |
+| Size of edge_limits_y in memory:                    0.241952 MB  |
+| Size of edge_to_triangle in memory:                  0.11928 MB  |
+| Size of y_edge_at_band_mid in memory:                0.08008 MB  |
+| Total:                                              0.683552 MB  |
++------------------------------------------------------------------+
+
+
+[>                                                               ] 0%
+Construction of trapezoidal map took 0.00204828 seconds
+
+Trapezoidal map memory footprint: 0.683552 MB
+Table data memory footprint: 0.020736 MB
+
+LUT fluid model ready for use
+Viscous flow: Computing pressure using the ideal gas law
+based on the free-stream temperature and a density computed
+from the Reynolds number.
+Force coefficients computed using free-stream values.
+
+-- Models:
++------------------------------------------------------------------------------+
+|          Viscosity Model|        Conductivity Model|              Fluid Model|
++------------------------------------------------------------------------------+
+|               SUTHERLAND|          CONSTANT_PRANDTL|+------------------------------------------------------------------------------+
+-- Fluid properties:
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|        Ref. Viscosity|    0.00010707|             1|   N.s/m^2|    0.00010707|
+|      Sutherland Temp.|       3312.09|             1|         K|       3312.09|
+|     Sutherland Const.|       683.036|             1|         K|       683.036|
++------------------------------------------------------------------------------+
+|        Prandtl (Lam.)|             -|             -|         -|        0.6738|
+|       Prandtl (Turb.)|             -|             -|         -|           0.9|
++------------------------------------------------------------------------------+
+|          Gas Constant|       287.058|             1|  N.m/kg.K|       287.058|
+|      Spec. Heat Ratio|             -|             -|         -|           1.4|
++------------------------------------------------------------------------------+
+-- Initial and free-stream conditions:
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|       Static Pressure|        101325|             1|        Pa|        101325|
+|               Density|       1.04663|             1|    kg/m^3|       1.04663|
+|           Temperature|           300|             1|         K|           300|
+|          Total Energy|  -1.07212e+07|             1|   m^2/s^2|  -1.07212e+07|
+|            Velocity-X|      0.358223|             1|       m/s|      0.358223|
+|            Velocity-Y|             0|             1|       m/s|             0|
+|    Velocity Magnitude|      0.358223|             1|       m/s|      0.358223|
++------------------------------------------------------------------------------+
+|             Viscosity|    1.1862e-05|             1|   N.s/m^2|    1.1862e-05|
+|          Conductivity|             -|             1|   W/m^2.K|             -|
+|     Turb. Kin. Energy|   1.92485e-05|             1|   m^2/s^2|   1.92485e-05|
+|     Spec. Dissipation|      0.169838|             1|       1/s|      0.169838|
++------------------------------------------------------------------------------+
+|           Mach Number|             -|             -|         -|         0.001|
+|       Reynolds Number|             -|             -|         -|       31607.6|
++------------------------------------------------------------------------------+
+Initialize Jacobian structure (Navier-Stokes). MG level: 0.
+Initialize Jacobian structure (SST model).
+
+------------------- Numerics Preprocessing ( Zone 0 ) -------------------
+
+----------------- Integration Preprocessing ( Zone 0 ) ------------------
+
+------------------- Iteration Preprocessing ( Zone 0 ) ------------------
+Euler/Navier-Stokes/RANS fluid iteration.
+
+------------------------------ Begin Solver -----------------------------
+
+Simulation Run using the Single-zone Driver
++--------------------------------------+
+|  Inner_Iter|    rms[Rho]|   rms[RhoE]|
++--------------------------------------+
+|           0|   -2.031490|    4.943339|
+|           1|   -2.034273|    4.940618|
+|           2|   -2.036952|    4.937946|
+|           3|   -2.039566|    4.935182|
+|           4|   -2.042280|    4.932400|
+|           5|   -2.044935|    4.929690|
+|           6|   -2.047532|    4.927049|
+|           7|   -2.050073|    4.924483|
+|           8|   -2.052557|    4.921977|
+|           9|   -2.054991|    4.919537|
+|          10|   -2.057206|    4.917403|
+|          11|   -2.059105|    4.915694|
+|          12|   -2.060952|    4.914067|
+|          13|   -2.062742|    4.912507|
+|          14|   -2.064468|    4.911013|
+|          15|   -2.066138|    4.909590|
+|          16|   -2.067738|    4.908276|
+|          17|   -2.069286|    4.907017|
+|          18|   -2.070779|    4.905810|
+|          19|   -2.072219|    4.904653|
+|          20|   -2.073601|    4.903577|
+|          21|   -2.074927|    4.902571|
+|          22|   -2.076137|    4.901784|
+|          23|   -2.077319|    4.900966|
+|          24|   -2.078448|    4.900209|
+|          25|   -2.079574|    4.899451|
+|          26|   -2.080716|    4.898700|
+|          27|   -2.081825|    4.897959|
+|          28|   -2.082876|    4.897288|
+|          29|   -2.083872|    4.896681|
+|          30|   -2.084798|    4.896165|
+|          31|   -2.085637|    4.895753|
+|          32|   -2.086422|    4.895408|
+|          33|   -2.087119|    4.895197|
+|          34|   -2.087792|    4.894989|
+|          35|   -2.088408|    4.894846|
+|          36|   -2.088965|    4.894766|
+|          37|   -2.089486|    4.894733|
+|          38|   -2.089955|    4.894763|
+|          39|   -2.090371|    4.894855|
+|          40|   -2.090739|    4.895005|
+|          41|   -2.091056|    4.895215|
+|          42|   -2.091320|    4.895484|
+|          43|   -2.091539|    4.895808|
+|          44|   -2.091709|    4.896191|
+|          45|   -2.091821|    4.896641|
+|          46|   -2.091880|    4.897150|
+|          47|   -2.091888|    4.897715|
+|          48|   -2.091846|    4.898336|
+|          49|   -2.091761|    4.899005|
+|          50|   -2.091638|    4.899716|
+|          51|   -2.091614|    4.900303|
+|          52|   -2.091563|    4.900924|
+|          53|   -2.091470|    4.901589|
+|          54|   -2.091338|    4.902295|
+|          55|   -2.091160|    4.903047|
+|          56|   -2.090940|    4.903844|
+|          57|   -2.090688|    4.904673|
+|          58|   -2.090403|    4.905538|
+|          59|   -2.090081|    4.906442|
+|          60|   -2.089720|    4.907384|
+|          61|   -2.089322|    4.908364|
+|          62|   -2.088885|    4.909383|
+|          63|   -2.088409|    4.910441|
+|          64|   -2.087896|    4.911535|
+|          65|   -2.087375|    4.912624|
+|          66|   -2.086824|    4.913740|
+|          67|   -2.086236|    4.914890|
+|          68|   -2.085610|    4.916075|
+|          69|   -2.084951|    4.917288|
+|          70|   -2.084267|    4.918527|
+|          71|   -2.083561|    4.919780|
+|          72|   -2.082835|    4.921045|
+|          73|   -2.082082|    4.922336|
+|          74|   -2.081302|    4.923649|
+|          75|   -2.080493|    4.924986|
+|          76|   -2.079668|    4.926336|
+|          77|   -2.078869|    4.927652|
+|          78|   -2.078152|    4.928876|
+|          79|   -2.077414|    4.930117|
+|          80|   -2.076670|    4.931363|
+|          81|   -2.075903|    4.932627|
+|          82|   -2.075114|    4.933911|
+|          83|   -2.074312|    4.935202|
+|          84|   -2.073500|    4.936495|
+|          85|   -2.072669|    4.937802|
+|          86|   -2.071816|    4.939127|
+|          87|   -2.070960|    4.940435|
+|          88|   -2.070068|    4.941788|
+|          89|   -2.069164|    4.943145|
+|          90|   -2.068256|    4.944499|
+|          91|   -2.067354|    4.945839|
+|          92|   -2.066406|    4.947227|
+|          93|   -2.065443|    4.948626|
+|          94|   -2.064465|    4.950036|
+|          95|   -2.063486|    4.951441|
+|          96|   -2.062502|    4.952844|
+|          97|   -2.061479|    4.954288|
+|          98|   -2.060436|    4.955762|
+|          99|   -2.059429|    4.957175|
+
+----------------------------- Solver Exit -------------------------------
+
+Maximum number of iterations reached (ITER = 100) before convergence.
++-----------------------------------------------------------------------+
+|      Convergence Field     |     Value    |   Criterion  |  Converged |
++-----------------------------------------------------------------------+
+|                    rms[Rho]|      -2.05943|         < -20|          No|
++-----------------------------------------------------------------------+
+-------------------------------------------------------------------------
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |../sensor_study/sea_level_hybrid_lut_screen/restart_continue.dat|
+|Paraview ASCII                     |../sensor_study/sea_level_hybrid_lut_screen/flow_continue.vtk|
+|CSV file                           |../sensor_study/sea_level_hybrid_lut_screen/wall_continue.csv|
++-----------------------------------------------------------------------+
+
+--------------------------- Finalizing Solver ---------------------------
+Deleted CNumerics container.
+Deleted CIntegration container.
+Deleted CSolver container.
+Deleted CIteration container.
+Deleted CInterface container.
+Deleted CGeometry container.
+Deleted CFreeFormDefBox class.
+Deleted CSurfaceMovement class.
+Deleted CVolumetricMovement class.
+Deleted CConfig container.
+Deleted nInst container.
+Deleted COutput class.
+-------------------------------------------------------------------------
+
+------------------------- Exit Success (SU2_CFD) ------------------------
+

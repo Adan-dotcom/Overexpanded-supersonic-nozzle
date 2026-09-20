@@ -1,0 +1,29 @@
+{
+  "source_wall_file": "wall_npr20_final_validation_bdf2_05630.vtk",
+  "iteration": 5630,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.03580149317357411,
+    0.059718232058043684,
+    0.0734584940709106,
+    0.08364040057929098,
+    0.10930885245404225
+  ],
+  "persistent_reattachment_crossings_m": [
+    0.05401120067541029,
+    0.07217346360734465,
+    0.07958426618071196,
+    0.0855073461859598,
+    0.121375551529561
+  ],
+  "provisional_shock_pressure_rise_x_m": 0.08419613,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -814.5312781436887,
+  "wall_shear_max_pa": 14698.665326894294,
+  "yplus_median": 0.06865658499999999,
+  "yplus_p95": 0.30277053499999973,
+  "yplus_max": 0.7222432,
+  "wall_pressure_min_pa": 124691.5,
+  "wall_pressure_max_pa": 2250087.0
+}

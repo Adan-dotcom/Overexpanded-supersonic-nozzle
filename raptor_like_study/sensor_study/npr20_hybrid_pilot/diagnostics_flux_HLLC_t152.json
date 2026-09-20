@@ -1,0 +1,21 @@
+{
+  "source_wall_file": "wall_npr20_flux_HLLC_00152.vtk",
+  "iteration": 152,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.11893765106191574
+  ],
+  "persistent_reattachment_crossings_m": [
+    0.12455685092606256
+  ],
+  "provisional_shock_pressure_rise_x_m": 0.1191578,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -31937.899059929383,
+  "wall_shear_max_pa": 14857.131830433977,
+  "yplus_median": 0.070184225,
+  "yplus_p95": 0.6770956800000008,
+  "yplus_max": 1.738458,
+  "wall_pressure_min_pa": 39116.05,
+  "wall_pressure_max_pa": 2187957.0
+}

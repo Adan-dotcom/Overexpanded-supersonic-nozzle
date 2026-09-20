@@ -1,0 +1,10 @@
+problem rocket frozen nfz=2
+  p,bar=52.0
+  o/f=3.20
+  supar=30.0
+reactant
+  fuel CH4(L) wt%=100 t(k)=111.66
+  oxid O2(L) wt%=100 t(k)=90.17
+only CO CO2 H H2 H2O H2O2 HO2 O O2 OH CH4
+output massf transport trace=1e-8
+end

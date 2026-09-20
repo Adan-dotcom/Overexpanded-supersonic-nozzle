@@ -1,0 +1,21 @@
+{
+  "source_wall_file": "wall_npr20_bdf2_stable_to100_00090.vtk",
+  "iteration": 90,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.1193561781819493
+  ],
+  "persistent_reattachment_crossings_m": [
+    0.12473320196279823
+  ],
+  "provisional_shock_pressure_rise_x_m": 0.1195482,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -24373.480037684592,
+  "wall_shear_max_pa": 15731.473034398428,
+  "yplus_median": 0.07221584,
+  "yplus_p95": 0.5137205900000008,
+  "yplus_max": 1.715824,
+  "wall_pressure_min_pa": 37092.67,
+  "wall_pressure_max_pa": 2256058.0
+}

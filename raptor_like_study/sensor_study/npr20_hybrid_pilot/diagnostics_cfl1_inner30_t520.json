@@ -1,0 +1,21 @@
+{
+  "source_wall_file": "wall_npr20_cfl1_inner30_from500_00520.vtk",
+  "iteration": 520,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.11536821659654864
+  ],
+  "persistent_reattachment_crossings_m": [
+    0.12445285041964288
+  ],
+  "provisional_shock_pressure_rise_x_m": 0.1228692,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -7874.465750974377,
+  "wall_shear_max_pa": 14534.645851939633,
+  "yplus_median": 0.06681729,
+  "yplus_p95": 0.4705667750000007,
+  "yplus_max": 2.111036,
+  "wall_pressure_min_pa": 38543.79,
+  "wall_pressure_max_pa": 2140493.0
+}

@@ -1,0 +1,5 @@
+case_id=case_0032
+area_ratio=26.29855239592451
+throat_radius_m=0.03117867601009664
+exit_radius_m=0.15989084245968185
+gas_constant=387.4436210029916

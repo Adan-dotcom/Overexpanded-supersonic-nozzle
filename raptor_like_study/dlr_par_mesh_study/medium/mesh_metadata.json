@@ -1,0 +1,21 @@
+{
+  "level": "medium",
+  "cells": 320000,
+  "points": 321801,
+  "axial_cells": 1600,
+  "radial_cells": 200,
+  "core_layers": 128,
+  "boundary_layer_layers": 72,
+  "first_cell_height_m": 5e-07,
+  "boundary_layer_block_thickness_m": 0.0015,
+  "boundary_layer_growth_ratio": 1.0789588566135753,
+  "area_ratio": 30.000004655075998,
+  "minimum_signed_area_m2": 2.083400133953365e-11,
+  "negative_or_zero_cells": 0,
+  "minimum_corner_angle_deg": 51.11403070074274,
+  "maximum_corner_angle_deg": 128.89857383222622,
+  "median_aspect_ratio": 2.5657675153388846,
+  "maximum_aspect_ratio": 269.5420962515344,
+  "minimum_wall_orthogonality_deg": 89.65881841503969,
+  "median_wall_orthogonality_deg": 89.99049979859247
+}

@@ -1,0 +1,404 @@
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 8.5.0 "Harrier"                           |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Computational Fluid Dynamics Code)         |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Project Website: https://su2code.github.io                        |
+|                                                                       |
+| The SU2 Project is maintained by the SU2 Foundation                   |
+| (http://su2foundation.org)                                            |
+-------------------------------------------------------------------------
+| Copyright 2012-2026, SU2 Contributors                                 |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+Parsing config file for zone 0
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+----------------- Physical Case Definition ( Zone 0 ) -------------------
+Compressible RANS equations.
+Turbulence model: Menter's k-omega SST-2003m with compressibility correction of Sarkar
+using default hard coded lower limit clipping.
+Hybrid RANS/LES: No Hybrid RANS/LES
+Mach number: 0.001.
+Angle of attack (AoA): 0 deg, and angle of sideslip (AoS): 0 deg.
+Reynolds number: 0. Reference length 1.
+Reading and writing binary SU2 native restart files.
+Read flow solution from: restart_npr20_relax_SLAU2_dt025.
+Dimensional simulation.
+The reference area is 1 m^2.
+The semi-span will be computed using the max y(3D) value.
+The reference length is 1 m.
+Reference origin for moment evaluation is (0, 0, 0).
+Surface(s) where the force coefficients are evaluated: WALL.
+
+Surface(s) plotted in the output file: WALL.
+Input mesh file name: ../../ambient_mesh/hybrid_pilot/dlr_par_hybrid.su2
+
+--------------- Space Numerical Integration ( Zone 0 ) ------------------
+Simple Low-Dissipation AUSM 2 solver for the flow inviscid terms.
+Standard Roe without low-dissipation function.
+Second order integration in space, with slope limiter.
+Venkatakrishnan-Wang slope-limiting method, with constant: 0.001.
+Scalar upwind solver for the turbulence model.
+First order integration in space.
+Average of gradients with correction (viscous flow terms).
+Average of gradients with correction (viscous turbulence terms).
+Gradient for upwind reconstruction: inverse-distance weighted Least-Squares.
+Gradient for viscous and source terms: inverse-distance weighted Least-Squares.
+
+--------------- Time Numerical Integration  ( Zone 0 ) ------------------
+Unsteady simulation, dual time stepping strategy (second order in time).
+Unsteady time step provided by the user (s): 2.5e-08.
+Euler implicit method for the flow equations.
+FGMRES is used for solving the linear system.
+Using a ILU(0) preconditioning.
+Convergence criteria of the linear solver: 0.0001.
+Max number of linear iterations: 10.
+No CFL adaptation.
+Courant-Friedrichs-Lewy number:        5
+Euler implicit time integration for the turbulence model.
+
+------------------ Convergence Criteria  ( Zone 0 ) ---------------------
+Maximum number of solver subiterations: 30.
+Maximum number of physical time-steps: 521.
+Begin convergence monitoring at iteration 5.
+Residual minimum value: 1e-12.
+Cauchy series min. value: 1e-10.
+Number of Cauchy elements: 100.
+Begin windowed time average at iteration 501.
+
+-------------------- Output Information ( Zone 0 ) ----------------------
+File writing frequency: 
++------------------------------------+
+|                     File| Frequency|
++------------------------------------+
+|                  RESTART|        20|
+|           PARAVIEW_ASCII|        20|
+|   SURFACE_PARAVIEW_ASCII|        20|
+|              SURFACE_CSV|        20|
++------------------------------------+
+Writing the convergence history file every 1 inner iterations.
+Writing the convergence history file every 1 time iterations.
+Writing the screen convergence history every 25 inner iterations.
+Writing the screen convergence history every 1 time iterations.
+The tabular file format is CSV (.csv).
+Convergence history file name: history_npr20_cfl5_inner30_from500.
+Forces breakdown file name: forces_breakdown.dat.
+Surface file name: wall_npr20_cfl5_inner30_from500.
+Volume file name: flow_npr20_cfl5_inner30_from500.
+Restart file name: restart_npr20_cfl5_inner30_from500.
+
+------------- Config File Boundary Information ( Zone 0 ) ---------------
++-----------------------------------------------------------------------+
+|                        Marker Type|                        Marker Name|
++-----------------------------------------------------------------------+
+|                          Far-field|                           FARFIELD|
++-----------------------------------------------------------------------+
+|                     Symmetry plane|                               AXIS|
++-----------------------------------------------------------------------+
+|                   Riemann boundary|                              INLET|
++-----------------------------------------------------------------------+
+|                     Heat flux wall|                               WALL|
++-----------------------------------------------------------------------+
+
+-------------------- Output Preprocessing ( Zone 0 ) --------------------
+
+WARNING: SURFACE_PRESSURE_DROP can only be computed for at least 2 surfaces (outlet, inlet, ...)
+
+Screen output fields: TIME_ITER, INNER_ITER, RMS_DENSITY, RMS_ENERGY, RMS_TKE, RMS_DISSIPATION
+History output group(s): ITER, CUR_TIME, RMS_RES
+Convergence field(s): RMS_DENSITY
+Warning: No (valid) fields chosen for time convergence monitoring. Time convergence monitoring inactive.
+Volume output fields: COORDINATES, SOLUTION, PRIMITIVE
+
+------------------- Geometry Preprocessing ( Zone 0 ) -------------------
+Two dimensional problem.
+208430 grid points before partitioning.
+311958 volume elements before partitioning.
+4 surface markers.
+800 boundary elements in index 0 (Marker = WALL).
+128 boundary elements in index 1 (Marker = INLET).
+1261 boundary elements in index 2 (Marker = AXIS).
+311 boundary elements in index 3 (Marker = FARFIELD).
+Executing the partitioning functions.
+Building the graph adjacency structure.
+Calling ParMETIS... graph partitioning complete (1583 edge cuts).
+Distributing ParMETIS coloring.
+Rebalancing vertices.
+Rebalancing volume element connectivity.
+Rebalancing markers and surface elements.
+210382 vertices including ghost points. 
+313537 interior elements including halo cells. 
+210774 triangles.
+102763 quadrilaterals.
+Establishing MPI communication patterns.
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+All volume elements are correctly oriented.
+All surface elements are correctly oriented.
+Identifying edges and vertices.
+Setting the control volume structure.
+Area of the computational grid: 0.61267.
+Searching for the closest normal neighbors to the surfaces.
+Storing a mapping from global to local point index.
+Compute the surface curvature.
+Max K: 10069.8. Mean K: 21.6169. Standard deviation K: 398.532.
+Computing mesh quality statistics for the dual control volumes.
++--------------------------------------------------------------+
+|           Mesh Quality Metric|        Minimum|        Maximum|
++--------------------------------------------------------------+
+|    Orthogonality Angle (deg.)|        45.8271|             90|
+|     CV Face Area Aspect Ratio|              1|        681.684|
+|           CV Sub-Volume Ratio|              1|        227.251|
++--------------------------------------------------------------+
+Finding max control volume width.
+Communicating number of neighbors.
+Wetted area = 0.03293 m^2.
+Area projection in the x-plane = 0.00999917 m, y-plane = 0.1477 m.
+Max. coordinate in the x-direction = 0.12502 m, y-direction = 0.0547723 m.
+Min. coordinate in the x-direction = -0.02268 m, y-direction = 0.0100004 m.
+Computing wall distances.
+
+-------------------- Solver Preprocessing ( Zone 0 ) --------------------
+Viscous flow: Computing pressure using the ideal gas law
+based on the free-stream temperature and a density computed
+from the Reynolds number.
+Force coefficients computed using free-stream values.
+
+-- Models:
++------------------------------------------------------------------------------+
+|          Viscosity Model|        Conductivity Model|              Fluid Model|
++------------------------------------------------------------------------------+
+|               SUTHERLAND|          CONSTANT_PRANDTL|                IDEAL_GAS|
++------------------------------------------------------------------------------+
+-- Fluid properties:
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|        Ref. Viscosity|    0.00010707|             1|   N.s/m^2|    0.00010707|
+|      Sutherland Temp.|       3312.09|             1|         K|       3312.09|
+|     Sutherland Const.|       683.036|             1|         K|       683.036|
++------------------------------------------------------------------------------+
+|        Prandtl (Lam.)|             -|             -|         -|        0.6738|
+|       Prandtl (Turb.)|             -|             -|         -|           0.9|
++------------------------------------------------------------------------------+
+|          Gas Constant|         390.6|             1|  N.m/kg.K|         390.6|
+|      Spec. Heat Ratio|             -|             -|         -|       1.19829|
++------------------------------------------------------------------------------+
+-- Initial and free-stream conditions:
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|       Static Pressure|        260000|             1|        Pa|        260000|
+|               Density|       2.21881|             1|    kg/m^3|       2.21881|
+|           Temperature|           300|             1|         K|           300|
+|          Total Energy|        590940|             1|   m^2/s^2|        590940|
+|            Velocity-X|      0.374721|             1|       m/s|      0.374721|
+|            Velocity-Y|             0|             1|       m/s|             0|
+|    Velocity Magnitude|      0.374721|             1|       m/s|      0.374721|
++------------------------------------------------------------------------------+
+|             Viscosity|    1.1862e-05|             1|   N.s/m^2|    1.1862e-05|
+|          Conductivity|             -|             1|   W/m^2.K|             -|
+|     Turb. Kin. Energy|   2.10624e-05|             1|   m^2/s^2|   2.10624e-05|
+|     Spec. Dissipation|      0.393977|             1|       1/s|      0.393977|
++------------------------------------------------------------------------------+
+|           Mach Number|             -|             -|         -|         0.001|
+|       Reynolds Number|             -|             -|         -|       70092.4|
++------------------------------------------------------------------------------+
+-- Unsteady conditions
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|            Total Time|             1|             1|         s|             1|
+|             Time Step|       2.5e-08|             1|         s|       2.5e-08|
++------------------------------------------------------------------------------+
+Initialize Jacobian structure (Navier-Stokes). MG level: 0.
+Initialize Jacobian structure (SST model).
+
+------------------- Numerics Preprocessing ( Zone 0 ) -------------------
+
+----------------- Integration Preprocessing ( Zone 0 ) ------------------
+
+------------------- Iteration Preprocessing ( Zone 0 ) ------------------
+Euler/Navier-Stokes/RANS fluid iteration.
+
+------------------------------ Begin Solver -----------------------------
+
+Simulation Run using the Single-zone Driver
+The simulation will run for 20 time steps.
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         501|           0|   -1.498060|    4.585747|    2.408929|    6.904688|
+|         501|          25|   -4.533878|    2.458520|   -0.083268|    7.091300|
+|         501|          29|   -4.550707|    2.442277|   -0.124497|    7.088664|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         502|           0|   -1.498104|    4.587823|    2.410138|    7.106966|
+|         502|          25|   -4.523077|    2.469597|   -0.261250|    7.051878|
+|         502|          29|   -4.534983|    2.460056|   -0.319512|    7.049877|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         503|           0|   -1.498158|    4.589618|    2.410494|    7.070944|
+|         503|          25|   -3.461795|    3.508305|    0.086887|    7.071011|
+|         503|          29|   -3.107200|    3.815401|    0.230382|    7.063713|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         504|           0|   -1.498101|    4.595088|    2.410490|    7.084089|
+|         504|          25|   -2.977364|    3.975836|    0.725215|    7.037030|
+|         504|          29|   -2.999423|    3.959884|    0.750776|    7.021088|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         505|           0|   -1.498048|    4.599394|    2.410452|    7.041112|
+|         505|          25|   -2.996226|    3.974907|    0.864929|    6.926048|
+|         505|          29|   -2.988265|    3.982326|    0.871483|    6.895919|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         506|           0|   -1.498015|    4.604653|    2.410373|    6.916801|
+|         506|          25|   -2.953505|    4.013026|    0.933443|    6.883028|
+|         506|          29|   -2.947843|    4.016786|    0.930625|    6.847786|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         507|           0|   -1.498024|    4.607526|    2.410162|    6.865658|
+|         507|          25|   -2.849816|    4.091056|    0.981417|    6.629903|
+|         507|          29|   -2.852280|    4.088501|    0.980506|    6.606659|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         508|           0|   -1.498030|    4.611254|    2.409965|    6.643049|
+|         508|          25|   -2.846585|    4.091667|    1.018412|    6.680834|
+|         508|          29|   -2.836413|    4.099461|    1.012585|    6.687772|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         509|           0|   -1.497993|    4.616647|    2.409835|    6.723130|
+|         509|          25|   -2.826801|    4.096898|    1.060410|    6.760742|
+|         509|          29|   -2.850024|    4.077265|    1.062269|    6.745613|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         510|           0|   -1.498021|    4.618783|    2.409822|    6.776397|
+|         510|          25|   -2.868260|    4.046428|    1.115665|    6.839212|
+|         510|          29|   -2.868298|    4.046932|    1.112522|    7.055846|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         511|           0|   -1.498148|    4.614965|    2.409848|    7.088131|
+|         511|          25|   -2.883458|    4.028578|    1.164558|    7.730858|
+|         511|          29|   -2.881830|    4.029887|    1.165535|    7.776198|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         512|           0|   -1.498280|    4.611172|    2.409871|    7.784368|
+|         512|          25|   -2.902256|    4.016608|    1.199300|    7.745224|
+|         512|          29|   -2.893914|    4.024158|    1.201204|    7.789374|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         513|           0|   -1.498391|    4.608993|    2.409868|    7.797046|
+|         513|          25|   -2.898110|    4.015837|    1.263661|    7.624180|
+|         513|          29|   -2.899290|    4.016186|    1.258036|    7.657569|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         514|           0|   -1.498409|    4.611403|    2.409941|    7.665930|
+|         514|          25|   -2.896668|    4.017367|    1.303885|    7.665681|
+|         514|          29|   -2.897779|    4.016511|    1.308979|    7.692074|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         515|           0|   -1.498384|    4.615783|    2.410106|    7.698467|
+|         515|          25|   -2.906603|    4.004750|    1.356332|    7.426096|
+|         515|          29|   -2.910127|    4.001815|    1.356799|    7.536073|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         516|           0|   -1.498451|    4.616682|    2.410306|    7.559645|
+|         516|          25|   -2.920675|    3.981933|    1.372176|    7.548250|
+|         516|          29|   -2.914592|    3.988717|    1.370710|    7.575581|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         517|           0|   -1.498535|    4.616129|    2.410226|    7.587648|
+|         517|          25|   -2.924706|    3.976153|    1.408060|    7.625240|
+|         517|          29|   -2.913600|    3.985037|    1.404429|    7.687715|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         518|           0|   -1.498657|    4.613538|    2.410082|    7.702275|
+|         518|          25|   -2.956421|    3.942077|    1.401646|    8.097303|
+|         518|          29|   -2.951794|    3.947508|    1.400306|    8.140723|
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         519|           0|   -1.498772|    4.611988|    2.409823|    8.143286|
+|         519|          25|   -2.979722|    3.918575|    1.368163|    8.087419|
+|         519|          29|   -2.971528|    3.923694|    1.368045|    8.074695|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_npr20_cfl5_inner30_from500_00519.dat|
++-----------------------------------------------------------------------+
++-----------------------------------------------------------------------------+
+|   Time_Iter|  Inner_Iter|    rms[Rho]|   rms[RhoE]|      rms[k]|      rms[w]|
++-----------------------------------------------------------------------------+
+|         520|           0|   -1.498898|    4.610804|    2.409482|    8.064985|
+|         520|          25|   -3.013868|    3.883867|    1.345588|    7.978581|
+|         520|          29|   -2.997994|    3.902972|    1.346688|    8.024514|
+
+----------------------------- Solver Exit -------------------------------
+Maximum number of time iterations reached (TIME_ITER = 521).
+-------------------------------------------------------------------------
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_npr20_cfl5_inner30_from500_00520.dat|
+|Paraview ASCII                     |flow_npr20_cfl5_inner30_from500_00520.vtk|
+|Paraview ASCII surface             |wall_npr20_cfl5_inner30_from500_00520.vtk|
+|CSV file                           |wall_npr20_cfl5_inner30_from500_00520.csv|
++-----------------------------------------------------------------------+
+
+--------------------------- Finalizing Solver ---------------------------
+Deleted CNumerics container.
+Deleted CIntegration container.
+Deleted CSolver container.
+Deleted CIteration container.
+Deleted CInterface container.
+Deleted CGeometry container.
+Deleted CFreeFormDefBox class.
+Deleted CSurfaceMovement class.
+Deleted CVolumetricMovement class.
+Deleted CConfig container.
+Deleted nInst container.
+Deleted COutput class.
+-------------------------------------------------------------------------
+
+------------------------- Exit Success (SU2_CFD) ------------------------
+

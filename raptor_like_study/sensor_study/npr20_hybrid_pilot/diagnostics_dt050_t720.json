@@ -1,0 +1,23 @@
+{
+  "source_wall_file": "wall_npr20_dt050_cfl2_i30_bdf2_from700_00720.vtk",
+  "iteration": 720,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.10903308826571598,
+    0.11877098099211805
+  ],
+  "persistent_reattachment_crossings_m": [
+    0.11708888947787129,
+    0.12405437760669981
+  ],
+  "provisional_shock_pressure_rise_x_m": 0.1164262,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -12444.954782113158,
+  "wall_shear_max_pa": 14980.406785488294,
+  "yplus_median": 0.08006366,
+  "yplus_p95": 0.6432775700000007,
+  "yplus_max": 1.966578,
+  "wall_pressure_min_pa": 34911.76,
+  "wall_pressure_max_pa": 2180772.0
+}

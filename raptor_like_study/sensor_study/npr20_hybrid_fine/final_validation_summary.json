@@ -1,0 +1,43 @@
+{
+  "selected_numerics": {
+    "flux": "SLAU2",
+    "physical_time_step_ns": 6.25,
+    "pseudo_cfl": 2.0,
+    "inner_iterations": 30,
+    "spatial_reconstruction": "MUSCL",
+    "limiter": "VENKATAKRISHNAN_WANG",
+    "venkat_coefficient": 0.001,
+    "turbulence": "SST-2003m with Sarkar compressibility correction"
+  },
+  "pilot_final": {
+    "iteration": 5613,
+    "physical_time_us": 162.825,
+    "separation_x_mm": 35.801848980621784,
+    "last_window_separation_range_mm": 0.019338350735800702,
+    "yplus_p95": 0.6042036150000003,
+    "yplus_max": 1.127016
+  },
+  "fine_final": {
+    "iteration": 5665,
+    "separation_x_mm": 35.808757298170015,
+    "separation_change_from_first_fine_checkpoint_mm": 0.010497882389557844,
+    "separation_change_from_pilot_mm": 0.006908317548230514,
+    "yplus_p95": 0.3012715549999996,
+    "yplus_max": 0.7116971
+  },
+  "thermal_gate": {
+    "inlet_total_temperature_k": 3485.33,
+    "pilot_max_local_total_temperature_k": 4004.8381348438083,
+    "fine_max_local_total_temperature_k": 4005.8859791991954,
+    "fine_overshoot_percent": 14.935629601764976,
+    "passed": false
+  },
+  "acceptance": {
+    "pilot_temporal_plateau_passed": true,
+    "fine_short_window_drift_passed": true,
+    "pilot_to_fine_grid_delta_passed": true,
+    "fine_wall_resolution_passed": true,
+    "separation_label_numerically_accepted": true,
+    "paper_physics_accepted": false
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "pressure_bar": {
+    "chamber": 253.0,
+    "throat": 146.3215,
+    "exit": 0.806
+  },
+  "temperature_k": {
+    "chamber": 3739.23,
+    "throat": 3550.51,
+    "exit": 2033.84
+  },
+  "mach": {
+    "chamber": 0.0,
+    "throat": 1.0,
+    "exit": 3.7761
+  }
+}

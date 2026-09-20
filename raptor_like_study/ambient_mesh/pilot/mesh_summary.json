@@ -1,0 +1,36 @@
+{
+  "profile": "pilot",
+  "purpose": "topology validation",
+  "contour_file": "D:\\PRUEBA SU2_2026\\DLR_PAR_full_contour.csv",
+  "x_far_m": 1.2204652,
+  "r_far_m": 0.5477226000000001,
+  "exit_diameter_m": 0.10954452,
+  "downstream_extent_exit_diameters": 10.0,
+  "radial_extent_exit_diameters": 5.0,
+  "settings": {
+    "h_nozzle": 0.0005,
+    "h_shock": 0.00025,
+    "h_plume": 0.001,
+    "h_far": 0.02,
+    "h1": 2e-06,
+    "bl_thickness": 0.001,
+    "bl_ratio": 1.15
+  },
+  "boundary_layer_x_range_m": [
+    -0.02160802,
+    0.12431448
+  ],
+  "nodes": 163539,
+  "elements_2d": {
+    "Triangle 3": 286907,
+    "Quadrilateral 4": 18816
+  },
+  "min_scaled_jacobian": 0.1310456484609972,
+  "mean_scaled_jacobian": 0.9999768612810274,
+  "boundaries": [
+    "WALL",
+    "INLET",
+    "AXIS",
+    "FARFIELD"
+  ]
+}

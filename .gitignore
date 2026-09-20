@@ -1,0 +1,39 @@
+# Local environments and caches
+**/.venv/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Solver fields, restarts, and generated meshes (see LOCAL_ARTIFACTS_MANIFEST.csv)
+*.vtk
+*.vtu
+*.dat
+*.su2
+*.msh
+*.stl
+*.cgns
+
+# Large regenerable CSV streams
+**/restart*.csv
+**/seed_*.csv
+**/history*.csv
+**/wall.csv
+**/wall_npr*.csv
+**/wall_smoke*.csv
+**/wall_continue*.csv
+**/wall_relax*.csv
+**/wall_safe*.csv
+**/wall_urans*.csv
+
+# Downloaded executables and platform libraries
+*.exe
+*.dll
+*.lib
+**/cea-linux
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+

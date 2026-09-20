@@ -1,0 +1,21 @@
+{
+  "source_wall_file": "wall_npr20_flux_SLAU2_00152.vtk",
+  "iteration": 152,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.11894443073135295
+  ],
+  "persistent_reattachment_crossings_m": [
+    0.12456253889621605
+  ],
+  "provisional_shock_pressure_rise_x_m": 0.1191578,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -32580.277331239515,
+  "wall_shear_max_pa": 14861.32206097571,
+  "yplus_median": 0.07018655500000001,
+  "yplus_p95": 0.6772382100000007,
+  "yplus_max": 1.738515,
+  "wall_pressure_min_pa": 39108.63,
+  "wall_pressure_max_pa": 2185723.0
+}

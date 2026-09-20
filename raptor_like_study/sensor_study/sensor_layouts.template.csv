@@ -1,0 +1,6 @@
+layout_id,sensor_id,type,x_m,r_m,units,full_scale,noise_std,bandwidth_hz,sampling_rate_hz,flush_mounted
+layout_002,p01,wall_static_pressure,0.040,,Pa,3000000,6000,10000,50000,true
+layout_002,p02,wall_static_pressure,0.060,,Pa,3000000,6000,10000,50000,true
+layout_003,p01,wall_static_pressure,0.030,,Pa,3000000,6000,10000,50000,true
+layout_003,p02,wall_static_pressure,0.050,,Pa,3000000,6000,10000,50000,true
+layout_003,p03,wall_static_pressure,0.070,,Pa,3000000,6000,10000,50000,true

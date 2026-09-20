@@ -1,0 +1,21 @@
+{
+  "source_wall_file": "wall_npr20_fine_B_barth_00250.vtk",
+  "iteration": 250,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [
+    0.1189409284729988
+  ],
+  "persistent_reattachment_crossings_m": [
+    0.12451529416269697
+  ],
+  "provisional_shock_pressure_rise_x_m": 0.1191578,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -34201.783347920056,
+  "wall_shear_max_pa": 14814.827631714898,
+  "yplus_median": 0.035155205,
+  "yplus_p95": 0.34886634499999947,
+  "yplus_max": 0.871442,
+  "wall_pressure_min_pa": 39264.01,
+  "wall_pressure_max_pa": 2266403.0
+}

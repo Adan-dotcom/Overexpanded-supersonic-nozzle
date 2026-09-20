@@ -1,0 +1,99 @@
+
+ problem rocket equilibrium
+   p,bar=243.78968736
+   o/f=3.87332075
+   supar=20.23991786
+ reactant
+   fuel CH4(L) wt%=100 t(k)=111.66
+   oxid O2(L) wt%=100 t(k)=90.17
+ output massf trace=1e-8
+ end
+
+THEORETICAL ROCKET PERFORMANCE ASSUMING EQUILIBRIUM
+COMPOSITION DURING EXPANSION FROM INFINITE AREA COMBUSTOR
+ 
+Pc = 243.79 bar
+ 
+supar =    20.2399
+ 
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     CH4(L)            100.000  -89233.000    111.66
+     O2(L)             100.000  -12979.000     90.17
+ 
+O/F =    3.87332    % Fuel =  20.51989    r, Eq. Ratio =  1.02993    phi, Eq. Ratio =  1.02993
+ 
+
+                        CHAMBER       THROAT         EXIT
+ Pinf/P                  1.0000       1.7277      152.665
+ P, bar                243.7897     141.1049       1.5969
+ T, K                   3737.12      3552.79      2392.98
+ Density, kg/m^3      0.1822E+2    0.1123E+2    0.2056E+0
+ H, kJ/kg             -1463.756    -2172.773    -6629.787
+ U, kJ/kg             -2801.993    -3429.074    -7406.549
+ G, kJ/kg             -43654.39    -42282.34    -33645.57
+ S, kJ/kg-K              11.290       11.290       11.290
+ 
+ M, (1/n)               23.2189      23.5132      25.6146
+ (dln(V)/dln(P))t       -1.0384      -1.0351      -1.0086
+ (dln(V)/dln(T))p        1.6578       1.6336       1.2353
+ Cp, kJ/(kg-K)           6.3287       6.3281       4.2386
+ Gamma_s                 1.1326       1.1287       1.1214
+ Son. Vel., m/s         1231.14      1190.82       933.31
+ Mach                    0.0000       1.0000       3.4440
+ 
+ PERFORMANCE PARAMETERS
+ 
+ Ae/At                                1.0000      20.2399
+ C*, m/s                             1822.74      1822.74
+ Cf                                   0.6533       1.7635
+ Ivac, m/s                           2245.81      3456.01
+ Isp, m/s                            1190.81      3214.35
+ 
+MASS FRACTIONS
+ 
+ CO                    0.160443     0.147962     0.050167
+ CO2                   0.310721     0.330383     0.484102
+ COOH                  6.924E-5     3.999E-5     2.123E-7
+ H                     5.906E-4     5.009E-4     6.340E-5
+ H2                    0.004091     0.003731     0.001374
+ H2O                   0.387761     0.395958     0.443890
+ H2O2                  1.091E-4     6.769E-5     5.851E-7
+ HCHO,formaldehy       8.435E-7     4.116E-7     6.11E-10
+ HCO                   2.281E-5     1.190E-5     2.224E-8
+ HCOOH                 1.263E-5     6.873E-6     3.118E-8
+ HO2                   5.428E-4     3.595E-4     4.022E-6
+ O                     0.008496     0.006935     4.077E-4
+ O2                    0.068547     0.063177     0.012198
+ O3                    2.027E-6     9.957E-7     5.98E-10
+ OH                    0.058590     0.050866     0.007792
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MASS FRACTIONS
+WERE LESS THAN 1.000000E-08 FOR ALL ASSIGNED CONDITIONS
+
+ (CH3COOH)2      (HCOOH)2        C               C10H21,n-decyl  C10H8,naphthale
+ C12H10,biphenyl C12H9,o-bipheny C2              C2H             C2H2,acetylene 
+ C2H2,vinylidene C2H3,vinyl      C2H4            C2H4O,ethylen-o C2H5           
+ C2H5OH          C2H6            C2O             C3              C3H3,1-propynl 
+ C3H3,2-propynl  C3H4,allene     C3H4,cyclo-     C3H4,propyne    C3H5,allyl     
+ C3H6,cyclo-     C3H6,propylene  C3H6O,acetone   C3H6O,propanal  C3H6O,propylox 
+ C3H7,i-propyl   C3H7,n-propyl   C3H8            C3H8O,1propanol C3H8O,2propanol
+ C3O2            C4              C4H10,isobutane C4H10,n-butane  C4H2,butadiyne 
+ C4H4,1,3-cyclo- C4H6,1butyne    C4H6,2butyne    C4H6,butadiene  C4H6,cyclo-    
+ C4H8,1-butene   C4H8,cis2-buten C4H8,cyclo-     C4H8,isobutene  C4H8,tr2-butene
+ C4H9,i-butyl    C4H9,n-butyl    C4H9,s-butyl    C4H9,t-butyl    C5             
+ C5H10,1-pentene C5H10,cyclo-    C5H11,pentyl    C5H11,t-pentyl  C5H12,i-pentane
+ C5H12,n-pentane C5H6,1,3cyclo-  C5H8,cyclo-     C6H10,cyclo-    C6H12,1-hexene 
+ C6H12,cyclo-    C6H13,n-hexyl   C6H14,n-hexane  C6H2            C6H5,phenyl    
+ C6H5O,phenoxy   C6H5OH,phenol   C6H6            C7H14,1-heptene C7H15,n-heptyl 
+ C7H16,2-methylh C7H16,n-heptane C7H7,benzyl     C7H8            C7H8O,cresol-mx
+ C8H10,ethylbenz C8H16,1-octene  C8H17,n-octyl   C8H18,isooctane C8H18,n-octane 
+ C8H8,styrene    C9H19,n-nonyl   CH              CH2             CH2CO,ketene   
+ CH2OH           CH3             CH3C(CH3)2CH3   CH3CHO,ethanal  CH3CO,acetyl   
+ CH3COOH         CH3O            CH3O2CH3        CH3OCH3         CH3OH          
+ CH3OOH          CH4             HCCO            HO(CO)2OH       O(CH)2O        
+ OHCH2COOH       C(gr)           H2O(L)          H2O(cr)        
+
+NOTE. WEIGHT FRACTION OF FUEL IN TOTAL FUELS AND OF OXIDANT IN TOTAL OXIDANTS
+

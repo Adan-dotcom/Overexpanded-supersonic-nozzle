@@ -1,0 +1,17 @@
+{
+  "case_id": "replace_me",
+  "solver_exit_success": false,
+  "finite_values_everywhere": false,
+  "nonpositive_density_pressure_temperature_points": null,
+  "lut_out_of_domain_points": null,
+  "relative_mass_imbalance": null,
+  "relative_total_energy_flux_imbalance": null,
+  "local_total_enthalpy_overshoot_fraction": null,
+  "inner_residual_drop_decades": null,
+  "wall_y_plus_p95": null,
+  "wall_y_plus_max": null,
+  "separation_persistence_m": null,
+  "flow_through_times_before_sampling": null,
+  "x_sep_final_window_drift_m": null,
+  "medium_fine_x_sep_difference_m": null
+}

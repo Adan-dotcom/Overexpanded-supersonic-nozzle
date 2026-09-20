@@ -1,0 +1,115 @@
+
+ problem rocket equilibrium
+   p,bar=51.80027832
+   o/f=3.29830720
+   supar=30.0
+ reactant
+   fuel CH4(L) wt%=100 t(k)=111.66
+   oxid O2(L) wt%=100 t(k)=90.17
+ output massf trace=1e-8 transport
+ end
+
+THEORETICAL ROCKET PERFORMANCE ASSUMING EQUILIBRIUM
+COMPOSITION DURING EXPANSION FROM INFINITE AREA COMBUSTOR
+ 
+Pc =  51.80 bar
+ 
+supar =    30.0000
+ 
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     CH4(L)            100.000  -89233.000    111.66
+     O2(L)             100.000  -12979.000     90.17
+ 
+O/F =    3.29831    % Fuel =  23.26497    r, Eq. Ratio =  1.20949    phi, Eq. Ratio =  1.20949
+ 
+
+                        CHAMBER       THROAT         EXIT
+ Pinf/P                  1.0000       1.7273      278.370
+ P, bar                 51.8003      29.9884       0.1861
+ T, K                   3500.22      3330.83      1840.34
+ Density, kg/m^3      0.3792E+1    0.2337E+1    0.2795E-1
+ H, kJ/kg             -1605.312    -2328.984    -7229.627
+ U, kJ/kg             -2971.304    -3612.091    -7895.521
+ G, kJ/kg             -44996.25    -43620.01    -30043.67
+ S, kJ/kg-K              12.397       12.397       12.397
+ 
+ M, (1/n)               21.3051      21.5837      22.9790
+ (dln(V)/dln(P))t       -1.0373      -1.0323      -1.0001
+ (dln(V)/dln(T))p        1.6745       1.6151       1.0043
+ Cp, kJ/(kg-K)           7.1509       6.8924       2.2220
+ Gamma_s                 1.1308       1.1280       1.1963
+ Son. Vel., m/s         1242.85      1203.06       892.55
+ Mach                    0.0000       1.0000       3.7577
+ 
+ TRANSPORT PROPERTIES (GASES ONLY)
+    CONDUCTIVITY IN UNITS OF MILLIWATTS/(CM)(K)
+ 
+  Visc, Millipois        1.1154       1.0800       0.7155
+ 
+ WITH EQUILIBRIUM REACTIONS
+  Cp, kJ/(kg-K)          7.1509       6.8924       2.2220
+  Conductivity          15.1171      13.9049       2.3152
+  Prandtl Number         0.5276       0.5354       0.6866
+ 
+ WITH FROZEN REACTIONS
+  Cp, kJ/(kg-K)          2.3504       2.3384       2.1228
+  Conductivity           3.9008       3.7280       2.1180
+  Prandtl Number         0.6721       0.6774       0.7171
+ 
+ 
+ PERFORMANCE PARAMETERS
+ 
+ Ae/At                                1.0000      30.0000
+ C*, m/s                             1842.28      1842.28
+ Cf                                   0.6530       1.8205
+ Ivac, m/s                           2269.60      3552.44
+ Isp, m/s                            1203.06      3353.90
+ 
+MASS FRACTIONS
+ 
+ CO                    0.248900     0.238369     0.163591
+ CO2                   0.247107     0.263676     0.381197
+ COOH                  2.407E-5     1.404E-5     9.132E-9
+ H                     0.001180     0.001003     1.578E-5
+ H2                    0.008704     0.008269     0.008473
+ H2O                   0.406937     0.416936     0.446592
+ H2O2                  2.545E-5     1.485E-5     4.08E-10
+ HCHO,formaldehy       5.358E-7     2.834E-7     1.324E-9
+ HCO                   1.631E-5     8.922E-6     5.925E-9
+ HCOOH                 3.938E-6     2.240E-6     1.188E-8
+ HO2                   1.422E-4     8.573E-5     3.68E-10
+ O                     0.007090     0.005356     3.030E-7
+ O2                    0.028528     0.023442     1.572E-6
+ O3                    1.584E-7     6.548E-8     2.96E-17
+ OH                    0.051343     0.042823     1.297E-4
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MASS FRACTIONS
+WERE LESS THAN 1.000000E-08 FOR ALL ASSIGNED CONDITIONS
+
+ (CH3COOH)2      (HCOOH)2        C               C10H21,n-decyl  C10H8,naphthale
+ C12H10,biphenyl C12H9,o-bipheny C2              C2H             C2H2,acetylene 
+ C2H2,vinylidene C2H3,vinyl      C2H4            C2H4O,ethylen-o C2H5           
+ C2H5OH          C2H6            C2O             C3              C3H3,1-propynl 
+ C3H3,2-propynl  C3H4,allene     C3H4,cyclo-     C3H4,propyne    C3H5,allyl     
+ C3H6,cyclo-     C3H6,propylene  C3H6O,acetone   C3H6O,propanal  C3H6O,propylox 
+ C3H7,i-propyl   C3H7,n-propyl   C3H8            C3H8O,1propanol C3H8O,2propanol
+ C3O2            C4              C4H10,isobutane C4H10,n-butane  C4H2,butadiyne 
+ C4H4,1,3-cyclo- C4H6,1butyne    C4H6,2butyne    C4H6,butadiene  C4H6,cyclo-    
+ C4H8,1-butene   C4H8,cis2-buten C4H8,cyclo-     C4H8,isobutene  C4H8,tr2-butene
+ C4H9,i-butyl    C4H9,n-butyl    C4H9,s-butyl    C4H9,t-butyl    C5             
+ C5H10,1-pentene C5H10,cyclo-    C5H11,pentyl    C5H11,t-pentyl  C5H12,i-pentane
+ C5H12,n-pentane C5H6,1,3cyclo-  C5H8,cyclo-     C6H10,cyclo-    C6H12,1-hexene 
+ C6H12,cyclo-    C6H13,n-hexyl   C6H14,n-hexane  C6H2            C6H5,phenyl    
+ C6H5O,phenoxy   C6H5OH,phenol   C6H6            C7H14,1-heptene C7H15,n-heptyl 
+ C7H16,2-methylh C7H16,n-heptane C7H7,benzyl     C7H8            C7H8O,cresol-mx
+ C8H10,ethylbenz C8H16,1-octene  C8H17,n-octyl   C8H18,isooctane C8H18,n-octane 
+ C8H8,styrene    C9H19,n-nonyl   CH              CH2             CH2CO,ketene   
+ CH2OH           CH3             CH3C(CH3)2CH3   CH3CHO,ethanal  CH3CO,acetyl   
+ CH3COOH         CH3O            CH3O2CH3        CH3OCH3         CH3OH          
+ CH3OOH          CH4             HCCO            HO(CO)2OH       O(CH)2O        
+ OHCH2COOH       C(gr)           H2O(L)          H2O(cr)        
+
+NOTE. WEIGHT FRACTION OF FUEL IN TOTAL FUELS AND OF OXIDANT IN TOTAL OXIDANTS
+

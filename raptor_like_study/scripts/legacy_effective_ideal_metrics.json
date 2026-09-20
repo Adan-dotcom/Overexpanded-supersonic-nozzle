@@ -1,0 +1,17 @@
+{
+  "case_id": "effective_ideal_npr20",
+  "solver_exit_success": true,
+  "finite_values_everywhere": true,
+  "nonpositive_density_pressure_temperature_points": 0,
+  "lut_out_of_domain_points": 0,
+  "relative_mass_imbalance": null,
+  "relative_total_energy_flux_imbalance": null,
+  "local_total_enthalpy_overshoot_fraction": 0.149356,
+  "inner_residual_drop_decades": 2.0,
+  "wall_y_plus_p95": 0.30127,
+  "wall_y_plus_max": 0.711697,
+  "separation_persistence_m": 0.001,
+  "flow_through_times_before_sampling": 3.8,
+  "x_sep_final_window_drift_m": 0.000010498,
+  "medium_fine_x_sep_difference_m": 0.000006908
+}

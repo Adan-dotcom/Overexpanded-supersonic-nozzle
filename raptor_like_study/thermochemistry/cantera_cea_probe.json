@@ -1,0 +1,51 @@
+{
+  "model": "Cantera 3.2 gri30 equilibrium, gaseous species only",
+  "of_ratio": 3.2,
+  "equivalence_ratio": 1.25,
+  "cantera_chamber": {
+    "temperature_k": 3530.7773227317166,
+    "pressure_pa": 5200000.000000001,
+    "density_kg_m3": 3.69091169707154,
+    "internal_energy_j_kg": -2742541.7625607857,
+    "enthalpy_j_kg": -1333675.7622915816,
+    "entropy_j_kg_k": 12598.251632787107,
+    "cp_j_kg_k": 2378.5944395851366,
+    "cv_j_kg_k": 1979.5701252510955,
+    "gamma_frozen": 1.2015711942932192,
+    "molecular_weight_kg_kmol": 20.83698240802648,
+    "sound_speed_frozen_m_s": 1301.0967690923605,
+    "major_mole_fractions": {
+      "H2O": 0.47053851767800237,
+      "CO2": 0.10857858121047388,
+      "CO": 0.20129722769397765,
+      "H2": 0.1048399395142434,
+      "OH": 0.060057862166884475,
+      "O2": 0.016433097766133272,
+      "O": 0.009522486041401983,
+      "H": 0.0286196428855269
+    }
+  },
+  "cea_chamber_reference": {
+    "temperature_k": 3485.33,
+    "pressure_pa": 5200000.0,
+    "density_kg_m3": 3.772,
+    "internal_energy_j_kg": -3012033.0,
+    "enthalpy_j_kg": -1633393.0,
+    "entropy_j_kg_k": 12499.0,
+    "cp_equilibrium_j_kg_k": 6853.1,
+    "cp_frozen_j_kg_k": 2373.2,
+    "gamma_equilibrium": 1.1326,
+    "molecular_weight_kg_kmol": 21.0198,
+    "sound_speed_equilibrium_m_s": 1249.59
+  },
+  "relative_errors_percent": {
+    "temperature_k": 1.3039603920350862,
+    "density_kg_m3": -2.1497429196304374,
+    "molecular_weight_kg_kmol": -0.8697399212814649
+  },
+  "limitations": [
+    "GRI-Mech 3.0 is a combustion mechanism, not the NASA CEA thermodynamic database.",
+    "Cantera sound speed and cp reported here are frozen-composition derivatives.",
+    "Condensed carbon and liquid water are excluded by the gas-phase mechanism."
+  ]
+}

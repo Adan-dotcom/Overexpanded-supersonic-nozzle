@@ -1,0 +1,65 @@
+{
+  "Baseline": {
+    "tmax_k": 5279.486,
+    "temperature_overshoot_above_t0_k": 1794.156,
+    "separation_x_mm": 118.96341554004215,
+    "shock_x_mm": 119.1578,
+    "reattachment_x_mm": 124.52738030170113,
+    "wall_shear_min_kpa": -33.07756627751727,
+    "yplus_p95": 0.3490392499999995,
+    "runtime_s": null
+  },
+  "A: Venkat K=.001": {
+    "tmax_k": 5125.868,
+    "temperature_overshoot_above_t0_k": 1640.5380000000005,
+    "separation_x_mm": 118.94063120874169,
+    "shock_x_mm": 119.1578,
+    "reattachment_x_mm": 124.51596968201368,
+    "wall_shear_min_kpa": -34.20008707938893,
+    "yplus_p95": 0.34890106499999946,
+    "runtime_s": 1350.46
+  },
+  "B: Barth-Jespersen": {
+    "tmax_k": 5124.816,
+    "temperature_overshoot_above_t0_k": 1639.4859999999999,
+    "separation_x_mm": 118.94092847299879,
+    "shock_x_mm": 119.1578,
+    "reattachment_x_mm": 124.51529416269696,
+    "wall_shear_min_kpa": -34.201783347920056,
+    "yplus_p95": 0.34886634499999947,
+    "runtime_s": 1352.56
+  },
+  "C: K=.001, CFL=.25, i30": {
+    "tmax_k": 5125.821,
+    "temperature_overshoot_above_t0_k": 1640.491,
+    "separation_x_mm": 118.92598225164316,
+    "shock_x_mm": 119.1578,
+    "reattachment_x_mm": 124.51243876888947,
+    "wall_shear_min_kpa": -33.408090679005284,
+    "yplus_p95": 0.3479162599999995,
+    "runtime_s": 3511.84
+  },
+  "A_temperature_trend": {
+    "steps": [
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
+    "tmax_k": [
+      5239.281,
+      5200.942,
+      5172.975,
+      5147.545,
+      5125.868
+    ]
+  },
+  "decision": {
+    "A_passed": false,
+    "B_passed": false,
+    "C_passed": false,
+    "label_accepted": false,
+    "reason": "All three branches retain Tmax well above T0; A and B are nearly identical, and C costs 2.6x without improving Tmax."
+  }
+}

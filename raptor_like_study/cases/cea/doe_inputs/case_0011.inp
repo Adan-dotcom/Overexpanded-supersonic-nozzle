@@ -1,0 +1,9 @@
+problem rocket equilibrium
+  p,bar=202.00413825
+  o/f=3.68102481
+  supar=48.08188150
+reactant
+  fuel CH4(L) wt%=100 t(k)=111.66
+  oxid O2(L) wt%=100 t(k)=90.17
+output massf trace=1e-8
+end

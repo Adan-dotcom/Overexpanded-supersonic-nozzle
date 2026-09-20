@@ -1,0 +1,1532 @@
+{
+  "dataset": "D:\\PRUEBA SU2_2026\\raptor_like_study\\ml_pipeline\\mock_sensor_dataset.csv",
+  "n_cases": 160,
+  "n_train": 128,
+  "n_test": 32,
+  "physics_accepted_only": false,
+  "provisional_data_used": true,
+  "publishable": false,
+  "warning": "Development-only metrics",
+  "results": [
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 2,
+      "sensor_indices": [
+        0,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 2,
+      "sensor_indices": [
+        0,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 2,
+      "sensor_indices": [
+        0,
+        127
+      ],
+      "mae_m": 0.0035819702560651577,
+      "rmse_m": 0.004574742142615632
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 2,
+      "sensor_indices": [
+        0,
+        127
+      ],
+      "mae_m": 0.020218632820113845,
+      "rmse_m": 0.024526643660425423
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 2,
+      "sensor_indices": [
+        0,
+        99
+      ],
+      "f1": 0.9230769230769231,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 2,
+      "sensor_indices": [
+        0,
+        99
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 2,
+      "sensor_indices": [
+        0,
+        99
+      ],
+      "mae_m": 0.0032238647634197427,
+      "rmse_m": 0.004007761079665161
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 2,
+      "sensor_indices": [
+        0,
+        99
+      ],
+      "mae_m": 0.03324053304353853,
+      "rmse_m": 0.040354646672094534
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 3,
+      "sensor_indices": [
+        0,
+        64,
+        127
+      ],
+      "f1": 0.9411764705882353,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 3,
+      "sensor_indices": [
+        0,
+        64,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 3,
+      "sensor_indices": [
+        0,
+        64,
+        127
+      ],
+      "mae_m": 0.0027243204001835574,
+      "rmse_m": 0.003994641070262613
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 3,
+      "sensor_indices": [
+        0,
+        64,
+        127
+      ],
+      "mae_m": 0.026848619365377302,
+      "rmse_m": 0.03357339541727576
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 3,
+      "sensor_indices": [
+        0,
+        73,
+        104
+      ],
+      "f1": 0.9230769230769231,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 3,
+      "sensor_indices": [
+        0,
+        73,
+        104
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 3,
+      "sensor_indices": [
+        0,
+        73,
+        104
+      ],
+      "mae_m": 0.002793912272002532,
+      "rmse_m": 0.0036818682177916185
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 3,
+      "sensor_indices": [
+        0,
+        73,
+        104
+      ],
+      "mae_m": 0.03294965091571459,
+      "rmse_m": 0.039319427533345594
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 4,
+      "sensor_indices": [
+        0,
+        42,
+        85,
+        127
+      ],
+      "f1": 0.9411764705882353,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 4,
+      "sensor_indices": [
+        0,
+        42,
+        85,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 4,
+      "sensor_indices": [
+        0,
+        42,
+        85,
+        127
+      ],
+      "mae_m": 0.0035461362931604196,
+      "rmse_m": 0.0044117957938096175
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 4,
+      "sensor_indices": [
+        0,
+        42,
+        85,
+        127
+      ],
+      "mae_m": 0.039459001060958815,
+      "rmse_m": 0.04634795908476529
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 4,
+      "sensor_indices": [
+        0,
+        67,
+        89,
+        112
+      ],
+      "f1": 0.9230769230769231,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 4,
+      "sensor_indices": [
+        0,
+        67,
+        89,
+        112
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 4,
+      "sensor_indices": [
+        0,
+        67,
+        89,
+        112
+      ],
+      "mae_m": 0.0032672128955255624,
+      "rmse_m": 0.003892056961894089
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 4,
+      "sensor_indices": [
+        0,
+        67,
+        89,
+        112
+      ],
+      "mae_m": 0.045771263910701195,
+      "rmse_m": 0.05669492318285592
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 5,
+      "sensor_indices": [
+        0,
+        32,
+        64,
+        95,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 5,
+      "sensor_indices": [
+        0,
+        32,
+        64,
+        95,
+        127
+      ],
+      "f1": 0.9795918367346939,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 5,
+      "sensor_indices": [
+        0,
+        32,
+        64,
+        95,
+        127
+      ],
+      "mae_m": 0.0027467626321685816,
+      "rmse_m": 0.004222417820683854
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 5,
+      "sensor_indices": [
+        0,
+        32,
+        64,
+        95,
+        127
+      ],
+      "mae_m": 0.06930112486373108,
+      "rmse_m": 0.08609480211017195
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 5,
+      "sensor_indices": [
+        82,
+        99,
+        65,
+        0,
+        120
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 5,
+      "sensor_indices": [
+        82,
+        99,
+        65,
+        0,
+        120
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 5,
+      "sensor_indices": [
+        82,
+        99,
+        65,
+        0,
+        120
+      ],
+      "mae_m": 0.002645347784873722,
+      "rmse_m": 0.0033806547931316965
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 5,
+      "sensor_indices": [
+        82,
+        99,
+        65,
+        0,
+        120
+      ],
+      "mae_m": 0.07287569482707217,
+      "rmse_m": 0.09427816591912933
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 6,
+      "sensor_indices": [
+        0,
+        25,
+        51,
+        76,
+        102,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 6,
+      "sensor_indices": [
+        0,
+        25,
+        51,
+        76,
+        102,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 6,
+      "sensor_indices": [
+        0,
+        25,
+        51,
+        76,
+        102,
+        127
+      ],
+      "mae_m": 0.0026297654108626187,
+      "rmse_m": 0.003304226806220175
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 6,
+      "sensor_indices": [
+        0,
+        25,
+        51,
+        76,
+        102,
+        127
+      ],
+      "mae_m": 0.12838149767555926,
+      "rmse_m": 0.14606050459818817
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 6,
+      "sensor_indices": [
+        93,
+        126,
+        80,
+        106,
+        65,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 6,
+      "sensor_indices": [
+        93,
+        126,
+        80,
+        106,
+        65,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 6,
+      "sensor_indices": [
+        93,
+        126,
+        80,
+        106,
+        65,
+        0
+      ],
+      "mae_m": 0.002609510632582771,
+      "rmse_m": 0.003575623225765182
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 6,
+      "sensor_indices": [
+        93,
+        126,
+        80,
+        106,
+        65,
+        0
+      ],
+      "mae_m": 0.16182604127698189,
+      "rmse_m": 0.19718545894230965
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 8,
+      "sensor_indices": [
+        0,
+        18,
+        36,
+        54,
+        73,
+        91,
+        109,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 8,
+      "sensor_indices": [
+        0,
+        18,
+        36,
+        54,
+        73,
+        91,
+        109,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 8,
+      "sensor_indices": [
+        0,
+        18,
+        36,
+        54,
+        73,
+        91,
+        109,
+        127
+      ],
+      "mae_m": 0.00274637063369223,
+      "rmse_m": 0.003575406620521147
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 8,
+      "sensor_indices": [
+        0,
+        18,
+        36,
+        54,
+        73,
+        91,
+        109,
+        127
+      ],
+      "mae_m": 0.039397513933829655,
+      "rmse_m": 0.04685372062542063
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 8,
+      "sensor_indices": [
+        127,
+        92,
+        112,
+        102,
+        70,
+        80,
+        58,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 8,
+      "sensor_indices": [
+        127,
+        92,
+        112,
+        102,
+        70,
+        80,
+        58,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 8,
+      "sensor_indices": [
+        127,
+        92,
+        112,
+        102,
+        70,
+        80,
+        58,
+        0
+      ],
+      "mae_m": 0.0020429913211850166,
+      "rmse_m": 0.002761242647196505
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 8,
+      "sensor_indices": [
+        127,
+        92,
+        112,
+        102,
+        70,
+        80,
+        58,
+        0
+      ],
+      "mae_m": 0.034538884386395595,
+      "rmse_m": 0.043292563742698596
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 10,
+      "sensor_indices": [
+        0,
+        14,
+        28,
+        42,
+        56,
+        71,
+        85,
+        99,
+        113,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 10,
+      "sensor_indices": [
+        0,
+        14,
+        28,
+        42,
+        56,
+        71,
+        85,
+        99,
+        113,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 10,
+      "sensor_indices": [
+        0,
+        14,
+        28,
+        42,
+        56,
+        71,
+        85,
+        99,
+        113,
+        127
+      ],
+      "mae_m": 0.0027599296205796583,
+      "rmse_m": 0.0038197867967049394
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 10,
+      "sensor_indices": [
+        0,
+        14,
+        28,
+        42,
+        56,
+        71,
+        85,
+        99,
+        113,
+        127
+      ],
+      "mae_m": 0.04250511632617979,
+      "rmse_m": 0.05143398879176842
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 10,
+      "sensor_indices": [
+        89,
+        127,
+        73,
+        104,
+        80,
+        64,
+        97,
+        55,
+        112,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 10,
+      "sensor_indices": [
+        89,
+        127,
+        73,
+        104,
+        80,
+        64,
+        97,
+        55,
+        112,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 10,
+      "sensor_indices": [
+        89,
+        127,
+        73,
+        104,
+        80,
+        64,
+        97,
+        55,
+        112,
+        0
+      ],
+      "mae_m": 0.002262109327580898,
+      "rmse_m": 0.003278913381797942
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 10,
+      "sensor_indices": [
+        89,
+        127,
+        73,
+        104,
+        80,
+        64,
+        97,
+        55,
+        112,
+        0
+      ],
+      "mae_m": 0.04508807403958062,
+      "rmse_m": 0.058298292795434116
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 12,
+      "sensor_indices": [
+        0,
+        12,
+        23,
+        35,
+        46,
+        58,
+        69,
+        81,
+        92,
+        104,
+        115,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 12,
+      "sensor_indices": [
+        0,
+        12,
+        23,
+        35,
+        46,
+        58,
+        69,
+        81,
+        92,
+        104,
+        115,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 12,
+      "sensor_indices": [
+        0,
+        12,
+        23,
+        35,
+        46,
+        58,
+        69,
+        81,
+        92,
+        104,
+        115,
+        127
+      ],
+      "mae_m": 0.0028061539263042608,
+      "rmse_m": 0.004269089124609883
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 12,
+      "sensor_indices": [
+        0,
+        12,
+        23,
+        35,
+        46,
+        58,
+        69,
+        81,
+        92,
+        104,
+        115,
+        127
+      ],
+      "mae_m": 0.032676003970488254,
+      "rmse_m": 0.03871730641068409
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 12,
+      "sensor_indices": [
+        58,
+        52,
+        89,
+        106,
+        74,
+        99,
+        127,
+        67,
+        94,
+        80,
+        115,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 12,
+      "sensor_indices": [
+        58,
+        52,
+        89,
+        106,
+        74,
+        99,
+        127,
+        67,
+        94,
+        80,
+        115,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 12,
+      "sensor_indices": [
+        58,
+        52,
+        89,
+        106,
+        74,
+        99,
+        127,
+        67,
+        94,
+        80,
+        115,
+        0
+      ],
+      "mae_m": 0.0019409975035797388,
+      "rmse_m": 0.002658320535394186
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 12,
+      "sensor_indices": [
+        58,
+        52,
+        89,
+        106,
+        74,
+        99,
+        127,
+        67,
+        94,
+        80,
+        115,
+        0
+      ],
+      "mae_m": 0.03601933530379967,
+      "rmse_m": 0.046417471474394734
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 16,
+      "sensor_indices": [
+        0,
+        8,
+        17,
+        25,
+        34,
+        42,
+        51,
+        59,
+        68,
+        76,
+        85,
+        93,
+        102,
+        110,
+        119,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 16,
+      "sensor_indices": [
+        0,
+        8,
+        17,
+        25,
+        34,
+        42,
+        51,
+        59,
+        68,
+        76,
+        85,
+        93,
+        102,
+        110,
+        119,
+        127
+      ],
+      "f1": 0.9795918367346939,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 16,
+      "sensor_indices": [
+        0,
+        8,
+        17,
+        25,
+        34,
+        42,
+        51,
+        59,
+        68,
+        76,
+        85,
+        93,
+        102,
+        110,
+        119,
+        127
+      ],
+      "mae_m": 0.002269402528427404,
+      "rmse_m": 0.003376840690420898
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 16,
+      "sensor_indices": [
+        0,
+        8,
+        17,
+        25,
+        34,
+        42,
+        51,
+        59,
+        68,
+        76,
+        85,
+        93,
+        102,
+        110,
+        119,
+        127
+      ],
+      "mae_m": 0.06168220348349731,
+      "rmse_m": 0.07261656299759069
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 16,
+      "sensor_indices": [
+        89,
+        70,
+        99,
+        114,
+        127,
+        104,
+        92,
+        109,
+        82,
+        52,
+        58,
+        76,
+        65,
+        119,
+        86,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 16,
+      "sensor_indices": [
+        89,
+        70,
+        99,
+        114,
+        127,
+        104,
+        92,
+        109,
+        82,
+        52,
+        58,
+        76,
+        65,
+        119,
+        86,
+        0
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 16,
+      "sensor_indices": [
+        89,
+        70,
+        99,
+        114,
+        127,
+        104,
+        92,
+        109,
+        82,
+        52,
+        58,
+        76,
+        65,
+        119,
+        86,
+        0
+      ],
+      "mae_m": 0.0019079998770201356,
+      "rmse_m": 0.0027527047071708713
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 16,
+      "sensor_indices": [
+        89,
+        70,
+        99,
+        114,
+        127,
+        104,
+        92,
+        109,
+        82,
+        52,
+        58,
+        76,
+        65,
+        119,
+        86,
+        0
+      ],
+      "mae_m": 0.06988012962100364,
+      "rmse_m": 0.0883876256119348
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 24,
+      "sensor_indices": [
+        0,
+        6,
+        11,
+        17,
+        22,
+        28,
+        33,
+        39,
+        44,
+        50,
+        55,
+        61,
+        66,
+        72,
+        77,
+        83,
+        88,
+        94,
+        99,
+        105,
+        110,
+        116,
+        121,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 24,
+      "sensor_indices": [
+        0,
+        6,
+        11,
+        17,
+        22,
+        28,
+        33,
+        39,
+        44,
+        50,
+        55,
+        61,
+        66,
+        72,
+        77,
+        83,
+        88,
+        94,
+        99,
+        105,
+        110,
+        116,
+        121,
+        127
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "uniform",
+      "budget": 24,
+      "sensor_indices": [
+        0,
+        6,
+        11,
+        17,
+        22,
+        28,
+        33,
+        39,
+        44,
+        50,
+        55,
+        61,
+        66,
+        72,
+        77,
+        83,
+        88,
+        94,
+        99,
+        105,
+        110,
+        116,
+        121,
+        127
+      ],
+      "mae_m": 0.0022199847599289908,
+      "rmse_m": 0.0035308498051043577
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "uniform",
+      "budget": 24,
+      "sensor_indices": [
+        0,
+        6,
+        11,
+        17,
+        22,
+        28,
+        33,
+        39,
+        44,
+        50,
+        55,
+        61,
+        66,
+        72,
+        77,
+        83,
+        88,
+        94,
+        99,
+        105,
+        110,
+        116,
+        121,
+        127
+      ],
+      "mae_m": 0.05257176926495403,
+      "rmse_m": 0.0690153123742211
+    },
+    {
+      "task": "classification",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 24,
+      "sensor_indices": [
+        114,
+        127,
+        67,
+        87,
+        81,
+        57,
+        77,
+        119,
+        105,
+        72,
+        98,
+        109,
+        92,
+        53,
+        102,
+        65,
+        83,
+        70,
+        60,
+        51,
+        9,
+        73,
+        4,
+        62
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "classification",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 24,
+      "sensor_indices": [
+        114,
+        127,
+        67,
+        87,
+        81,
+        57,
+        77,
+        119,
+        105,
+        72,
+        98,
+        109,
+        92,
+        53,
+        102,
+        65,
+        83,
+        70,
+        60,
+        51,
+        9,
+        73,
+        4,
+        62
+      ],
+      "f1": 1.0,
+      "auroc": 1.0
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "random_forest",
+      "layout": "pod_qr",
+      "budget": 24,
+      "sensor_indices": [
+        114,
+        127,
+        67,
+        87,
+        81,
+        57,
+        77,
+        119,
+        105,
+        72,
+        98,
+        109,
+        92,
+        53,
+        102,
+        65,
+        83,
+        70,
+        60,
+        51,
+        9,
+        73,
+        4,
+        62
+      ],
+      "mae_m": 0.0027126428229845775,
+      "rmse_m": 0.004239541998832306
+    },
+    {
+      "task": "x_sep_regression",
+      "model": "mlp",
+      "layout": "pod_qr",
+      "budget": 24,
+      "sensor_indices": [
+        114,
+        127,
+        67,
+        87,
+        81,
+        57,
+        77,
+        119,
+        105,
+        72,
+        98,
+        109,
+        92,
+        53,
+        102,
+        65,
+        83,
+        70,
+        60,
+        51,
+        9,
+        73,
+        4,
+        62
+      ],
+      "mae_m": 0.0585186794492804,
+      "rmse_m": 0.07090336693940782
+    }
+  ]
+}

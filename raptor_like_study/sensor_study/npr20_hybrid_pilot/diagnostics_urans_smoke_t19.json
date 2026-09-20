@@ -1,0 +1,17 @@
+{
+  "source_wall_file": "wall_npr20_urans_smoke_00019.vtk",
+  "iteration": 19,
+  "converged": false,
+  "label_accepted": false,
+  "persistent_separation_crossings_m": [],
+  "persistent_reattachment_crossings_m": [],
+  "provisional_shock_pressure_rise_x_m": 0.12502,
+  "su2_cf_reference_dynamic_pressure_pa": 0.15577823219400003,
+  "wall_shear_min_pa": -172.87105249819345,
+  "wall_shear_max_pa": 54310.47938814797,
+  "yplus_median": 0.14039695,
+  "yplus_p95": 0.627311285,
+  "yplus_max": 0.9582347,
+  "wall_pressure_min_pa": 21957.72,
+  "wall_pressure_max_pa": 2149209.0
+}

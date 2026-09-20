@@ -1,0 +1,105 @@
+{
+  "case": {
+    "pc_pa": 5200000.0,
+    "of_ratio": 3.2,
+    "area_ratio": 30.0
+  },
+  "equilibrium": {
+    "pressure_bar": [
+      52.0,
+      30.0772,
+      0.1802
+    ],
+    "temperature_k": [
+      3485.33,
+      3312.08,
+      1743.13
+    ],
+    "density_kg_m3": [
+      3.772,
+      2.325,
+      0.02792
+    ],
+    "molecular_weight_kg_kmol": [
+      21.0198,
+      21.2866,
+      22.4568
+    ],
+    "gamma_s": [
+      1.1326,
+      1.1304,
+      1.2027
+    ],
+    "mach": [
+      0.0,
+      1.0,
+      3.81
+    ],
+    "viscosity_millipoise": [
+      1.1072,
+      1.0707,
+      0.6821
+    ]
+  },
+  "frozen_at_throat": {
+    "pressure_bar": [
+      52.0,
+      30.0769,
+      0.1432
+    ],
+    "temperature_k": [
+      3485.36,
+      3312.09,
+      1267.0
+    ],
+    "density_kg_m3": [
+      3.772,
+      2.325,
+      0.02894
+    ],
+    "molecular_weight_kg_kmol": [
+      21.0194,
+      21.2864,
+      21.2864
+    ],
+    "gamma_s": [
+      1.1327,
+      1.1305,
+      1.2506
+    ],
+    "mach": [
+      0.0,
+      1.0,
+      4.1161
+    ],
+    "viscosity_millipoise": [
+      1.1072,
+      1.0707,
+      0.519
+    ],
+    "cp_frozen_kj_kg_k": [
+      2.3732,
+      2.3604,
+      1.9493
+    ],
+    "conductivity_frozen_mw_cm_k": [
+      3.931,
+      3.7506,
+      1.4112
+    ],
+    "prandtl_frozen": [
+      0.6684,
+      0.6738,
+      0.7169
+    ]
+  },
+  "su2_effective_frozen_gas": {
+    "gas_constant_j_kg_k": 390.5997546790439,
+    "gamma": 1.1982940938335604,
+    "mu_ref_pa_s": 0.00010707,
+    "mu_ref_temperature_k": 3312.09,
+    "sutherland_constant_k": 683.0362175493512,
+    "prandtl_laminar": 0.6738,
+    "total_temperature_k": 3485.33
+  }
+}

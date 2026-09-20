@@ -1,0 +1,35 @@
+{
+  "profile": "medium",
+  "purpose": "grid-convergence candidate",
+  "topology": "transfinite quadrilateral nozzle plus conformal triangular ambient domain",
+  "contour_file": "D:\\PRUEBA SU2_2026\\DLR_PAR_full_contour.csv",
+  "x_far_m": 1.2204652,
+  "r_far_m": 0.5477226000000001,
+  "exit_diameter_m": 0.10954452,
+  "downstream_extent_exit_diameters": 10.0,
+  "radial_extent_exit_diameters": 5.0,
+  "settings": {
+    "axial_cells": 1600,
+    "radial_cells": 200,
+    "first_wall_cell_m": 5e-07,
+    "h_lip": 1e-05,
+    "h_near": 0.0001,
+    "h_plume": 0.0004,
+    "h_far": 0.01
+  },
+  "inlet_growth_ratio": 1.0372054535486313,
+  "exit_growth_ratio": 1.043222543738389,
+  "nodes": 985527,
+  "elements_2d": {
+    "Triangle 3": 1325044,
+    "Quadrilateral 4": 320000
+  },
+  "min_scaled_jacobian": 0.9937962395362013,
+  "mean_scaled_jacobian": 0.9998666407194274,
+  "boundaries": [
+    "WALL",
+    "INLET",
+    "AXIS",
+    "FARFIELD"
+  ]
+}

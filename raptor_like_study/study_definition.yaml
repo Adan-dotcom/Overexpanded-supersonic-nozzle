@@ -1,0 +1,23 @@
+study_name: raptor_like_lox_ch4_nozzle_separation
+status: deprecated_do_not_use_replaced_by_experiment_spec_physical_campaign
+scope: representative_public_parameter_envelope
+propellant:
+  oxidizer: O2(L)
+  fuel: CH4(L)
+  mixture_ratio_oxidizer_to_fuel: 3.60
+operating_points:
+  chamber_pressure_pa: [20000000, 25300000, 30000000]
+  chamber_temperature_model: CEA
+  back_pressure_pa: [101325, 50000, 20000, 5000]
+  area_ratio: [20, 34.34, 50]
+models:
+  chemistry: [equilibrium, frozen]
+  turbulence: [SST]
+  flow: [RANS, URANS]
+labels:
+  - separated
+  - x_sep_m
+  - x_reattach_m
+  - shock_x_m
+  - wall_pressure_rms_pa
+  - side_load_rms_n
