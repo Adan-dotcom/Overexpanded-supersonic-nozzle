@@ -13,6 +13,11 @@
 *.stl
 *.cgns
 
+# Portable handoff state for the active one-atmosphere case.
+!raptor_like_study/ambient_mesh/hybrid_pilot/dlr_par_hybrid.su2
+!raptor_like_study/sensor_study/sea_level_hybrid_lut_screen/restart_safe.dat
+!raptor_like_study/sensor_study/sea_level_hybrid_lut_screen/restart_urans_smoke_00009.dat
+
 # Large regenerable CSV streams
 **/restart*.csv
 **/seed_*.csv
@@ -36,4 +41,3 @@
 Thumbs.db
 .idea/
 .vscode/
-

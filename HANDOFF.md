@@ -3,10 +3,12 @@
 ## Read this first
 
 This repository contains the reproducible source, configurations, NASA CEA
-outputs, thermochemistry LUT, diagnostics, plots, and decision history. Raw
-solver fields/restarts/generated meshes are intentionally excluded because the
-local workspace contains about 31 GiB and individual VTK files exceed GitHub's
-100 MB limit. `LOCAL_ARTIFACTS_MANIFEST.csv` inventories those local artifacts.
+outputs, thermochemistry LUT, diagnostics, plots, and decision history. The
+active one-atmosphere pilot mesh, its stable restart, and the latest URANS smoke
+restart are included as a portable handoff. All other raw solver fields,
+restarts, and generated meshes are intentionally excluded because the local
+workspace contains about 31 GiB and individual VTK files exceed GitHub's 100 MB
+limit. `LOCAL_ARTIFACTS_MANIFEST.csv` inventories those local artifacts.
 
 There are currently **zero physics-accepted ML labels**. Do not train or report
 the final sensor model until production cases pass every gate.
@@ -52,7 +54,8 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-3. Regenerate the hybrid pilot mesh:
+3. The active pilot mesh is already included at
+   `ambient_mesh/hybrid_pilot/dlr_par_hybrid.su2`. To regenerate it instead:
 
 ```powershell
 .\.venv\Scripts\python.exe ambient_mesh\generate_hybrid_mesh.py --profile pilot
@@ -70,7 +73,11 @@ wsl.exe --cd "/mnt/d/PRUEBA SU2_2026/raptor_like_study/screening_campaign" `
 The WSL Python used previously had Cantera, NumPy, SciPy, Matplotlib, and
 meshio. Adjust the executable path if those packages are installed elsewhere.
 
-5. Recreate the stable checkpoint in this order from `screening_campaign`:
+5. The portable stable checkpoint is already included at
+   `sensor_study/sea_level_hybrid_lut_screen/restart_safe.dat`; the last
+   completed transient state is `restart_urans_smoke_00009.dat`. To recreate
+   the stable checkpoint from scratch, run this sequence from
+   `screening_campaign`:
 
 ```bash
 export OMPI_MCA_osc=pt2pt
@@ -114,4 +121,3 @@ campaign alone cannot validate the method.
 cases and zero accepted profiles. `build_training_dataset.py` intentionally
 refuses to create a final dataset until `physics_accepted=true` profiles exist.
 Mock-data plots are development-only and always nonpublishable.
-
