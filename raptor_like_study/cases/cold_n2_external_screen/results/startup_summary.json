@@ -1,0 +1,99 @@
+{
+  "case_family": "cold_n2_external_screen",
+  "classification": "provisional_external_plume_numerical_screen_not_validation",
+  "runs": [
+    {
+      "case": "stage3-npr30",
+      "solver_stop": {
+        "normal_stop_recorded": true,
+        "stop_reason": "maximum-time",
+        "final_step": 4330,
+        "final_time_s": 0.00100009,
+        "nonphysical_error_text_present": false
+      },
+      "finite_positive": true,
+      "vtk": true,
+      "wall_loads": true,
+      "x_sep_m": 0.12502000000000002,
+      "x_shock_m": 0.12502,
+      "y_plus_max": 6903.821682933785,
+      "physics_accepted": false,
+      "training_eligible": false
+    },
+    {
+      "case": "stage3-npr33",
+      "solver_stop": {
+        "normal_stop_recorded": true,
+        "stop_reason": "maximum-time",
+        "final_step": 4179,
+        "final_time_s": 0.00100004,
+        "nonphysical_error_text_present": false
+      },
+      "finite_positive": true,
+      "vtk": true,
+      "wall_loads": true,
+      "x_sep_m": 0.12502000000000002,
+      "x_shock_m": 0.12502,
+      "y_plus_max": 7513.196433386037,
+      "physics_accepted": false,
+      "training_eligible": false
+    },
+    {
+      "case": "stage3-npr35",
+      "solver_stop": {
+        "normal_stop_recorded": true,
+        "stop_reason": "maximum-time",
+        "final_step": 4100,
+        "final_time_s": 0.0010001,
+        "nonphysical_error_text_present": false
+      },
+      "finite_positive": true,
+      "vtk": true,
+      "wall_loads": true,
+      "x_sep_m": 0.12502000000000002,
+      "x_shock_m": 0.12502,
+      "y_plus_max": 7183.112609756476,
+      "physics_accepted": false,
+      "training_eligible": false
+    },
+    {
+      "case": "stage3-npr37",
+      "solver_stop": {
+        "normal_stop_recorded": true,
+        "stop_reason": "maximum-time",
+        "final_step": 4037,
+        "final_time_s": 0.00100001,
+        "nonphysical_error_text_present": false
+      },
+      "finite_positive": true,
+      "vtk": true,
+      "wall_loads": true,
+      "x_sep_m": 0.12502000000000002,
+      "x_shock_m": 0.12502,
+      "y_plus_max": 7932.544293105775,
+      "physics_accepted": false,
+      "training_eligible": false
+    },
+    {
+      "case": "stage3-npr40",
+      "solver_stop": {
+        "normal_stop_recorded": true,
+        "stop_reason": "maximum-time",
+        "final_step": 3962,
+        "final_time_s": 0.00100008,
+        "nonphysical_error_text_present": false
+      },
+      "finite_positive": true,
+      "vtk": true,
+      "wall_loads": true,
+      "x_sep_m": 0.08158018727290318,
+      "x_shock_m": 0.12502,
+      "y_plus_max": 8595.68123237443,
+      "physics_accepted": false,
+      "training_eligible": false
+    }
+  ],
+  "all_runs_normal_and_positive": true,
+  "physics_accepted": false,
+  "training_eligible": false
+}

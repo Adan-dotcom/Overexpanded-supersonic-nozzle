@@ -1,0 +1,12 @@
+{
+  "scope": "official_initialization_only_no_solver_run",
+  "installed_job_sha256": "ac25b0b55a0571baf6937e36b59d13a2ad281bcb7540a6649472ea49c27a20d5",
+  "executed_job_sha256": "ac25b0b55a0571baf6937e36b59d13a2ad281bcb7540a6649472ea49c27a20d5",
+  "source_copy_unmodified": true,
+  "formulation_lines_present": true,
+  "prep_completed": true,
+  "inflow_tke": 76.2339615,
+  "inflow_log_omega": 15.033477894648,
+  "physics_accepted": false,
+  "training_eligible": false
+}

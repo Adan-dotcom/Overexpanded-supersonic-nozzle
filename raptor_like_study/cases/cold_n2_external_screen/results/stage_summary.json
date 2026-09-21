@@ -1,0 +1,49 @@
+{
+  "case_family": "cold_n2_external_screen",
+  "classification": "provisional_external_plume_numerical_screen_not_validation",
+  "stages": [
+    {
+      "stage": 1,
+      "description": "external, inviscid, ideal N2, transient",
+      "retry_basis": "official underexpanded-jet transient controls",
+      "status": "pass",
+      "final_time_s": 0.00100007,
+      "finite_positive": true,
+      "vtk_count": 111,
+      "wall_load_count": 208,
+      "x_sep_m": null,
+      "y_plus_max": 0.0,
+      "physics_accepted": false,
+      "training_eligible": false
+    },
+    {
+      "stage": 2,
+      "description": "laminar, adiabatic no-slip wall, transient",
+      "retry_basis": "official Hakkinen adiabatic no-slip wall",
+      "status": "pass",
+      "final_time_s": 0.0010005,
+      "finite_positive": true,
+      "vtk_count": 111,
+      "wall_load_count": 208,
+      "x_sep_m": null,
+      "y_plus_max": 257.99,
+      "physics_accepted": false,
+      "training_eligible": false
+    },
+    {
+      "stage": 3,
+      "description": "k_log_omega initialized from official Mabey formulation",
+      "retry_basis": "official Mabey initialization algebra",
+      "status": "pass",
+      "final_time_s": 0.0010001,
+      "finite_positive": true,
+      "vtk_count": 111,
+      "wall_load_count": 208,
+      "x_sep_m": 0.12502,
+      "y_plus_max": 7183.11,
+      "physics_accepted": false,
+      "training_eligible": false
+    }
+  ],
+  "mass_energy_balance": "unavailable_for_open_transient_audit"
+}

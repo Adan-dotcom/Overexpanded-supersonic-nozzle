@@ -1,0 +1,54 @@
+{
+  "scope": "official_example_installation_verification_not_physics_validation",
+  "artifact_directory": "/home/adan/eilmer-artifacts/official-basis-f53f460/flat-plate-hakkinen-swbli",
+  "final_snapshot": "0010",
+  "cell_count": 16000,
+  "finite_pressure_density_temperature": true,
+  "nonpositive_pressure_density_temperature_points": 0,
+  "state_min": {
+    "pressure_Pa": 3575.3054950618553,
+    "density_kg_m3": 0.08046306285395474,
+    "temperature_K": 140.7270730019164
+  },
+  "state_max": {
+    "pressure_Pa": 8833.651733862498,
+    "density_kg_m3": 0.1691240971539089,
+    "temperature_K": 281.347926908695
+  },
+  "vtk_export_present": true,
+  "vtk_file_count": 232,
+  "solver_log": {
+    "sha256": "02505a73c1d2fe6d99b168d8a30a46d9c6a7ad347d95391df1606b118f896b32",
+    "normal_stop_recorded": true,
+    "stop_reason": "maximum-time",
+    "final_step": 2514,
+    "final_time_s": 0.00087564,
+    "nonphysical_error_text_present": false
+  },
+  "source_files": [
+    {
+      "installed": "/home/adan/gdtk/examples/lmr/2D/flat-plate-hakkinen-swbli/grid.lua",
+      "executed": "/home/adan/eilmer-artifacts/official-basis-f53f460/flat-plate-hakkinen-swbli/grid.lua",
+      "installed_sha256": "40c2d5be7d3e08c2bcb8142c83ca921dce477873e1bd18fb7c58a5f125dbdc8c",
+      "executed_sha256": "40c2d5be7d3e08c2bcb8142c83ca921dce477873e1bd18fb7c58a5f125dbdc8c",
+      "identical": true
+    },
+    {
+      "installed": "/home/adan/gdtk/examples/lmr/2D/flat-plate-hakkinen-swbli/transient.lua",
+      "executed": "/home/adan/eilmer-artifacts/official-basis-f53f460/flat-plate-hakkinen-swbli/transient.lua",
+      "installed_sha256": "c7bf5505e9934b09a0ed3ced5e2bb891029d6d97c0f36194016d60e3922e5b80",
+      "executed_sha256": "c7bf5505e9934b09a0ed3ced5e2bb891029d6d97c0f36194016d60e3922e5b80",
+      "identical": true
+    },
+    {
+      "installed": "/home/adan/gdtk/examples/lmr/2D/flat-plate-hakkinen-swbli/makefile",
+      "executed": "/home/adan/eilmer-artifacts/official-basis-f53f460/flat-plate-hakkinen-swbli/makefile",
+      "installed_sha256": "3ec4887171f06bc6675cee388fba73ce083c045fe382944bf47cdd713b1ca5f0",
+      "executed_sha256": "3ec4887171f06bc6675cee388fba73ce083c045fe382944bf47cdd713b1ca5f0",
+      "identical": true
+    }
+  ],
+  "source_copy_unmodified": true,
+  "physics_accepted": false,
+  "training_eligible": false
+}

@@ -1,0 +1,54 @@
+{
+  "scope": "official_example_installation_verification_not_physics_validation",
+  "artifact_directory": "/home/adan/eilmer-artifacts/official-basis-f53f460/underexpanded-jet",
+  "final_snapshot": "0100",
+  "cell_count": 126960,
+  "finite_pressure_density_temperature": true,
+  "nonpositive_pressure_density_temperature_points": 0,
+  "state_min": {
+    "pressure_Pa": 5604.282350267605,
+    "density_kg_m3": 0.4062334901442245,
+    "temperature_K": 45.92556629314583
+  },
+  "state_max": {
+    "pressure_Pa": 1456900.0388889427,
+    "density_kg_m3": 21.917636920970565,
+    "temperature_K": 333.0336926045821
+  },
+  "vtk_export_present": true,
+  "vtk_file_count": 3334,
+  "solver_log": {
+    "sha256": "9e6cb3c4f635f31cda952fcc42a3ff09e81216d58eb80455f0d60ef7f3ee9d42",
+    "normal_stop_recorded": true,
+    "stop_reason": "maximum-time",
+    "final_step": 40091,
+    "final_time_s": 0.005,
+    "nonphysical_error_text_present": false
+  },
+  "source_files": [
+    {
+      "installed": "/home/adan/gdtk/examples/lmr/2D/underexpanded-jet/grid.lua",
+      "executed": "/home/adan/eilmer-artifacts/official-basis-f53f460/underexpanded-jet/grid.lua",
+      "installed_sha256": "48a81a4147a2e9201899348eb93e6dfd0bbc60df090cea73c8830fafdb5fafdc",
+      "executed_sha256": "48a81a4147a2e9201899348eb93e6dfd0bbc60df090cea73c8830fafdb5fafdc",
+      "identical": true
+    },
+    {
+      "installed": "/home/adan/gdtk/examples/lmr/2D/underexpanded-jet/transient.lua",
+      "executed": "/home/adan/eilmer-artifacts/official-basis-f53f460/underexpanded-jet/transient.lua",
+      "installed_sha256": "02eaf37ecb4c02795d4f102e1d5c024e396e042577304f5ecf4475edb3545049",
+      "executed_sha256": "02eaf37ecb4c02795d4f102e1d5c024e396e042577304f5ecf4475edb3545049",
+      "identical": true
+    },
+    {
+      "installed": "/home/adan/gdtk/examples/lmr/2D/underexpanded-jet/makefile",
+      "executed": "/home/adan/eilmer-artifacts/official-basis-f53f460/underexpanded-jet/makefile",
+      "installed_sha256": "b084d4dc2e3f7a50ef476a08905ef506b3e4d20bef4226deb533de5be08190bb",
+      "executed_sha256": "b084d4dc2e3f7a50ef476a08905ef506b3e4d20bef4226deb533de5be08190bb",
+      "identical": true
+    }
+  ],
+  "source_copy_unmodified": true,
+  "physics_accepted": false,
+  "training_eligible": false
+}

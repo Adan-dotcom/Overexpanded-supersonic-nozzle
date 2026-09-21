@@ -2,9 +2,10 @@
 
 Decision: **NO_GO**
 
-This decision applies only to numerical readiness of the provisional
-DLR-PAR/N2 Eilmer workflow. It is not an experimental-validation decision and
-produces no ML labels.
+This decision applies only to the retired/provisional **internal-domain**
+`cold_n2_validation` case. It is not a decision on the external-plume workflow
+described in `OFFICIAL_BASIS_AND_DECISION.md`, is not an
+experimental-validation decision, and produces no ML labels.
 
 ## Executed gate
 
@@ -50,4 +51,6 @@ transient initialization or continuation/restart into steady RANS, followed by
 one fresh coarse-baseline gate. The failed baseline provides no basis for mesh
 comparison, NPR robustness, sensitivity quantification, or a hot-gas screen.
 
-LOX/CH4 screening remains disabled.
+The internal-domain case remains **NO_GO** and its artifacts are preserved.
+The separate external-plume workflow is evaluated independently in
+`OFFICIAL_BASIS_AND_DECISION.md`.

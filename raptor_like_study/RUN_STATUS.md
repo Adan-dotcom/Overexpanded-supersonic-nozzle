@@ -48,7 +48,7 @@ sensor definitions, ML gates and Eilmer installation files were retained.
 - Cold-N2 mesh family: **geometry gates passed** at 51,840, 103,680 and
   207,360 cells in six conformal blocks. Flow-based `y+`, separation resolution
   and convergence remain unqualified.
-- Cold-N2 numerical screen: **NO_GO**. The NPR=35 coarse baseline crashed at
+- Cold-N2 internal-domain numerical screen: **NO_GO**. The NPR=35 coarse baseline crashed at
   Newton step 1 in `decompILU0` with a floating-point divide-by-zero. The one
   permitted retry (ILU fill 1, diagonal perturbation, scaling and disabled
   extrema clipping) reproduced the identical failure. No completed iteration,
@@ -57,6 +57,23 @@ sensor definitions, ML gates and Eilmer installation files were retained.
 - Cold-N2 DLR-PAR validation: not yet reproduced with Eilmer.
 - Hot DLR-PAR/methalox production: blocked.
 - Final ML training: blocked.
+
+## Official-basis external screen (new separate lane)
+
+The four requested official examples were reproduced from the installed
+`f53f4609a0331d48efee69a4e4f3c3598378cc03` tree. METIS 5.1.0 was added as the
+missing installation dependency required by the official `ugrid_partition`
+check; no official source or CFD control was edited. Compact positivity/VTK
+audits are under
+`cases/cold_n2_external_screen/results/official_basis/`.
+
+The new `cold_n2_external_screen` uses an underexpanded-jet-derived exterior
+axisymmetric plume and completed its inviscid, laminar/no-slip, and
+`k_log_omega` transient stages. Startup NPR 30/33/35/37/40 all reached 1 ms
+normally with positive finite states, VTK and wall loads. The screen decision
+is **GO_FOR_LOX_SCREEN_ONLY**; this is not a production or validation gate.
+The external screen's large y+ and unavailable open-transient global balance
+remain explicit limitations.
 
 ## Immediate order
 

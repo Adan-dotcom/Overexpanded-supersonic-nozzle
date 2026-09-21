@@ -37,11 +37,20 @@ assumed sensitivity ranges and a digitization uncertainty of +/-0.055 rt for
 unavailable. See
 `raptor_like_study/cases/cold_n2_validation/SOURCE_AUDIT.md`.
 
-The provisional numerical screen reached **NO_GO**. Both allowed coarse
+The provisional **internal-domain** numerical screen reached **NO_GO**. Both allowed coarse
 baseline attempts failed at Newton step 1 with the same ILU zero-pivot
 floating-point exception, including the documented adjusted retry. Therefore
 medium, NPR, OFAT and LOX screens were not launched. See
-`COLD_N2_SCREEN_DECISION.md`.
+`COLD_N2_SCREEN_DECISION.md` (scope: internal case only).
+
+A separate `cold_n2_external_screen` was built from the installed official
+underexpanded-jet topology. The nozzle, underexpanded jet, Hakkinen transient,
+and Mabey initialization were reproduced; missing METIS 5.1.0 was diagnosed
+and installed. Its inviscid, laminar/no-slip, k-log-omega and startup
+NPR=30/33/35/37/40 stages all finished with positive states and VTK/wall
+loads. Its decision is **GO_FOR_LOX_SCREEN_ONLY**, in
+`OFFICIAL_BASIS_AND_DECISION.md`. This does not override the internal NO_GO and
+does not permit production, validation claims or ML labels.
 
 The complete fresh-machine procedure and execution order are in
 `instrucciones iniciales.md`. The separate development-only ML task is in
@@ -61,12 +70,17 @@ hardware and is not the original DLR cold-N2 experiment.
 
 ## Next execution
 
-The three-level cold-N2 grid family passed its geometry gates, but flow is
+The three-level cold-N2 internal grid family passed its geometry gates, but flow is
 blocked by the repeated steady Newton preconditioner failure. Implement and
 qualify transient initialization or continuation/restart, then rerun only the
 coarse NPR=35 baseline gate. Do not launch LOX/CH4 until a new numerical
 decision permits that screen. No existing result validates nozzle separation,
 turbulence or finite-rate chemistry.
+
+For the separate external lane, the next authorized action is only the LOX/CH4
+screen using the same audit gates. Its y+ values are large and its open-
+transient global mass/energy balance is unavailable, so it remains a workflow
+gate rather than a physical result.
 
 ## Verification
 

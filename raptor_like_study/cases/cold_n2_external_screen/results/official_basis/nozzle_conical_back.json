@@ -1,0 +1,54 @@
+{
+  "scope": "official_example_installation_verification_not_physics_validation",
+  "artifact_directory": "/home/adan/eilmer-artifacts/official-basis-f53f460/nozzle-conical-back",
+  "final_snapshot": "0020",
+  "cell_count": 3300,
+  "finite_pressure_density_temperature": true,
+  "nonpositive_pressure_density_temperature_points": 0,
+  "state_min": {
+    "pressure_Pa": 11433.00786757227,
+    "density_kg_m3": 0.38996385494786395,
+    "temperature_K": 102.11699938685182
+  },
+  "state_max": {
+    "pressure_Pa": 495607.3685246301,
+    "density_kg_m3": 5.7640161102006635,
+    "temperature_K": 299.49505448879967
+  },
+  "vtk_export_present": true,
+  "vtk_file_count": 64,
+  "solver_log": {
+    "sha256": "62570488ed73ae79cadb9d0b87aa07c4e9702fb4723327610b3bb37a7755bc7d",
+    "normal_stop_recorded": true,
+    "stop_reason": "maximum-time",
+    "final_step": 5457,
+    "final_time_s": 0.00400073,
+    "nonphysical_error_text_present": false
+  },
+  "source_files": [
+    {
+      "installed": "/home/adan/gdtk/examples/lmr/2D/nozzle-conical-back/grid.lua",
+      "executed": "/home/adan/eilmer-artifacts/official-basis-f53f460/nozzle-conical-back/grid.lua",
+      "installed_sha256": "7ed7a64d5479bd66aaeb536912ecc787b1887e1d935a2594d5d012cb56f8112f",
+      "executed_sha256": "7ed7a64d5479bd66aaeb536912ecc787b1887e1d935a2594d5d012cb56f8112f",
+      "identical": true
+    },
+    {
+      "installed": "/home/adan/gdtk/examples/lmr/2D/nozzle-conical-back/transient.lua",
+      "executed": "/home/adan/eilmer-artifacts/official-basis-f53f460/nozzle-conical-back/transient.lua",
+      "installed_sha256": "4f17a8c0f7acaba1a368aa603ddd3c648d017f86364c8ab857f60a08ee3db249",
+      "executed_sha256": "4f17a8c0f7acaba1a368aa603ddd3c648d017f86364c8ab857f60a08ee3db249",
+      "identical": true
+    },
+    {
+      "installed": "/home/adan/gdtk/examples/lmr/2D/nozzle-conical-back/makefile",
+      "executed": "/home/adan/eilmer-artifacts/official-basis-f53f460/nozzle-conical-back/makefile",
+      "installed_sha256": "6041f47016d75df91d3df3a3a167efeb2f4be9a1279578d6699b69e7c2371597",
+      "executed_sha256": "6041f47016d75df91d3df3a3a167efeb2f4be9a1279578d6699b69e7c2371597",
+      "identical": true
+    }
+  ],
+  "source_copy_unmodified": true,
+  "physics_accepted": false,
+  "training_eligible": false
+}
