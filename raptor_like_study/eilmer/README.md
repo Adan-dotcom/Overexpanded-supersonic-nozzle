@@ -7,7 +7,7 @@ upstream-supported Linux workflow and supplies MPI cleanly.
 This selection does **not** make any existing CFD output a physics-accepted ML
 label. Eilmer supplies the required building blocks: compressible viscous flow,
 RANS, multiple species and energy modes, finite-rate chemistry, structured and
-unstructured grids, SU2-grid import, transient marching, steady JFNK, and MPI.
+unstructured grids, transient marching, steady JFNK, and MPI.
 We still have to qualify the exact LOX/CH4 products-air mechanism, transport,
 turbulence model, wall thermal condition, conservation, discretization and
 experimental separation prediction.
@@ -23,8 +23,8 @@ experimental separation prediction.
 Load the environment and verify it from WSL:
 
 ```bash
-source '/mnt/d/PRUEBA SU2_2026/raptor_like_study/eilmer/eilmer5-env.sh'
-bash '/mnt/d/PRUEBA SU2_2026/raptor_like_study/eilmer/check_eilmer_install.sh'
+source raptor_like_study/eilmer/eilmer5-env.sh
+bash raptor_like_study/eilmer/check_eilmer_install.sh
 ```
 
 `install_eilmer5_wsl.sh` reproduces the pinned build on another Ubuntu/WSL2
@@ -54,12 +54,12 @@ complementary, not competing solvers.
 ## Required qualification sequence
 
 1. Run the official serial/MPI smoke case and record solver provenance.
-2. Reproduce a published cold-N2 DLR-PAR anchor in both SU2 and Eilmer.
+2. Reproduce published cold-N2 DLR-PAR anchors with Eilmer.
 3. Benchmark an Eilmer multicomponent products/air mixing case before using the
    full nozzle mesh.
 4. Select and document equilibrium, frozen and finite-rate LOX/CH4 chemistry.
 5. Validate species thermodynamics and transport over the actual state domain.
-6. Run SST/SA or supported turbulence sensitivities and justify the wall model.
+6. Run supported turbulence sensitivities and justify the wall model.
 7. Pass conservation, mesh, time-step, domain and statistical-stationarity
    gates before setting `physics_accepted=true`.
 

@@ -1,12 +1,11 @@
 {
   "case_id": "replace_me",
-  "case_family": "cold_n2_validation_or_hot_methalox_application",
-  "lut_used": false,
+  "case_family": "products_air_benchmark_or_cold_n2_validation_or_hot_methalox_application",
   "solver_exit_success": false,
   "finite_values_everywhere": false,
+  "species_mass_fraction_closure_passed": false,
   "energy_conservation_audit_passed": false,
   "nonpositive_density_pressure_temperature_points": null,
-  "lut_out_of_domain_points": null,
   "relative_mass_imbalance": null,
   "relative_total_energy_flux_imbalance": null,
   "inner_residual_drop_decades": null,
@@ -29,7 +28,5 @@
   "thermochemistry_reference_validated": false,
   "transport_properties_validated": false,
   "chemistry_sensitivity_completed": false,
-  "working_fluid_matches_experiment": false,
-  "lut_interpolation_validated": false,
-  "lut_qoi_converged": false
+  "working_fluid_matches_experiment": false
 }

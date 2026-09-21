@@ -1,82 +1,33 @@
-# DLR-PAR sparse-sensor nozzle separation study
+# DLR-PAR Eilmer separation and sparse-sensor study
 
-> Current status: zero physics-accepted CFD labels. Read
-> `physics_model_status.yaml` and run `scripts/check_model_readiness.py` before
-> launching work. The legacy single-LUT hot plume is blocked because its
-> exterior is not air.
+The project studies how many wall-pressure sensors are needed to infer
+shock-induced boundary-layer separation in an overexpanded nozzle. Eilmer 5
+is the sole CFD backend; NASA CEA supplies chamber thermochemistry.
 
-This project is a reproducible research scaffold, not a reconstruction of the
-proprietary SpaceX Raptor engine. Publicly reported operating values are used as
-a reference envelope and every assumed value is recorded.
+## Scientific scope
 
-## Current physical envelope
+- Geometry: one fixed DLR-PAR contour, area ratio 30.
+- Validation lane: published cold gaseous-nitrogen DLR-PAR data.
+- Application lane: synthetic DLR-PAR geometry with public NASA LOX/LCH4
+  operating conditions.
+- Output: `x_sep`, shock location, reattachment and virtual wall transducers.
+- ML truth: only CFD cases that pass all numerical and physical gates.
 
-- Propellants: liquid oxygen and liquid methane.
-- Chamber pressure: 5.1-5.4 MPa for the NASA-LLAMA-scale nominal campaign.
-- O/F: 3.1-3.3, with NASA CEA computing chamber temperature case by case.
-- Geometry: fixed DLR-PAR contour, area ratio 30.
-- Ambient pressure: 50-101.325 kPa for the nominal open-atmosphere campaign.
-- Exploratory ground throttling: 2.0-5.4 MPa at 101.325 kPa.
-- Chemistry: NASA CEA equilibrium and frozen comparisons.
-- CFD labels: compressible RANS/URANS nozzle solutions, wall `Cf_t`, pressure,
-  separation and reattachment locations.
+The hot application is not a reconstruction of Raptor or any proprietary
+engine. Generalization is over operating conditions for one contour until
+additional geometries are introduced.
 
-These values define a synthetic DLR-PAR/methalox methodology study. They must
-not be described as Raptor geometry, proprietary engine data, or a recreation
-of the original cold-nitrogen DLR experiment.
+## Active tools
 
-The corrected 48-point chemistry batch is in `cases/physical_doe.csv`. NASA
-CEA results are joined in `cases/cea/physical_cea_summary.csv`, with chamber
-temperatures from `3365.9` to `3501.7 K`; species are stored in
-`cases/cea/physical_products_long.csv`. These are case inputs, not CFD labels.
+- Eilmer `v5.0.0`: compressible CFD, MPI, gas models and chemistry.
+- NASA CEA v3.3.4: equilibrium/frozen chamber and expansion reference states.
+- Python: DOE, evidence gates, post-processing and ML.
+- ParaView: interactive VTK inspection; Matplotlib: repeatable paper figures.
 
-## Study stages
+See `eilmer/README.md` for installation and commands. The first new CFD task is
+the bounded products/air benchmark described in `HANDOFF.md`.
 
-1. Run NASA CEA for combustion products and thermodynamic properties.
-2. Generate a parameterized axisymmetric nozzle mesh.
-3. Run a robust RANS continuation, then URANS where the separated shock moves.
-4. Extract `x_sep`, `x_reattach`, shock location and wall-pressure features.
-5. Build a case-level dataset and train/test a neural surrogate over operating
-   conditions for this fixed geometry.
-6. Validate against published separated-nozzle data before claiming engine-level
-   predictive accuracy.
+## Safety rule
 
-## Tools
-
-NASA CEA v3.3.4 binaries are in `tools/cea-3.3.4`. The Linux executable is run
-from WSL because the Windows gfortran executable needs an external Fortran
-runtime. SU2 remains the cold-N2 validation and cross-solver lane. Eilmer
-5.0.0 is the selected candidate for the multicomponent hot products/air lane;
-its installation and qualification plan are in `eilmer/README.md`. Selection
-does not remove the production blockers in `physics_model_status.yaml`.
-
-## Reproduce the chemistry stage
-
-From PowerShell in this directory:
-
-```powershell
-.\scripts\run_cea_baseline.ps1
-wsl.exe -d Ubuntu -- bash '/mnt/d/PRUEBA SU2_2026/raptor_like_study/scripts/run_cea_doe.sh'
-python .\scripts\parse_cea_doe.py
-```
-
-The CEA inputs use liquid `O2(L)` and `CH4(L)`, chamber pressure, O/F, and
-area ratio. The resulting equilibrium burned-gas state is supplied to the
-nozzle CFD inlet; this stage does not resolve injectors or combustion.
-
-## CFD pilot
-
-`cases/su2/case_0001` is generated directly from the CEA summary. Its mesh and
-configuration have been exercised in both single-process and two-process MPI
-mode. The short pilot is not treated as a converged physical result; production
-cases need continuation and convergence checks before their separation labels
-enter the dataset.
-
-```powershell
-wsl.exe -d Ubuntu -- bash '/mnt/d/PRUEBA SU2_2026/raptor_like_study/scripts/run_su2_case.sh' case_0001 2
-```
-
-CEA is a local command-line Fortran program, not a hosted API. The automation
-writes its text input, executes the official binary, and parses its text output.
-SU2 is likewise a local executable driven by a `.cfg` file, keeping each case
-reproducible without depending on an undocumented web service.
+`physics_model_status.yaml` currently reports zero accepted labels and blocks
+hot production. Smoke and screening data are never training data.

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-STUDY_ROOT="/mnt/d/PRUEBA SU2_2026/raptor_like_study"
+STUDY_ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 CEA_BIN="$STUDY_ROOT/tools/cea-3.3.4/cea-linux"
 INPUT_DIR="$STUDY_ROOT/cases/cea/doe_inputs"
 

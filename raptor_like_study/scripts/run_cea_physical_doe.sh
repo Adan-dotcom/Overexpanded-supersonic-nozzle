@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-root="/mnt/d/PRUEBA SU2_2026/raptor_like_study"
+root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 cea_bin="$root/tools/cea-3.3.4/cea-linux"
 input_dir="$root/cases/cea/physical_doe_inputs"
 

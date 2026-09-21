@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="/mnt/d/PRUEBA SU2_2026/raptor_like_study"
+ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)
 CEA_DIR="$ROOT/tools/cea-3.3.4"
 CASE_DIR="$ROOT/sensor_study/nominal_cea"
 

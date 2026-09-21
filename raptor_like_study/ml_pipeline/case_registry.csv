@@ -1,6 +1,4 @@
 case_id,campaign,geometry_id,pc_pa,t0_k,pa_pa,of_ratio,numerically_accepted,physics_accepted,provisional,profile_csv,separated,x_sep_m,exclusion_reason
-effective_ideal_npr20,legacy_effective_ideal,DLR_PAR,5200000,3485.33,260000,3.2,true,false,true,,true,0.0358087573,total_enthalpy_temperature_gate_failed
-lut_internal_smoke,software_integration,DLR_PAR,5200000,3485.33,260000,3.2,false,false,true,,, ,two_iterations_only
 hot_methalox_ground_throttle_exploratory_001,hot_methalox_ground_throttle_exploratory,DLR_PAR,2559971.7977145975,3406.26,101325.0,3.2711208758272305,false,false,false,,,,planned_CFD_not_run
 hot_methalox_ground_throttle_exploratory_002,hot_methalox_ground_throttle_exploratory,DLR_PAR,2998033.051501125,3409.66,101325.0,3.1590683292722197,false,false,false,,,,planned_CFD_not_run
 hot_methalox_ground_throttle_exploratory_003,hot_methalox_ground_throttle_exploratory,DLR_PAR,3443315.5431212774,3432.81,101325.0,3.1936517429830267,false,false,false,,,,planned_CFD_not_run

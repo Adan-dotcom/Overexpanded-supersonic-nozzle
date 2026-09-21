@@ -3,16 +3,15 @@ import unittest
 from scripts.evaluate_physics_gate import evaluate
 
 
-def passing_metrics(case_family="hot_methalox_application", lut_used=True):
+def passing_metrics(case_family="hot_methalox_application"):
     metrics = {
         "case_id": "test",
         "case_family": case_family,
-        "lut_used": lut_used,
         "solver_exit_success": True,
         "finite_values_everywhere": True,
+        "species_mass_fraction_closure_passed": True,
         "energy_conservation_audit_passed": True,
         "nonpositive_density_pressure_temperature_points": 0,
-        "lut_out_of_domain_points": 0,
         "relative_mass_imbalance": 0.001,
         "relative_total_energy_flux_imbalance": 0.002,
         "inner_residual_drop_decades": 3.0,
@@ -35,8 +34,6 @@ def passing_metrics(case_family="hot_methalox_application", lut_used=True):
         "thermochemistry_reference_validated": True,
         "transport_properties_validated": True,
         "chemistry_sensitivity_completed": True,
-        "lut_interpolation_validated": True,
-        "lut_qoi_converged": True,
     }
     if case_family == "cold_n2_validation":
         metrics["working_fluid_matches_experiment"] = True
@@ -65,6 +62,22 @@ class PhysicsGateTests(unittest.TestCase):
         result = evaluate(passing_metrics(), "screen")
         self.assertTrue(result["screening_survivor"])
         self.assertFalse(result["physics_accepted"])
+        self.assertFalse(result["training_eligible"])
+
+    def test_products_air_benchmark_does_not_require_nozzle_wall_metrics(self):
+        metrics = passing_metrics("products_air_benchmark")
+        for key in (
+            "inner_residual_drop_decades",
+            "wall_y_plus_p95",
+            "wall_y_plus_max",
+            "separation_persistence_m",
+            "flow_through_times_before_sampling",
+            "x_sep_final_window_drift_m",
+            "medium_fine_x_sep_difference_m",
+        ):
+            metrics.pop(key)
+        result = evaluate(metrics, "screen")
+        self.assertTrue(result["screening_survivor"])
         self.assertFalse(result["training_eligible"])
 
 

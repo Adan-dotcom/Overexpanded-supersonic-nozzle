@@ -1,36 +1,28 @@
-# Local environments and caches
+# Python environments and caches
 **/.venv/
 **/__pycache__/
 *.py[cod]
 .pytest_cache/
 
-# Solver fields, restarts, and generated meshes (see LOCAL_ARTIFACTS_MANIFEST.csv)
+# Eilmer generated case data
+**/lmrsim/
 *.vtk
 *.vtu
+*.pvtu
+*.pvd
 *.dat
-*.su2
 *.msh
-*.stl
+*.su2
 *.cgns
+*.log
 
-# Portable handoff state for the active one-atmosphere case.
-!raptor_like_study/ambient_mesh/hybrid_pilot/dlr_par_hybrid.su2
-!raptor_like_study/sensor_study/sea_level_hybrid_lut_screen/restart_safe.dat
-!raptor_like_study/sensor_study/sea_level_hybrid_lut_screen/restart_urans_smoke_00009.dat
-
-# Large regenerable CSV streams
+# Large regenerated tables and streams
 **/restart*.csv
-**/seed_*.csv
 **/history*.csv
-**/wall.csv
-**/wall_npr*.csv
-**/wall_smoke*.csv
-**/wall_continue*.csv
-**/wall_relax*.csv
-**/wall_safe*.csv
-**/wall_urans*.csv
+**/wall*.csv
+**/flow*.csv
 
-# Downloaded executables and platform libraries
+# Local binaries and platform libraries
 *.exe
 *.dll
 *.lib

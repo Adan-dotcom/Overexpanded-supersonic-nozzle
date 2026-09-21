@@ -93,7 +93,7 @@
       0.7169
     ]
   },
-  "su2_effective_frozen_gas": {
+  "frozen_effective_gas_reference": {
     "gas_constant_j_kg_k": 390.5997546790439,
     "gamma": 1.1982940938335604,
     "mu_ref_pa_s": 0.00010707,

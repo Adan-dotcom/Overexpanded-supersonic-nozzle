@@ -1,10 +1,8 @@
 study:
-  name: dlr_par_lox_ch4_sparse_sensor_placement
-  status: blocked_pending_valid_products_air_solver
-  purpose: >
-    Sparse fixed wall-pressure sensor placement for localization of shock-induced
-    boundary-layer separation in an axisymmetric TOP nozzle using hot LOX/LCH4
-    combustion products.
+  name: dlr_par_methalox_sparse_sensor_eilmer
+  purpose: predict shock-induced boundary-layer separation from sparse wall pressure
+  status: blocked_pending_products_air_benchmark
+  claim_scope: synthetic_methodology_study_not_raptor_hardware
 
 geometry:
   source_file: DLR_PAR_full_contour.csv
@@ -13,202 +11,84 @@ geometry:
   throat_radius_m: 0.010
   exit_x_m: 0.12502
   exit_radius_m: 0.05477
-  area_ratio_Ae_At: 30.0
+  area_ratio: 30.0
   variants: [DLR_PAR]
-  provenance: "Frey dissertation, Appendix B Fig. B.3; reconstructed full contour supplied by user"
+  arbitrary_geometry_claim_allowed: false
 
 operating_conditions:
-  # NASA LOX/CH4 hot-fire envelope, not claimed to be Raptor data.
-  chamber_pressure_abs_Pa:
-    min: 5.10e6
-    max: 5.40e6
-    nominal: 5.20e6
-    source_basis: "NASA MSFC 31-kN LOX/CH4 hot-fire campaigns (HR-1/LLAMA family)"
-  mixture_ratio_OF:
-    min: 3.10
-    max: 3.60
-    nominal: 3.20
-    source_basis: "NASA MSFC 31-kN LOX/CH4 hot-fire campaigns"
-  back_pressure_Pa:
-    min: 5.00e4
-    max: 1.01325e5
-    sampling: latin_hypercube
-    rationale: "open-atmosphere altitude-to-sea-level nominal campaign"
-  nozzle_pressure_ratio:
-    definition: "derived as Pc_abs / back_pressure_Pa; never independently sampled"
-    implied_min_approx: 50.3
-    implied_max_approx: 108.0
-  chamber_temperature_K:
-    definition: "derived by NASA CEA v3 for each (Pc,O/F) case; not independently sampled"
-  mass_flow_kg_s:
-    definition: "derived from choked solution / CEA-consistent chamber state and throat area; not imposed"
-  thrust_N:
-    definition: "derived output; NASA 31-kN thrust is NOT imposed because the DLR-PAR throat area is different"
+  chamber_pressure_abs_pa: {min: 5.10e6, max: 5.40e6, nominal: 5.20e6}
+  mixture_ratio_of: {min: 3.10, max: 3.30, nominal: 3.20}
+  back_pressure_abs_pa: {min: 5.00e4, max: 1.01325e5}
+  chamber_temperature: NASA_CEA_derived_per_case
+  nozzle_pressure_ratio: derived_as_Pc_over_Pa
+  independently_sample_npr: false
 
 thermochemistry:
-  propellants:
-    oxidizer: LOX
-    fuel: LCH4
-  chemistry_primary: equilibrium
-  code: NASA_CEA_v3
-  chamber_state: equilibrium
-  nozzle_expansion_primary: equilibrium
-  model_form_sensitivity:
-    - frozen_CEA
-  finite_rate:
-    enabled: false
-    reason: >
-      Current stock SU2 NEMO finite-rate gas models do not include an out-of-the-box
-      LOX/CH4 combustion-products mechanism. Do not claim finite-rate methane chemistry
-      in SU2 unless a validated custom mechanism is implemented.
-  cfd_property_coupling:
-    method: "NASA-polynomial equilibrium-products table -> SU2 DATADRIVEN_FLUID for single-composition screens only"
-    independent_variables: [rho, e]
-    validated_outputs: [p, T, equilibrium_a_squared]
-    production_enabled: false
-    blockers: [products_air_mixing, transport_validation, lut_qoi_convergence]
-  note: >
-    Recent methane-nozzle literature reports finite-rate chemistry gives the best
-    agreement, but equilibrium and finite-rate results are close for high-pressure
-    Raptor-class conditions; frozen chemistry is retained as a sensitivity bound.
+  chamber_reference: NASA_CEA_v3.3.4
+  oxidizer: O2_L
+  fuel: CH4_L
+  eilmer_primary_candidate: thermally_perfect_multispecies_finite_rate
+  comparison_models: [equilibrium, frozen, finite_rate]
+  exhaust_species_set: pending_benchmark_selection
+  exterior_composition: dry_air
+  transport_model: pending_validation
+  chemical_reference_state_must_be_consistent: true
+
+solver:
+  code: Eilmer
+  version: 5.0.0
+  mpi_ranks: 6
+  dimensionality: 2D_axisymmetric
+  flow: compressible_viscous
+  turbulence_primary_candidate: k_omega
+  turbulence_alternates: pending_supported_model_review
+  transient_method: explicit_or_implicit_after_benchmark
+  output_format: VTK
+
+mesh:
+  near_wall: structured_wall_normal_layers
+  target_y_plus: 1.0
+  levels: [screen, pilot, medium, fine]
+  shock_and_throat_refinement: true
+  generated_files_committed: false
 
 wall:
-  velocity_bc: no_slip
-  thermal_bc_primary: adiabatic
-  material: null
+  velocity: no_slip
+  thermal_primary: adiabatic
+  required_sensitivity: fixed_temperature_or_heat_flux
   conjugate_heat_transfer: false
-  radiation: false
-  rationale: >
-    Fluid-only separation/sensor study on the DLR-PAR contour. No cooling-channel
-    geometry or experimentally supported hot-wall temperature exists for this
-    synthetic DLR-PAR + NASA LOX/LCH4 combination, so a material/CHT model would
-    require invented hardware data.
+  rationale: no_supported_cooling_channel_geometry_or_hot_wall_measurement
 
-cfd:
-  screening_code: SU2
-  hot_plume_production_code: null
-  hot_plume_production_status: blocked_pending_validated_compressible_rans_multicomponent_formulation
-  numerics_below_apply_to: software_screening_only_until_production_solver_is_selected
-  version_target: "8.5.x or current stable"
-  dimensionality: 2D_axisymmetric
-  governing_equations: compressible_RANS_URANS_Navier_Stokes
-  primary_solver: RANS
-  unsteady_subset_solver: URANS
-  turbulence_primary: SST_2003m
-  turbulence_model_uncertainty:
-    alternate: Spalart_Allmaras
-    duplicate_cases: 10
-  convection:
-    scheme: HLLC
-    spatial_order: second_order_MUSCL
-    limiter: Venkatakrishnan
-  viscous_gradients: weighted_least_squares
-  time:
-    steady: implicit
-    unsteady: dual_time_BDF2
-  wall_resolution:
-    target_y_plus_max: 1.0
-    boundary_layer_resolved: true
-  mesh:
-    generator: Gmsh_or_equivalent
-    topology_preference: quad_dominant_structured_near_wall
-    grid_convergence:
-      enabled: true
-      levels: [coarse, medium, fine]
-      representative_cases: 6
-  outputs:
-    - wall_pressure
-    - wall_shear_stress
-    - skin_friction_coefficient
-    - Mach
-    - density
-    - temperature
-    - velocity
-    - turbulence_variables
-
-dataset:
-  production_cases: 100
-  sampling: latin_hypercube
-  sampled_dimensions:
-    - chamber_pressure_abs_Pa
-    - mixture_ratio_OF
-    - back_pressure_Pa
-  extra_runs:
-    turbulence_model_duplicates: 10
-    grid_convergence_additional_runs: 12
-  total_planned_cfd_runs: 122
-  split_unit: complete_CFD_case
-  train_fraction: 0.70
-  validation_fraction: 0.15
-  test_fraction: 0.15
-  leakage_rule: >
-    All sensor layouts/noise realizations derived from the same CFD case remain
-    in the same split.
+benchmark:
+  type: compressible_multicomponent_products_air
+  target_cells: [20000, 60000]
+  target_wall_minutes: 30
+  hard_stop_wall_minutes: 60
+  required_checks:
+    - finite_positive_state
+    - species_mass_fraction_closure
+    - mass_flux_closure
+    - total_energy_flux_closure
+    - separate_exhaust_and_air_boundary_compositions
+    - vtk_export
 
 separation_truth:
-  separated_flag:
-    definition: "true if a persistent post-throat Cf sign reversal exists"
-  x_sep:
-    definition: >
-      first post-throat axial location where wall Cf crosses from positive to negative,
-      linearly interpolated between adjacent wall samples and required to remain negative
-      over a persistence interval
-  x_reattach:
-    definition: >
-      first downstream persistent crossing of Cf from negative back to positive
-  x_shock:
-    definition: "location of maximum resolved wall-pressure gradient, stored separately from x_sep"
-  additional_targets:
-    - separation_bubble_length
-    - min_Cf
-    - mean_wall_pressure
-    - wall_pressure_RMS_for_URANS_cases
+  x_sep: first_post_throat_wall_shear_positive_to_negative_crossing
+  persistence_m_min: 0.001
+  x_reattach: first_persistent_negative_to_positive_crossing
+  x_shock: maximum_wall_pressure_gradient
+  urans_statistics: [mean, standard_deviation, distribution]
 
 sensors:
-  primary_variable: wall_static_pressure
-  installation_model: flush_mounted
-  reference_hardware:
-    manufacturer: Kulite
-    model_family: HEM_375_CO
-    selected_full_scale_bar: 70
-    accuracy_max_percent_FSO: 0.5
-    natural_frequency_Hz_min: 400000
-    operating_temperature_C_max: 193
-    note: >
-      Hardware reference is used only to define pressure/noise/dynamic limits for
-      virtual sensors; actual hot-wall installation would require thermal isolation/cooling.
-  virtual_sensor_candidates:
-    region: "divergent wall only: x > 0"
-    coordinate_source: DLR_PAR_full_contour.csv
-    candidate_count: 128
-    placement: "arc-length-uniform resampling of the divergent wall"
-  max_sensor_counts_to_test: [2, 3, 4, 5, 6, 8, 10, 12, 16, 24]
-  noise_model:
-    static_gain_error_percent_FSO: 0.5
-    zero_offset_realizations: true
-    additive_white_noise: true
-  dynamic_model_URANS:
-    sensor_bandwidth_Hz: 400000
-    sampling_rate_Hz: 1000000
-  optimization_constraint:
-    fixed_layout_across_all_operating_conditions: true
+  variable: wall_static_pressure
+  installation: flush_mounted
+  candidate_count: 128
+  sensor_count_grid: [2, 3, 4, 5, 6, 8, 10, 12, 16, 24]
+  candidate_ranges_bar: [17, 35, 70]
+  layouts_fixed_using_training_fold_only: true
 
-ml:
-  task_1:
-    type: classification
-    target: separated_flag
-  task_2:
-    type: regression
-    target: x_sep
-    active_when: separated_flag_true
-  baselines:
-    - uniform_spacing
-    - random_fixed_layout
-    - greedy_forward_selection
-    - POD_QR
-  learned_model:
-    type: MLP_or_1D_encoder
-  metrics:
-    classification: [F1, AUROC, false_negative_rate]
-    localization: [MAE_x_over_L, RMSE_x_over_L, P95_abs_error]
-  sensor_budget_curve: true
+dataset:
+  final_filter: physics_accepted_true_only
+  split_group: complete_CFD_case
+  validation: grouped_nested_cross_validation
+  accepted_labels_current: 0

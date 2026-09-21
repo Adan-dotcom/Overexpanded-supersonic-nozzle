@@ -62,7 +62,7 @@ def main():
         "case": {"pc_pa": 5.2e6, "of_ratio": 3.2, "area_ratio": 30.0},
         "equilibrium": equilibrium,
         "frozen_at_throat": frozen,
-        "su2_effective_frozen_gas": {
+        "frozen_effective_gas_reference": {
             "gas_constant_j_kg_k": gas_r,
             "gamma": gamma,
             "mu_ref_pa_s": mu1,
@@ -73,7 +73,7 @@ def main():
         },
     }
     (HERE / "nominal_summary.json").write_text(json.dumps(result, indent=2) + "\n", encoding="ascii")
-    print(json.dumps(result["su2_effective_frozen_gas"], indent=2))
+    print(json.dumps(result["frozen_effective_gas_reference"], indent=2))
 
 
 if __name__ == "__main__":

@@ -1,105 +1,35 @@
-study:
-  name: dlr_par_sparse_sensor_methodology
-  claim: >
-    Sparse wall-pressure sensing of separation in a synthetic DLR-PAR nozzle
-    operated with either published cold-flow validation conditions or
-    representative hot methalox conditions. This is not a Raptor replica.
-
-geometry:
-  source_file: DLR_PAR_full_contour.csv
-  variants: [DLR_PAR]
-  generalization_scope: one_fixed_contour
-  arbitrary_geometry_claim_allowed: false
+study: dlr_par_eilmer_validation_and_application
+active_solver: Eilmer_5.0.0
 
 campaigns:
-  cold_flow_validation:
-    purpose: validate separation physics and turbulence-model behavior
+  products_air_benchmark:
+    status: ready_to_implement
+    cells: [20000, 60000]
+    mpi_ranks: 6
+    target_wall_minutes: 30
+    hard_stop_wall_minutes: 60
+    training_eligible: false
+
+  cold_n2_validation:
     gas: N2
-    wall_model: match_published_DLR_setup
-    npr_targets: [14.0, 20.0, 22.0, 23.7, 23.8, 30.0, 40.0, 52.8, 57.2, 60.7, 65.0]
-    operating_values_source: published_DLR_PAR_data
-    status: screening_allowed_production_blocked_requires_full_paper_digitization
+    geometry: DLR_PAR
+    status: blocked_pending_eilmer_grid_and_literature_digitization
+    training_eligible: false
 
-  hot_methalox_nominal:
-    purpose: application dataset at unpressurized sea-level-to-altitude backpressure
-    chamber_pressure_abs_Pa: {min: 5.10e6, max: 5.40e6, nominal: 5.20e6}
-    mixture_ratio_OF: {min: 3.10, max: 3.30, nominal: 3.20}
-    back_pressure_abs_Pa: {min: 5.00e4, max: 1.01325e5}
-    implied_npr_approx: {min: 50.3, max: 108.0}
-    chamber_temperature_K: CEA_derived_for_each_Pc_OF
-    note: NPR_is_derived_not_independently_sampled
-    status: production_blocked_pending_products_air_solver
+  hot_methalox_application:
+    geometry: DLR_PAR
+    chamber_pressure_abs_pa: [5.10e6, 5.40e6]
+    mixture_ratio_of: [3.10, 3.30]
+    back_pressure_abs_pa: [5.00e4, 1.01325e5]
+    npr: derived_as_Pc_over_Pa
+    status: blocked_pending_benchmark_and_validation
+    training_eligible: false
 
-  hot_methalox_ground_throttle_exploratory:
-    purpose: reach strongly separated NPR at one-atmosphere backpressure
-    chamber_pressure_abs_Pa: {min: 2.00e6, max: 5.40e6}
-    mixture_ratio_OF: {min: 3.10, max: 3.30}
-    back_pressure_abs_Pa: 1.01325e5
-    implied_npr_approx: {min: 19.7, max: 53.3}
-    evidence_status: exploratory_not_LLAMA_validated_below_5.1MPa
-    production_status: blocked_pending_products_air_solver
-    note: treat_as_startup_or_throttling_study_not_a_certified_steady_engine_map
-
-forbidden_condition:
-  description: Pc_5.2MPa_with_NPR20_implies_260kPa_ambient
-  allowed_only_if: explicitly_modeling_a_pressurized_test_chamber
-
-physics_models:
-  primary_thermochemistry_candidate: nasa_polynomial_equilibrium_products_LUT
-  lut_interpolation_validated: true
-  lut_qoi_converged: false
-  legacy_gri30_lut_status: rejected_outside_declared_thermo_range
-  sensitivities: [effective_ideal_gas, frozen_products_LUT]
-  finite_rate_status: future_validation_model
-  products_air_plume_status: blocked
-  blocker: stock_SU2_8_5_path_not_validated_for_compressible_RANS_products_air_mixing
-  turbulence_screen: [SST_2003m, Spalart_Allmaras]
-  wall_primary: adiabatic
-  wall_sensitivity_required: fixed_temperature_or_heat_flux_when_supported
-  dimensionality_primary: axisymmetric
-  excluded_claims: [circumferential_side_load_prediction, arbitrary_geometry_generalization]
-
-screening:
-  mesh_cells: 76800
-  allowed_uses: [startup_stability, conservation, gross_regime, runtime, model_elimination]
-  forbidden_uses: [training_label, final_x_sep, discretization_claim]
-  survivor_rule: qualitative_behavior_and_ranking_must_repeat_on_pilot_mesh
-
-acceptance_gates:
-  software_exit_success: true
-  finite_values_everywhere: true
-  nonpositive_density_pressure_temperature_points: 0
-  lut_out_of_domain_points: 0
+acceptance:
+  require_finite_positive_state: true
   relative_mass_imbalance_max: 0.005
   relative_total_energy_flux_imbalance_max: 0.01
-  energy_audit_uses_total_enthalpy: true
-  energy_reference_method_validated: true
-  note: static_temperature_below_inlet_T0_is_not_a_universal_reacting_flow_gate
-  inner_residual_drop_target_decades: 2.0
-  wall_y_plus_p95_max: 1.0
-  wall_y_plus_max_max: 2.0
-  separation_persistence_m_min: 0.001
-  minimum_flow_through_times_before_sampling: 3.0
-  x_sep_final_window_drift_m_max: 0.0001
-  medium_fine_x_sep_difference_m_max: 0.0003
-  turbulence_model_disagreement_m_report_required: true
-  cold_flow_validation_required_for_method_claim: true
-  label_rule: all_applicable_gates_must_pass
-
-sensors:
-  variable: wall_static_pressure
-  candidate_ranges_bar: [17, 35, 70]
-  error_model: range_specific_full_scale_plus_offset_plus_white_noise
-  installed_transfer_function_required_for_dynamic_claim: true
-  layouts_fixed_using_training_fold_only: true
-
-machine_learning:
-  final_training_filter: physics_accepted_true_only
-  development_data_allowed: synthetic_or_unaccepted_with_provisional_flag
-  development_metrics_publishable: false
-  split_group: complete_CFD_case
-  validation: grouped_nested_cross_validation
-  geometry_input_enabled: false
-  baselines: [uniform, random, greedy_forward, POD_QR, ridge, random_forest]
-  learned_models: [MLP]
-  tasks: [separated_classification, x_sep_regression]
+  require_species_closure: true
+  require_mesh_and_time_step_convergence: true
+  require_turbulence_sensitivity: true
+  require_experimental_anchor: true
