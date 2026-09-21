@@ -26,10 +26,11 @@ additional geometries are introduced.
 
 See `eilmer/README.md` for installation and commands. The bounded products/air
 benchmark and the DLR-PAR geometry-only grid check described in `HANDOFF.md`
-have passed their screens. The active CFD task is to freeze the published
-cold-N2 inputs and anchors before constructing validation meshes. The source
-audit in `cases/cold_n2_validation/` lists the exact missing primary data and
-rejects a previously conflated NASA/MSFC PAR campaign.
+have passed their screens. The primary cold-N2 vector plots are now frozen as
+CSV targets, but the matched CFD case still awaits numeric absolute run
+conditions and the other inputs listed by the source audit in
+`cases/cold_n2_validation/`. That audit also rejects a previously conflated
+NASA/MSFC PAR campaign.
 
 ## Safety rule
 

@@ -1,5 +1,5 @@
 schema_version: 2
-updated_utc: "2026-09-21T12:55:36Z"
+updated_utc: "2026-09-21T13:20:52Z"
 active_solver: Eilmer
 accepted_training_labels: 0
 
@@ -43,7 +43,6 @@ tracks:
     boundary_condition_inventory: cases/cold_n2_validation/boundary_conditions.yaml
     blockers:
       - exact_test_total_temperature_and_ambient_pressure_not_recovered
-      - experimental_wall_profiles_not_digitized_from_target_dlr_figures
       - physical_separation_uncertainty_not_recovered
       - wall_thermal_condition_not_reported_in_primary_source
       - working_contour_only_partially_verified_not_full_cad

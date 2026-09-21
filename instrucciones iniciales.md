@@ -30,7 +30,9 @@ modelos de aprendizaje automático.
   corrida de flujo ni una validación experimental.
 - La auditoría de fuentes descartó las Figuras 11 y 12 del reporte NASA como
   anclas DLR: corresponden a otra PAR, con aire caliente y cámara de vacío.
-  Faltan todavía las curvas DLR de alta resolución y `T0`/`Pa` numéricos.
+  El PDF primario ya fue verificado y sus curvas vectoriales de presión y
+  separación fueron congeladas. Todavía faltan `T0`/`Pa` numéricos y la
+  incertidumbre experimental de la línea de separación.
 - La validación DLR-PAR con N2 frío todavía no está reproducida en Eilmer.
 - La campaña caliente está bloqueada hasta cerrar los gates documentados.
 - Las LUT históricas fueron retiradas. No recrearlas como modelo activo.
@@ -196,8 +198,8 @@ Adapta los comandos a la API concreta del caso y a la documentación de Eilmer
 2. Portar el contorno y revisar geometría/malla: completado como screen, no
    como malla de validación.
 3. Contraste escalar con geometría publicada: completado parcialmente; faltan
-   el contorno oficial completo, las curvas DLR de alta resolución y las
-   condiciones absolutas `T0`/`Pa`.
+   el contorno oficial completo y las condiciones absolutas `T0`/`Pa`. Las
+   curvas vectoriales primarias de Figs. 3a, 7a, 7b y 11a ya están congeladas.
 4. Generar tres mallas de validación con resolución de pared justificada.
 5. Reproducir presión de pared y posición de separación del experimento.
 6. Hacer convergencia de malla, paso temporal y dominio.

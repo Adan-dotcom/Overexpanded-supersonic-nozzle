@@ -37,14 +37,15 @@ no son objetivos admisibles para la validacion DLR.
 El articulo DLR objetivo reporta perfiles medios de subida a NPR 30, 33, 35,
 37 y 40. En esa campana la transicion FSS a RSS parcial ocurre entre NPR 33 y
 35, hay RSS parcial entre 35 y 37, el end effect devuelve el flujo a FSS cerca
-de 38 y aparece RSS plena cerca de NPR 34 durante bajada. Los valores exactos
-de las curvas todavia requieren una copia de figura con resolucion suficiente.
-La auditoria completa esta en `cases/cold_n2_validation/SOURCE_AUDIT.md`.
+de 38 y aparece RSS plena cerca de NPR 34 durante bajada. Los valores de Figs.
+3a, 7a, 7b y 11a ya fueron extraidos directamente de los trazos vectoriales
+del PDF primario y congelados con trazabilidad. La auditoria completa esta en
+`cases/cold_n2_validation/SOURCE_AUDIT.md`.
 
 ## Matriz de validacion
 
-Esta matriz es provisional hasta congelar las condiciones absolutas y los
-puntos digitizados del articulo DLR:
+Esta matriz conserva caracter provisional hasta congelar las condiciones
+absolutas; los puntos del articulo DLR ya estan congelados:
 
 | Caso | Condicion DLR | Observable primario | Objetivo |
 |---|---|---|---|
@@ -66,10 +67,13 @@ digitizados, `x_shock`, `x_sep`, `x_reattach`, regimen, direccion de barrido,
 estadisticas URANS, positividad, balances de masa/energia e independencia de
 malla, paso temporal y dominio.
 
-Todavia no hay puntos digitizados ni incertidumbre tabulada en el repositorio.
-La plantilla vacia esta en
+Los puntos digitizados y su procedencia estan en
+`cases/cold_n2_validation/results/`. La incertidumbre de digitizacion se deriva
+del espesor grafico de cada trazo; los campos de incertidumbre experimental se
+mantienen vacios porque el articulo no la publica. La plantilla de comparacion
+por caso permanece en
 `cases/cold_n2_validation/cold_n2_validation_targets.template.csv`. No se
-fijan porcentajes ficticios de error. Al digitalizar se debe congelar:
+fijan porcentajes ficticios de error. Su esquema es:
 
 ```text
 case_id,sweep_direction,npr,regime_expected,x_rt,pwall_over_pa,

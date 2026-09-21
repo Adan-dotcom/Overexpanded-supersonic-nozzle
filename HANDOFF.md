@@ -28,9 +28,11 @@ screen: 92,160 positive-area cells in six conformal blocks.  Evidence is under
 a wall-resolved validation mesh or an experimental validation result.
 
 A source audit then rejected NASA report 20100017649 as a DLR validation
-anchor: its PAR used different geometry, heated air and a vacuum chamber.  The
-actual DLR source confirms the tracked contour's scalar geometry controls but
-does not provide all absolute boundary conditions in accessible text.  See
+anchor: its PAR used different geometry, heated air and a vacuum chamber. The
+actual DLR source confirms the tracked contour's scalar geometry controls. The
+user-supplied primary PDF was hash-verified and its vector pressure and
+separation curves were frozen in the repo, but it does not provide all
+absolute boundary conditions or experimental separation uncertainty. See
 `raptor_like_study/cases/cold_n2_validation/SOURCE_AUDIT.md`.
 
 The complete fresh-machine procedure and execution order are in
@@ -51,12 +53,13 @@ hardware and is not the original DLR cold-N2 experiment.
 
 ## Next execution
 
-Obtain the high-resolution DLR pressure figures or tabulated data and numeric
-run conditions listed in the source audit, then freeze the cold-N2 inputs and
-anchors. Generate a three-level wall-resolved axisymmetric grid family and
-reproduce those anchors before attempting the hot application campaign. Do
-not interpret either screen as validation of nozzle separation, turbulence or
-finite-rate chemistry.
+Obtain the numeric run conditions and remaining uncertainty information listed
+in the source audit. Do not silently replace the missing `T0` or `Pa` with
+standard values. Once those inputs or predeclared sensitivity brackets are
+available, generate a three-level wall-resolved axisymmetric grid family and
+reproduce the frozen anchors before attempting the hot application campaign.
+Do not interpret either screen as validation of nozzle separation, turbulence
+or finite-rate chemistry.
 
 ## Verification
 
