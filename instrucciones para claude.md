@@ -221,4 +221,3 @@ Termina el bloque únicamente cuando:
 No maquilles una carencia de datos. El resultado útil de esta etapa puede ser
 un pipeline impecable que concluye “todavía no se puede medir capacidad
 predictiva”. Eso deja listo el trabajo serio cuando lleguen las corridas Eilmer.
-
