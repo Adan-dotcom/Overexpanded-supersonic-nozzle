@@ -1,6 +1,7 @@
 {
-  "report_date": "2026-09-20",
-  "platform": "WSL2 Ubuntu 24.04.3 LTS",
+  "report_date_utc": "2026-09-21",
+  "platform": "WSL2 Ubuntu 26.04.1 LTS",
+  "kernel": "6.18.33.2-microsoft-standard-WSL2",
   "eilmer": {
     "tag": "v5.0.0",
     "commit": "f53f4609a0331d48efee69a4e4f3c3598378cc03",
@@ -10,7 +11,8 @@
     "mpi_enabled": true,
     "multispecies_enabled": true,
     "multitemperature_enabled": true,
-    "turbulence_enabled": true
+    "turbulence_enabled": true,
+    "python_gas_library_installed": true
   },
   "compiler": {
     "name": "LDC",
@@ -20,46 +22,38 @@
   },
   "mpi": {
     "implementation": "Open MPI",
-    "version": "4.1.6"
+    "version": "5.0.10"
   },
   "tests": [
     {
-      "name": "official_convex_corner_serial",
-      "mode": "steady_shared",
-      "ranks": 1,
-      "final_step": 32,
-      "stop_reason": "relative-global-residual-target",
-      "final_relative_global_residual": 9.778215e-14,
-      "vtk_exported": true,
-      "passed": true,
-      "local_artifact_dir": "/home/adan/eilmer-work/convex-corner-serial"
+      "name": "pinned_install_check",
+      "result": "lmr and lmr-mpi-run found; revision f53f460",
+      "passed": true
     },
     {
-      "name": "official_convex_corner_mpi",
-      "mode": "steady_openmpi_complex_step_jfnk",
+      "name": "openmpi_hostname_smoke",
       "ranks": 2,
-      "final_step": 32,
-      "stop_reason": "relative-global-residual-target",
-      "final_relative_global_residual": 5.813410e-14,
-      "vtk_exported": true,
-      "passed": true,
-      "local_artifact_dir": "/home/adan/eilmer-work/convex-corner-mpi"
+      "result": "two rank responses from Adan-Pc",
+      "passed": true
     },
     {
-      "name": "official_underexpanded_jet_mpi_smoke",
+      "name": "products_air_benchmark_v1",
       "mode": "transient_openmpi_real",
       "ranks": 6,
-      "blocks": 32,
-      "final_step": 1,
+      "blocks": 6,
+      "cells": 36000,
+      "final_step": 2660,
       "stop_reason": "maximum-time",
+      "solver_wall_seconds": 1082,
       "vtk_exported": true,
+      "screening_survivor": true,
       "passed": true,
-      "local_artifact_dir": "/home/adan/eilmer-work/underexpanded-jet-mpi6-smoke"
+      "local_artifact_dir": "/home/adan/eilmer-artifacts/products-air-benchmark-20260920-03"
     }
   ],
   "physics_qualification": {
     "accepted_training_labels": 0,
     "hot_products_air_production_ready": false,
-    "note": "These are installation tests, not validated nozzle-separation cases."
+    "note": "Installation checks and the products/air screen are not validated nozzle-separation cases."
   }
 }

@@ -43,6 +43,10 @@ fi
 
 export PATH="$HOME/opt/ldc2-${LDC_VERSION}-linux-x86_64/bin:$PATH"
 make -C "$HOME/gdtk/src/lmr" DMD=ldc2 FLAVOUR=fast WITH_MPI=1 install
+# Python validation and post-processing import gdtk.gas, which dynamically
+# loads libgas.so.  The LMR target installs the Python wrapper but not that
+# shared library, so install the official gas-library target as well.
+make -C "$HOME/gdtk/src/gas" DMD=ldc2 FLAVOUR=fast install
 
 cat <<EOF
 Installed Eilmer $EILMER_TAG at $HOME/gdtkinst

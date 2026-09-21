@@ -14,11 +14,13 @@ command -v lmr-run >/dev/null
 command -v lmr-mpi-run >/dev/null
 command -v mpirun >/dev/null
 command -v ldc2 >/dev/null
+test -f "$DGD/lib/libgas.so"
 
 printf 'Eilmer source: %s (%s)\n' "$DGD_REPO" "$actual_commit"
 printf 'Eilmer install: %s\n' "$DGD"
 printf 'lmr: %s\n' "$(command -v lmr)"
 printf 'lmr-mpi-run: %s\n' "$(command -v lmr-mpi-run)"
+printf 'libgas: %s\n' "$DGD/lib/libgas.so"
 printf 'MPI: %s\n' "$(mpirun --version | sed -n '1p')"
 printf 'LDC: %s\n' "$(ldc2 --version | sed -n '1p')"
 lmr revision-id

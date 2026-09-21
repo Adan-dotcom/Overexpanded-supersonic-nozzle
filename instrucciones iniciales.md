@@ -22,7 +22,9 @@ modelos de aprendizaje automático.
 - Versión fijada: `v5.0.0`, commit
   `f53f4609a0331d48efee69a4e4f3c3598378cc03`.
 - Etiquetas CFD aceptadas para ML: **0**.
-- El benchmark multicomponente productos/aire todavía no está implementado.
+- El benchmark multicomponente productos/aire pasó su screen de seis rangos;
+  su evidencia pequeña está en
+  `raptor_like_study/cases/products_air_benchmark/results/`.
 - La validación DLR-PAR con N2 frío todavía no está reproducida en Eilmer.
 - La campaña caliente está bloqueada hasta cerrar los gates documentados.
 - Las LUT históricas fueron retiradas. No recrearlas como modelo activo.
@@ -127,16 +129,19 @@ python raptor_like_study/scripts/check_model_readiness.py hot_methalox_products_
 Resultado esperado al recibir el repo:
 
 - los tests pasan;
-- `products_air_benchmark --stage screen` está listo para implementarse;
+- `products_air_benchmark --stage screen` permanece habilitado y su benchmark
+  reproducible ya pasó el gate formal;
 - producción caliente permanece bloqueada y enumera sus bloqueos.
 
 No elimines un bloqueo editando nombres o cambiando `false` por `true`. Sólo se
 cierra con evidencia generada y auditada.
 
-## Primer trabajo que debes ejecutar
+## Primer trabajo completado
 
-Implementa un benchmark Eilmer pequeño de mezcla compresible de productos de
-combustión y aire. No empieces por la tobera completa.
+El benchmark Eilmer pequeño de mezcla compresible de productos de combustión y
+aire ya está implementado y auditado. No lo conviertas en resultado de tobera
+ni en etiqueta ML. El siguiente trabajo es portar y revisar la geometría
+DLR-PAR antes de correr la validación fría.
 
 Requisitos mínimos:
 
@@ -180,7 +185,7 @@ Adapta los comandos a la API concreta del caso y a la documentación de Eilmer
 
 ## Orden después del benchmark
 
-1. Pasar y documentar el benchmark productos/aire.
+1. Benchmark productos/aire: completado como screen, no como dato físico.
 2. Portar `DLR_PAR_full_contour.csv` y revisar geometría y calidad de malla.
 3. Digitalizar las condiciones y anclas experimentales DLR-PAR de N2 frío.
 4. Reproducir presión de pared y posición de separación del experimento.
@@ -228,6 +233,6 @@ esté probado. No reescribas la historia remota sin autorización explícita.
 
 El repositorio ya es suficiente para continuar en otra computadora: contiene
 la geometría, CEA, DOE, reglas físicas, gates, scripts ML, instalación fijada de
-Eilmer y este procedimiento. No contiene resultados CFD aceptados ni el primer
-caso Eilmer del proyecto. Tu primera responsabilidad es construir y auditar el
-benchmark, no anunciar que la campaña física ya está lista.
+Eilmer y este procedimiento. No contiene resultados CFD aceptados para ML. Sí
+contiene el primer screen Eilmer auditado; la siguiente responsabilidad es la
+geometría y validación fría, no anunciar que la campaña física ya está lista.

@@ -17,6 +17,11 @@ Eilmer `v5.0.0` at commit
 Serial, two-rank steady MPI, and six-rank real transient installation tests
 passed. These tests verify software only, not nozzle physics.
 
+The six-rank, 36,000-cell products/air benchmark also passed its software and
+conservation screen in 18.0 minutes of solver wall time. Its small evidence is
+under `raptor_like_study/cases/products_air_benchmark/results/`; it is not a
+physics-accepted result or an ML label.
+
 The complete fresh-machine procedure and execution order are in
 `instrucciones iniciales.md`. The separate development-only ML task is in
 `instrucciones para claude.md`.
@@ -35,14 +40,11 @@ hardware and is not the original DLR cold-N2 experiment.
 
 ## Next execution
 
-Build a small Eilmer products/air benchmark before any nozzle run. Target
-20k-60k cells, six ranks, and 10-30 minutes wall time; abort at 60 minutes.
-It must demonstrate separate exhaust/air compositions, finite positive state,
-species closure, mass and total-energy closure, and VTK export.
-
-Only after that benchmark passes should the team port the DLR-PAR contour,
-generate a wall-resolved axisymmetric grid, and reproduce cold-N2 literature
-anchors before attempting the hot application campaign.
+Port the DLR-PAR contour and perform a geometry and mesh-quality-only check.
+Then freeze the cold-N2 experimental inputs, generate a wall-resolved
+axisymmetric grid, and reproduce the literature anchors before attempting the
+hot application campaign. Do not interpret the passed mixing benchmark as
+validation of nozzle separation, turbulence or finite-rate chemistry.
 
 ## Verification
 

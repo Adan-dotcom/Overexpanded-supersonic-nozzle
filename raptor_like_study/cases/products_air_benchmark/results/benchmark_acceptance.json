@@ -1,0 +1,39 @@
+{
+  "case_id": "products_air_benchmark_v1",
+  "case_family": "products_air_benchmark",
+  "stage": "screen",
+  "numerical_checks_pass": true,
+  "model_checks_pass": true,
+  "all_checks_pass": true,
+  "physics_accepted": false,
+  "training_eligible": false,
+  "screening_survivor": true,
+  "failed_numerical_checks": [],
+  "failed_model_checks": [],
+  "checks": {
+    "numerical": {
+      "solver_exit_success": {"value": true, "pass": true},
+      "finite_values_everywhere": {"value": true, "pass": true},
+      "species_mass_fraction_closure_passed": {"value": true, "pass": true},
+      "energy_conservation_audit_passed": {"value": true, "pass": true},
+      "nonpositive_density_pressure_temperature_points": {"value": 0, "pass": true},
+      "relative_mass_imbalance": {"value": 0.0004102800762938105, "criterion": "max 0.005", "pass": true},
+      "relative_total_energy_flux_imbalance": {"value": 0.00012688485068317466, "criterion": "max 0.01", "pass": true}
+    },
+    "model": {
+      "recognized_case_family": {"value": "products_air_benchmark", "pass": true},
+      "energy_audit_uses_total_enthalpy": {"value": true, "pass": true},
+      "energy_reference_method_validated": {"value": true, "pass": true},
+      "gas_model_temperature_range_validated": {"value": true, "pass": true},
+      "six_rank_execution": {"value": true, "pass": true},
+      "vtk_export_present": {"value": true, "pass": true},
+      "ambient_is_air": {"value": true, "pass": true},
+      "exhaust_composition_is_methalox_products": {"value": true, "pass": true},
+      "products_air_mixing_validated": {"value": true, "pass": true},
+      "chemistry_regime_justified": {"value": true, "pass": true},
+      "thermochemistry_reference_validated": {"value": true, "pass": true},
+      "transport_properties_validated": {"value": true, "pass": true}
+    }
+  },
+  "policy_note": "Static temperature below inlet T0 is not used as a reacting-flow energy gate. Energy qualification must use total enthalpy with a validated reference method."
+}

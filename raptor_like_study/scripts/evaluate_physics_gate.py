@@ -58,6 +58,17 @@ HOT_METHALOX_REQUIREMENTS = (
     "chemistry_sensitivity_completed",
 )
 
+PRODUCTS_AIR_BENCHMARK_REQUIREMENTS = (
+    "six_rank_execution",
+    "vtk_export_present",
+    "ambient_is_air",
+    "exhaust_composition_is_methalox_products",
+    "products_air_mixing_validated",
+    "chemistry_regime_justified",
+    "thermochemistry_reference_validated",
+    "transport_properties_validated",
+)
+
 COLD_N2_REQUIREMENTS = ("working_fluid_matches_experiment",)
 
 
@@ -104,7 +115,9 @@ def evaluate(metrics: dict, stage: str) -> dict:
     }
     if case_family == "cold_n2_validation":
         model_checks.update(boolean_checks(metrics, COLD_N2_REQUIREMENTS))
-    elif case_family in {"products_air_benchmark", "hot_methalox_application"}:
+    elif case_family == "products_air_benchmark":
+        model_checks.update(boolean_checks(metrics, PRODUCTS_AIR_BENCHMARK_REQUIREMENTS))
+    elif case_family == "hot_methalox_application":
         model_checks.update(boolean_checks(metrics, HOT_METHALOX_REQUIREMENTS))
 
     if stage == "production":

@@ -1,6 +1,6 @@
 # Run status
 
-Updated: 2026-09-20
+Updated: 2026-09-21 UTC
 
 ## Solver
 
@@ -16,6 +16,7 @@ Installation checks completed:
 | Official convex corner, shared | 1 | converged, VTK written |
 | Official convex corner, MPI JFNK | 2 | converged, VTK written |
 | Official underexpanded jet, real transient | 6 | normal stop, VTK written |
+| Products/air benchmark v1 | 6 | screen passed, VTK written |
 
 Exact provenance is in `eilmer/installation_report.json`.
 
@@ -29,16 +30,22 @@ sensor definitions, ML gates and Eilmer installation files were retained.
 ## Physics readiness
 
 - Physics-accepted labels: **0**.
-- Products/air benchmark: not yet implemented.
+- Products/air benchmark: **screen passed**; 36,000 cells, six ranks, 18.0 min
+  solver time, mass imbalance 0.0410%, total-energy imbalance 0.0127%.
 - Cold-N2 DLR-PAR validation: not yet reproduced with Eilmer.
 - Hot DLR-PAR/methalox production: blocked.
 - Final ML training: blocked.
 
 ## Immediate order
 
-1. Implement the 20k-60k-cell Eilmer products/air benchmark.
-2. Require six-rank runtime below 30 minutes, with a 60-minute hard stop.
-3. Verify species, state positivity, mass and total-energy conservation.
-4. Port the DLR-PAR geometry and perform a mesh-quality-only check.
-5. Reproduce published cold-N2 separation anchors.
-6. Qualify hot chemistry, transport, turbulence and wall models.
+1. Port the DLR-PAR geometry and perform a mesh-quality-only check.
+2. Digitize and freeze the published cold-N2 boundary conditions and anchors.
+3. Reproduce published cold-N2 separation anchors.
+4. Perform mesh, time-step, domain, turbulence and wall-model qualification.
+5. Qualify hot chemistry and transport before any hot production case.
+
+The benchmark evidence is in
+`cases/products_air_benchmark/results/`. Heavy artifacts remain at
+`/home/adan/eilmer-artifacts/products-air-benchmark-20260920-03` and are not
+tracked by Git. This screen closes no production-physics gate other than the
+preliminary products/air software and conservation blocker.

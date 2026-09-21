@@ -1,0 +1,18 @@
+{
+  "case_id": "products_air_benchmark_v1",
+  "started_utc": "2026-09-21T04:10:02Z",
+  "ended_utc": "2026-09-21T04:29:14Z",
+  "wall_seconds": 1152,
+  "solver_wall_seconds": 1082,
+  "eilmer_commit": "f53f4609a0331d48efee69a4e4f3c3598378cc03",
+  "gas_input_sha256": "7b43544ec501005235dea38dbfa1c6592cbc4a9205b8dc5d272b147d3fdb05fd",
+  "generated_gas_model_sha256": "8cee160bc3a83f66f870a1d3bc2ba6e2d4817d08c98c9b0f673925422af15d31",
+  "cell_count": 36000,
+  "block_count": 6,
+  "mpi_ranks": 6,
+  "hostname": "Adan-Pc",
+  "platform": "Linux 6.18.33.2-microsoft-standard-WSL2 x86_64",
+  "artifact_directory": "/home/adan/eilmer-artifacts/products-air-benchmark-20260920-03",
+  "source_repository": "/home/adan/Overexpanded-supersonic-nozzle",
+  "postprocess_recovered_after_missing_empty_loads_directory": true
+}

@@ -18,6 +18,8 @@
   "energy_audit_uses_total_enthalpy": false,
   "energy_reference_method_validated": false,
   "gas_model_temperature_range_validated": false,
+  "six_rank_execution": false,
+  "vtk_export_present": false,
   "wall_thermal_model_justified": false,
   "turbulence_model_sensitivity_completed": false,
   "experimental_anchor_validated": false,

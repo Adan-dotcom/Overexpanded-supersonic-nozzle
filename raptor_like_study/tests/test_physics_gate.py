@@ -24,6 +24,8 @@ def passing_metrics(case_family="hot_methalox_application"):
         "energy_audit_uses_total_enthalpy": True,
         "energy_reference_method_validated": True,
         "gas_model_temperature_range_validated": True,
+        "six_rank_execution": True,
+        "vtk_export_present": True,
         "wall_thermal_model_justified": True,
         "turbulence_model_sensitivity_completed": True,
         "experimental_anchor_validated": True,
@@ -79,6 +81,21 @@ class PhysicsGateTests(unittest.TestCase):
         result = evaluate(metrics, "screen")
         self.assertTrue(result["screening_survivor"])
         self.assertFalse(result["training_eligible"])
+
+    def test_products_air_benchmark_does_not_claim_chemistry_sensitivity(self):
+        metrics = passing_metrics("products_air_benchmark")
+        metrics["chemistry_sensitivity_completed"] = False
+        result = evaluate(metrics, "screen")
+        self.assertTrue(result["screening_survivor"])
+        self.assertFalse(result["physics_accepted"])
+
+    def test_products_air_benchmark_requires_vtk_and_six_ranks(self):
+        for required in ("vtk_export_present", "six_rank_execution"):
+            metrics = passing_metrics("products_air_benchmark")
+            metrics[required] = False
+            result = evaluate(metrics, "screen")
+            self.assertFalse(result["screening_survivor"])
+            self.assertIn(required, result["failed_model_checks"])
 
 
 if __name__ == "__main__":

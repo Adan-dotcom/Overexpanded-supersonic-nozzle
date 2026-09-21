@@ -24,8 +24,9 @@ additional geometries are introduced.
 - Python: DOE, evidence gates, post-processing and ML.
 - ParaView: interactive VTK inspection; Matplotlib: repeatable paper figures.
 
-See `eilmer/README.md` for installation and commands. The first new CFD task is
-the bounded products/air benchmark described in `HANDOFF.md`.
+See `eilmer/README.md` for installation and commands. The bounded products/air
+benchmark described in `HANDOFF.md` has passed its screen; the active CFD task
+is the DLR-PAR geometry and cold-N2 validation lane.
 
 ## Safety rule
 

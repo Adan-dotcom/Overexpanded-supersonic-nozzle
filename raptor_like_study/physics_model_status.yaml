@@ -1,5 +1,5 @@
 schema_version: 2
-updated_utc: "2026-09-20"
+updated_utc: "2026-09-21T04:29:14Z"
 active_solver: Eilmer
 accepted_training_labels: 0
 
@@ -23,12 +23,14 @@ tracks:
     description: Small multicomponent exhaust/air software and conservation test.
     software_screening_enabled: true
     production_enabled: false
+    screening_passed: true
+    evidence: cases/products_air_benchmark/results/benchmark_acceptance.json
+    solver_wall_seconds: 1082
+    cells: 36000
+    mpi_ranks: 6
     target_wall_minutes: 30
     hard_stop_wall_minutes: 60
-    blockers:
-      - benchmark_case_not_implemented
-      - methalox_species_set_not_selected
-      - transport_model_not_checked
+    blockers: []
 
   cold_n2_validation:
     description: Published DLR-PAR cold-nitrogen validation lane.
@@ -45,7 +47,6 @@ tracks:
     software_screening_enabled: false
     production_enabled: false
     blockers:
-      - products_air_benchmark_not_passed
       - finite_rate_mechanism_not_selected_or_validated
       - thermodynamics_and_transport_not_validated_over_state_domain
       - turbulence_model_not_validated_for_separation

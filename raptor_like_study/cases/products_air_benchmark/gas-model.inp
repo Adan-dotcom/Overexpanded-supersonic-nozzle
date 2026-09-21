@@ -1,0 +1,6 @@
+model = 'thermally perfect gas'
+species = {'H2O', 'CO2', 'CO', 'H2', 'OH', 'O2', 'O', 'H', 'N2'}
+
+-- Prefer the GRI-Mech transport records when both CEA and GRI-Mech data exist.
+-- prep-gas still uses the Eilmer species database and reports any substitution.
+options = {database='prefer-grimech'}
