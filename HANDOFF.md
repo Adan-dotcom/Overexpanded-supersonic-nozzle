@@ -37,6 +37,12 @@ assumed sensitivity ranges and a digitization uncertainty of +/-0.055 rt for
 unavailable. See
 `raptor_like_study/cases/cold_n2_validation/SOURCE_AUDIT.md`.
 
+The provisional numerical screen reached **NO_GO**. Both allowed coarse
+baseline attempts failed at Newton step 1 with the same ILU zero-pivot
+floating-point exception, including the documented adjusted retry. Therefore
+medium, NPR, OFAT and LOX screens were not launched. See
+`COLD_N2_SCREEN_DECISION.md`.
+
 The complete fresh-machine procedure and execution order are in
 `instrucciones iniciales.md`. The separate development-only ML task is in
 `instrucciones para claude.md`.
@@ -55,13 +61,12 @@ hardware and is not the original DLR cold-N2 experiment.
 
 ## Next execution
 
-The three-level cold-N2 grid family passed its geometry gates at 51,840,
-103,680 and 207,360 cells. It is not yet wall-resolved: qualify `y+` and mesh
-convergence using completed viscous solutions. Obtain numeric `Pa`; do not
-silently substitute standard atmosphere. Then execute the predeclared
-sensitivity design and reproduce the frozen anchors before attempting the hot
-application campaign. Do not interpret any screen as validation of nozzle
-separation, turbulence or finite-rate chemistry.
+The three-level cold-N2 grid family passed its geometry gates, but flow is
+blocked by the repeated steady Newton preconditioner failure. Implement and
+qualify transient initialization or continuation/restart, then rerun only the
+coarse NPR=35 baseline gate. Do not launch LOX/CH4 until a new numerical
+decision permits that screen. No existing result validates nozzle separation,
+turbulence or finite-rate chemistry.
 
 ## Verification
 

@@ -45,4 +45,7 @@ uncertainty.
 `boundary_conditions.yaml` records the user-authorized provisional sensitivity
 ranges. `mesh_family/` contains the executed three-level geometry screen, and
 `flow_screen/` contains the guarded N2 case. Dimensional flow remains blocked
-until numeric `Pa` and the factorial/OFAT design are explicitly declared.
+after the repeated coarse-baseline Newton-preconditioner failure documented in
+`/COLD_N2_SCREEN_DECISION.md`. The provisional Pa values and OFAT design are
+declared, but further N2 and LOX screens are disabled until that numerical
+defect is corrected.

@@ -48,21 +48,24 @@ sensor definitions, ML gates and Eilmer installation files were retained.
 - Cold-N2 mesh family: **geometry gates passed** at 51,840, 103,680 and
   207,360 cells in six conformal blocks. Flow-based `y+`, separation resolution
   and convergence remain unqualified.
+- Cold-N2 numerical screen: **NO_GO**. The NPR=35 coarse baseline crashed at
+  Newton step 1 in `decompILU0` with a floating-point divide-by-zero. The one
+  permitted retry (ILU fill 1, diagonal perturbation, scaling and disabled
+  extrema clipping) reproduced the identical failure. No completed iteration,
+  VTK, wall profile, state audit, `x_sep`, shock, `y+`, or conservation result
+  exists. Medium, NPR sweep, OFAT and LOX screens were gated off.
 - Cold-N2 DLR-PAR validation: not yet reproduced with Eilmer.
 - Hot DLR-PAR/methalox production: blocked.
 - Final ML training: blocked.
 
 ## Immediate order
 
-1. Obtain numeric `Pa`; derive every `P0` as `NPR*Pa` and do not substitute
-   standard atmosphere silently.
-2. Declare whether the authorized provisional ranges are crossed factorially
-   or OFAT and, for OFAT, declare the reference NPR.
-3. Execute the cold-N2 screens and qualify the mesh family using flow-based
-   `y+`, separation resolution and convergence.
-4. Reproduce the now-frozen cold-N2 pressure and separation anchors.
-5. Perform time-step, external-domain, turbulence and wall-model qualification.
-6. Qualify hot chemistry and transport before any hot production case.
+1. Replace or bypass the singular steady Newton preconditioner path using a
+   separately tested transient initialization or continuation/restart method.
+2. Re-run one coarse NPR=35 baseline and require normal exit plus all audits.
+3. Only after that gate, execute medium, startup NPR sweep and OFAT screens.
+4. Keep LOX/CH4 screening disabled until a new cold-N2 numerical decision.
+5. Reproduce the frozen experimental anchors before any physics acceptance.
 
 The benchmark evidence is in
 `cases/products_air_benchmark/results/`. Heavy artifacts remain at
@@ -83,3 +86,8 @@ reported separately from the unavailable experimental uncertainty.
 Cold-N2 mesh-family evidence is in
 `cases/cold_n2_validation/mesh_family/results/`. Heavy grids remain at
 `/home/adan/eilmer-artifacts/dlr-par-cold-n2-mesh-family-20260921-01`.
+
+The numerical-screen decision is in `COLD_N2_SCREEN_DECISION.md`; its compact
+evidence is in `cases/cold_n2_validation/results/screen_campaign_summary.json`.
+Heavy failure artifacts remain under
+`/home/adan/eilmer-artifacts/cold-n2-screen-20260921`.

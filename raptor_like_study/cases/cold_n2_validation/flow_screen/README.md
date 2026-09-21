@@ -6,6 +6,11 @@ transport data, `k_log_omega`, a stagnation inlet and a fixed ambient-pressure
 outlet. It does not include an external plume domain, so it cannot by itself
 validate the DLR free-jet separation topology.
 
+The 2026-09-21 coarse baseline failed twice at Newton step 1 with the same ILU
+zero-pivot exception, including the single permitted adjusted retry. Further
+screens are disabled pending a qualified transient-initialization or
+continuation/restart correction. See `/COLD_N2_SCREEN_DECISION.md`.
+
 Every dimensional run requires an explicit numeric ambient pressure. The
 preprocessor derives `P0=NPR*Pa` and accepts only the user-authorized provisional
 values: T0 = 285/295/305 K; adiabatic or fixed wall at 280/300/320 K; inlet

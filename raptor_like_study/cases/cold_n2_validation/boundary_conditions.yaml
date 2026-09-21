@@ -1,5 +1,5 @@
 schema_version: 2
-status: provisional_sensitivity_authorized_missing_numeric_ambient_pressure
+status: provisional_sensitivity_declared_screen_failed_no_go
 target_campaign:
   facility: DLR_P6_2_horizontal_test_bench
   primary_doi: 10.2514/1.42351
@@ -43,7 +43,8 @@ provisional_sensitivity:
   authorization: user_supplied_2026_09_21
   classification: assumed_screening_ranges_not_measured_run_conditions
   stagnation_temperature_K: [285.0, 295.0, 305.0]
-  ambient_pressure_Pa: null
+  ambient_pressure_reference_Pa: 100000.0
+  ambient_pressure_sensitivity_Pa: [95000.0, 103000.0]
   stagnation_pressure_rule: P0_equals_NPR_times_Pa
   wall_thermal_conditions:
     - type: adiabatic
@@ -72,7 +73,7 @@ reported_sequences:
     shutdown_near_npr_34: first_fully_formed_RSS_in_reported_campaign
 
 missing_required_values:
-  ambient_pressure_Pa_per_run: null
+  matched_experimental_ambient_pressure_Pa_per_run: null
   measured_stagnation_temperature_K_per_run: null
   measured_wall_temperature_K_per_run: null
   measured_inlet_turbulence_per_run: null

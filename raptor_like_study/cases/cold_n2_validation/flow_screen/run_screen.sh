@@ -28,6 +28,7 @@ python3 "$REPO_ROOT/raptor_like_study/scripts/check_model_readiness.py" \
 
 cp -- "$SCRIPT_DIR/gas-model.inp" "$SCRIPT_DIR/prepare_run.py" \
     "$SCRIPT_DIR/transient.lua" "$SCRIPT_DIR/postprocess_wall.py" \
+    "$SCRIPT_DIR/audit_snapshot.py" \
     "$CASE_DIR/results/physical_separation_fig7a.csv" \
     "$CASE_DIR/mesh_family/grid.lua" \
     "$REPO_ROOT/DLR_PAR_full_contour.csv" \
@@ -61,6 +62,8 @@ lmr snapshot2vtk --all 2>&1 | tee snapshot2vtk.log
 python3 postprocess_wall.py --artifact-dir "$ARTIFACT_DIR" \
     --targets physical_separation_fig7a.csv \
     --output screen_metrics.json --profile-output wall_profile.csv
+/home/adan/eilmer-screen-venv/bin/python audit_snapshot.py \
+    --artifact-dir "$ARTIFACT_DIR" --output snapshot_audit.json
 ended_epoch=$(date +%s)
 
 python3 - "$ARTIFACT_DIR" "$started_utc" "$((ended_epoch-started_epoch))" \

@@ -1,0 +1,68 @@
+{
+  "campaign_id": "dlr_par_cold_n2_screen_20260921",
+  "decision": "NO_GO",
+  "decision_scope": "numerical_readiness_for_subsequent_lox_ch4_screen_only",
+  "eilmer_commit": "f53f4609a0331d48efee69a4e4f3c3598378cc03",
+  "source_repository_commit_at_execution": "36fd2d49f2b0675cc8c133195688139d70d77fc5",
+  "baseline_parameters": {
+    "ambient_pressure_Pa": 100000.0,
+    "NPR": 35.0,
+    "stagnation_pressure_Pa": 3500000.0,
+    "stagnation_temperature_K": 295.0,
+    "wall_temperature_K": 300.0,
+    "turbulence_intensity_fraction": 0.01,
+    "turbulence_length_scale_m": 0.001,
+    "mesh_level": "coarse",
+    "sweep_direction": "startup"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "elapsed_upper_bound_seconds": 5.1,
+      "solver_exit_status": 136,
+      "normal_solver_exit": false,
+      "failure_signature": "floating_point_divide_by_zero_in_decompILU0_at_newton_step_1",
+      "numerical_adjustment": "initial_steady_configuration_ILU0",
+      "solver_log_sha256": "797e0799da6ec365b4c42699f73711f702bbeee2c75c702850ac3cde1d0721d2",
+      "residual_status": "initial_global_relative_residual_1.0_then_crash_before_completed_iteration",
+      "vtk_export_present": false,
+      "wall_profile_export_present": false,
+      "state_audit_completed": false,
+      "mass_balance_available": false,
+      "energy_balance_available": false,
+      "x_sep_over_rt": null,
+      "shock_x_over_rt": null,
+      "maximum_wall_y_plus": null
+    },
+    {
+      "attempt": 2,
+      "elapsed_upper_bound_seconds": 16.7,
+      "solver_exit_status": 136,
+      "normal_solver_exit": false,
+      "failure_signature": "floating_point_divide_by_zero_in_decompILU0_at_newton_step_1",
+      "numerical_adjustment": "ILU1_diagonal_perturbation_1e-30_scaling_and_extrema_clipping_false",
+      "solver_log_sha256": "2532acb66bf79fd5897d8b11d6554b9ec2f8fa89a4d136edcd94ebb36d94fc64",
+      "residual_status": "initial_global_relative_residual_1.0_then_crash_before_completed_iteration",
+      "vtk_export_present": false,
+      "wall_profile_export_present": false,
+      "state_audit_completed": false,
+      "mass_balance_available": false,
+      "energy_balance_available": false,
+      "x_sep_over_rt": null,
+      "shock_x_over_rt": null,
+      "maximum_wall_y_plus": null
+    }
+  ],
+  "not_executed_due_to_baseline_gate": {
+    "medium_baseline": true,
+    "startup_NPR": [30, 33, 37, 40],
+    "medium_OFAT_case_count": 11,
+    "shutdown": true,
+    "fine_mesh": true,
+    "lox_ch4_screen": true
+  },
+  "sensitivity_quantified": false,
+  "physics_accepted": false,
+  "training_eligible": false,
+  "heavy_artifact_root": "/home/adan/eilmer-artifacts/cold-n2-screen-20260921"
+}

@@ -1,5 +1,5 @@
 schema_version: 2
-updated_utc: "2026-09-21T14:15:11Z"
+updated_utc: "2026-09-21T14:54:25Z"
 active_solver: Eilmer
 accepted_training_labels: 0
 
@@ -34,7 +34,7 @@ tracks:
 
   cold_n2_validation:
     description: Published DLR-PAR cold-nitrogen validation lane.
-    software_screening_enabled: true
+    software_screening_enabled: false
     production_enabled: false
     geometry_screen_passed: true
     geometry_screen_evidence: cases/dlr_par_geometry/results/grid_quality.json
@@ -43,8 +43,12 @@ tracks:
     boundary_condition_inventory: cases/cold_n2_validation/boundary_conditions.yaml
     sensitivity_ranges_authorized: true
     screening_classification: provisional_assumed_ranges_not_matched_experiment
+    numerical_screen_decision: NO_GO
+    numerical_screen_evidence: cases/cold_n2_validation/results/screen_campaign_summary.json
+    baseline_solver_attempts: 2
+    baseline_solver_normal_exits: 0
     blockers:
-      - numeric_ambient_pressure_not_predeclared
+      - steady_newton_preconditioner_zero_pivot_repeated_at_first_step
       - measured_run_conditions_not_recovered_provisional_sensitivity_only
       - working_contour_only_partially_verified_not_full_cad
       - mesh_family_geometry_passed_but_flow_based_y_plus_and_convergence_not_qualified
@@ -56,6 +60,7 @@ tracks:
     software_screening_enabled: false
     production_enabled: false
     blockers:
+      - cold_n2_numerical_screen_decision_no_go
       - finite_rate_mechanism_not_selected_or_validated
       - thermodynamics_and_transport_not_validated_over_state_domain
       - turbulence_model_not_validated_for_separation

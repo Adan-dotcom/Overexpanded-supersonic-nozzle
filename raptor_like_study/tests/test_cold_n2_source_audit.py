@@ -21,13 +21,14 @@ class ColdN2SourceAuditTests(unittest.TestCase):
         self.assertTrue(evidence["scalar_controls_consistent"])
         self.assertFalse(evidence["full_contour_certified"])
 
-    def test_provisional_ranges_do_not_fabricate_absolute_pressure(self):
+    def test_provisional_ranges_keep_matched_pressure_explicitly_unavailable(self):
         inventory = yaml.safe_load((CASE / "boundary_conditions.yaml").read_text(encoding="utf-8"))
         missing = inventory["missing_required_values"]
-        self.assertIsNone(missing["ambient_pressure_Pa_per_run"])
+        self.assertIsNone(missing["matched_experimental_ambient_pressure_Pa_per_run"])
         sensitivity = inventory["provisional_sensitivity"]
         self.assertEqual(sensitivity["stagnation_temperature_K"], [285.0, 295.0, 305.0])
-        self.assertIsNone(sensitivity["ambient_pressure_Pa"])
+        self.assertEqual(sensitivity["ambient_pressure_reference_Pa"], 100000.0)
+        self.assertEqual(sensitivity["ambient_pressure_sensitivity_Pa"], [95000.0, 103000.0])
         self.assertEqual(sensitivity["stagnation_pressure_rule"], "P0_equals_NPR_times_Pa")
         self.assertEqual(inventory["published_targets"]["provisional_x_sep_uncertainty_rt"], 0.055)
 
@@ -126,6 +127,17 @@ class ColdN2SourceAuditTests(unittest.TestCase):
             self.assertAlmostEqual(metrics["x_sep_m"], 0.0015)
             self.assertAlmostEqual(metrics["shock_x_m"], 0.0035)
             self.assertFalse(metrics["physics_accepted"])
+
+    def test_failed_screen_decision_stays_out_of_training(self):
+        decision = json.loads(
+            (CASE / "results" / "screen_campaign_summary.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(decision["decision"], "NO_GO")
+        self.assertEqual(len(decision["attempts"]), 2)
+        self.assertTrue(all(not run["normal_solver_exit"] for run in decision["attempts"]))
+        self.assertFalse(decision["sensitivity_quantified"])
+        self.assertFalse(decision["physics_accepted"])
+        self.assertFalse(decision["training_eligible"])
 
     def test_primary_vector_targets_are_frozen(self):
         provenance = json.loads(

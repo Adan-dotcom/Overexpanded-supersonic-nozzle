@@ -14,9 +14,10 @@ campaigns:
     gas: N2
     geometry: DLR_PAR
     geometry_screen: passed_not_flow_validation
-    status: provisional_screen_authorized_missing_numeric_ambient_pressure
+    status: provisional_screen_executed_no_go
     stagnation_temperature_K: [285.0, 295.0, 305.0]
-    ambient_pressure_Pa: null
+    ambient_pressure_reference_Pa: 100000.0
+    ambient_pressure_sensitivity_Pa: [95000.0, 103000.0]
     stagnation_pressure: derived_as_NPR_times_Pa
     wall_thermal: [adiabatic, fixed_280K, fixed_300K, fixed_320K]
     inlet_turbulence_intensity_fraction: [0.005, 0.01, 0.05]
