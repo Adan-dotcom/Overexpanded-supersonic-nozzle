@@ -14,13 +14,17 @@ separation (RSS), reattachment, and time-dependent switching.
   to store shock, separation, and reattachment as different quantities.
 - Limitation for this project: cold gaseous-nitrogen experiment, not LOX/CH4.
 
-NASA's nozzle side-load review summarizes PAR pressure profiles across NPR and
-reports FSS below approximately 23.8, RSS through much of the intermediate NPR
-range, a return to FSS above approximately 57.2, and full flow near NPR 65.
+NASA's nozzle side-load review summarizes pressure profiles for a different
+MSFC PAR article. It reports FSS below approximately 23.8, RSS through much of
+the intermediate NPR range, a return to FSS above approximately 57.2, and full
+flow near NPR 65 for that article only. It used heated dry air, a 38.1 mm
+throat, area ratio 30.5, a 40 degree initial angle and a vacuum chamber; its
+curves are not DLR-PAR/N2 validation targets.
 
 - Public report: https://ntrs.nasa.gov/api/citations/20100017649/downloads/20100017649.pdf
-- Relevance: the proposed NPR 20-100 sweep crosses multiple physical regimes;
-  a single smooth regression target is insufficient without regime labels.
+- Relevance: demonstrates source-specific regime behavior and why hardware,
+  gas and environment must be matched before transferring a transition NPR.
+- Eligibility: rejected as a quantitative anchor for the DLR validation lane.
 
 ### Turbulence-model uncertainty
 

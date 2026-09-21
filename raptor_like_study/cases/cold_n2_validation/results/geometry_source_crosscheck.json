@@ -1,0 +1,34 @@
+{
+  "comparison_scope": "published_scalar_controls_only_not_full_contour_certification",
+  "primary_geometry_source": "Verma_and_Haidn_cold_gas_testing_same_DLR_nozzle",
+  "published": {
+    "throat_radius_m": 0.01,
+    "area_ratio": 30.0,
+    "post_throat_arc_wall_angle_deg": 34.0,
+    "exit_wall_angle_deg": 10.0
+  },
+  "reconstructed_contour": {
+    "throat_radius_m": 0.01,
+    "area_ratio": 30.000004655075998,
+    "post_throat_arc_wall_angle_deg": 33.923492770875825,
+    "exit_wall_angle_deg": 10.036839737502836
+  },
+  "reconstructed_minus_published": {
+    "throat_radius_m": 0.0,
+    "area_ratio": 4.655075997561653e-06,
+    "post_throat_arc_wall_angle_deg": -0.07650722912417507,
+    "exit_wall_angle_deg": 0.0368397375028362
+  },
+  "diagnostics": {
+    "maximum_divergent_slope_segment_midpoint_x_m": 0.0030013,
+    "exit_segment_midpoint_x_m": 0.12466724
+  },
+  "checks": {
+    "throat_radius_within_1e_9_m": true,
+    "area_ratio_within_1e_3": true,
+    "post_throat_angle_within_published_rounding_deg": true,
+    "exit_angle_within_published_rounding_deg": true
+  },
+  "scalar_controls_consistent": true,
+  "full_contour_certified": false
+}

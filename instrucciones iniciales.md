@@ -28,6 +28,9 @@ modelos de aprendizaje automático.
 - El contorno reconstruido DLR-PAR pasó una revisión geométrica y de calidad
   de malla: 92 160 celdas positivas en seis bloques conformes. No fue una
   corrida de flujo ni una validación experimental.
+- La auditoría de fuentes descartó las Figuras 11 y 12 del reporte NASA como
+  anclas DLR: corresponden a otra PAR, con aire caliente y cámara de vacío.
+  Faltan todavía las curvas DLR de alta resolución y `T0`/`Pa` numéricos.
 - La validación DLR-PAR con N2 frío todavía no está reproducida en Eilmer.
 - La campaña caliente está bloqueada hasta cerrar los gates documentados.
 - Las LUT históricas fueron retiradas. No recrearlas como modelo activo.
@@ -142,9 +145,10 @@ cierra con evidencia generada y auditada.
 ## Primer trabajo completado
 
 El benchmark Eilmer pequeño de mezcla compresible de productos de combustión y
-aire ya está implementado y auditado. No lo conviertas en resultado de tobera
-ni en etiqueta ML. El siguiente trabajo es portar y revisar la geometría
-DLR-PAR antes de correr la validación fría.
+aire y el screen geométrico DLR-PAR ya están implementados y auditados. No los
+conviertas en resultado físico de tobera ni en etiqueta ML. El siguiente
+trabajo requiere recuperar y congelar los datos primarios DLR enumerados en
+`raptor_like_study/cases/cold_n2_validation/SOURCE_AUDIT.md`.
 
 Requisitos mínimos:
 
@@ -191,8 +195,9 @@ Adapta los comandos a la API concreta del caso y a la documentación de Eilmer
 1. Benchmark productos/aire: completado como screen, no como dato físico.
 2. Portar el contorno y revisar geometría/malla: completado como screen, no
    como malla de validación.
-3. Contrastar la reconstrucción con la geometría publicada y digitalizar las
-   condiciones y anclas experimentales DLR-PAR de N2 frío.
+3. Contraste escalar con geometría publicada: completado parcialmente; faltan
+   el contorno oficial completo, las curvas DLR de alta resolución y las
+   condiciones absolutas `T0`/`Pa`.
 4. Generar tres mallas de validación con resolución de pared justificada.
 5. Reproducir presión de pared y posición de separación del experimento.
 6. Hacer convergencia de malla, paso temporal y dominio.

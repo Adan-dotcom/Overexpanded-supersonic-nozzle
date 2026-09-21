@@ -35,14 +35,20 @@ sensor definitions, ML gates and Eilmer installation files were retained.
 - DLR-PAR geometry: **geometry screen passed**; 385-point contour translated
   to metres and 92,160 positive-area cells generated in six conformal blocks.
   This is an inspection grid, not a wall-resolved validation mesh.
+- DLR source audit: the contour matches the published throat, area ratio and
+  rounded 34/10 degree wall-angle controls.  NASA report 20100017649 was
+  rejected as a DLR anchor because it used different hardware, gas and test
+  environment. Exact DLR pressure curves and absolute run conditions remain
+  missing.
 - Cold-N2 DLR-PAR validation: not yet reproduced with Eilmer.
 - Hot DLR-PAR/methalox production: blocked.
 - Final ML training: blocked.
 
 ## Immediate order
 
-1. Verify the reconstructed contour against the published geometry.
-2. Digitize and freeze the published cold-N2 boundary conditions and anchors.
+1. Obtain a high-resolution DLR target article/figure or tabulated pressure
+   data plus numeric `T0` and `Pa` for the selected runs.
+2. Digitize and freeze the DLR cold-N2 profiles and uncertainties.
 3. Generate the three-level wall-resolved cold-N2 mesh family.
 4. Reproduce published cold-N2 separation anchors.
 5. Perform time-step, domain, turbulence and wall-model qualification.
@@ -58,3 +64,7 @@ Geometry-screen evidence is in `cases/dlr_par_geometry/results/`.  Its heavy
 artifacts remain at `/home/adan/eilmer-artifacts/dlr-par-geometry-20260921-02`.
 It closes the geometry-port task only; it does not close experimental,
 wall-resolution, turbulence or separation-validation gates.
+
+The literature eligibility audit and explicit missing boundary conditions are
+in `cases/cold_n2_validation/`. No NASA/MSFC pressure curve was relabeled as a
+DLR measurement, and the target CSV remains an empty template.

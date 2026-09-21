@@ -27,6 +27,12 @@ screen: 92,160 positive-area cells in six conformal blocks.  Evidence is under
 `raptor_like_study/cases/dlr_par_geometry/results/`.  This is not a flow run,
 a wall-resolved validation mesh or an experimental validation result.
 
+A source audit then rejected NASA report 20100017649 as a DLR validation
+anchor: its PAR used different geometry, heated air and a vacuum chamber.  The
+actual DLR source confirms the tracked contour's scalar geometry controls but
+does not provide all absolute boundary conditions in accessible text.  See
+`raptor_like_study/cases/cold_n2_validation/SOURCE_AUDIT.md`.
+
 The complete fresh-machine procedure and execution order are in
 `instrucciones iniciales.md`. The separate development-only ML task is in
 `instrucciones para claude.md`.
@@ -45,12 +51,12 @@ hardware and is not the original DLR cold-N2 experiment.
 
 ## Next execution
 
-Verify the reconstructed contour against the published geometry, then freeze
-the cold-N2 experimental inputs and anchors. Generate a three-level
-wall-resolved axisymmetric grid family and reproduce the literature anchors
-before attempting the hot application campaign. Do not interpret either
-screen as validation of nozzle separation, turbulence or finite-rate
-chemistry.
+Obtain the high-resolution DLR pressure figures or tabulated data and numeric
+run conditions listed in the source audit, then freeze the cold-N2 inputs and
+anchors. Generate a three-level wall-resolved axisymmetric grid family and
+reproduce those anchors before attempting the hot application campaign. Do
+not interpret either screen as validation of nozzle separation, turbulence or
+finite-rate chemistry.
 
 ## Verification
 

@@ -1,0 +1,58 @@
+schema_version: 1
+status: blocked_missing_absolute_conditions_and_digitized_targets
+target_campaign:
+  facility: DLR_P6_2_horizontal_test_bench
+  primary_doi: 10.2514/1.42351
+  working_gas: dry_gaseous_N2
+  environment: open_atmosphere
+  altitude_chamber_used: false
+  nozzle_pressure_ratio_definition: P0_over_Pa
+  pressure_varied_to_change_npr: P0_stagnation_pressure
+
+known_geometry:
+  throat_diameter_m: 0.020
+  area_ratio: 30.0
+  post_throat_arc_wall_angle_deg: 34.0
+  exit_wall_angle_deg: 10.0
+  full_contour_status: user_reconstruction_partially_corroborated_not_certified
+
+known_instrumentation:
+  axial_sensor_model: Kulite_XT_140M
+  axial_sensor_count: 13
+  axial_pitch_m: 0.008
+  pressure_range_bar: [0.0, 1.0]
+  manufacturer_accuracy_percent_reported: 0.5
+  manufacturer_accuracy_basis: not_explicit_in_accessible_article_text
+  axial_sample_rate_hz: 1000
+  axial_low_pass_cutoff_hz: 160
+  exact_sensor_abscissae_status: missing_figure_digitization
+
+reported_sequences:
+  startup_mean_profile_npr: [30.0, 33.0, 35.0, 37.0, 40.0]
+  particular_transient_test:
+    pressure_ramp_to_npr_32_bar_per_s: 2.0
+    subsequent_pressure_ramp_bar_per_s: 1.0
+    held_duration_s: 15.0
+  shutdown_particular_test:
+    pressure_ramp_bar_per_s: -1.0
+    held_duration_s: 15.0
+  qualitative_regimes:
+    startup_npr_30: FSS
+    startup_npr_33_to_35: FSS_to_pRSS_transition
+    startup_npr_35_to_37: partially_formed_RSS
+    startup_near_npr_38: end_effect_pRSS_to_FSS
+    shutdown_near_npr_34: first_fully_formed_RSS_in_reported_campaign
+
+missing_required_values:
+  stagnation_temperature_K: null
+  ambient_pressure_Pa_per_run: null
+  stagnation_pressure_Pa_per_run: null
+  wall_temperature_K: null
+  inlet_turbulence_intensity: null
+  inlet_turbulence_length_scale_m: null
+  digitized_wall_pressure_profiles: null
+  physical_separation_uncertainty: null
+
+prohibited_substitutions:
+  nasa_msfc_par_figures_11_12: different_hardware_fluid_and_facility
+  nedjari_2023_boundary_values: secondary_cfd_setup_not_primary_run_log

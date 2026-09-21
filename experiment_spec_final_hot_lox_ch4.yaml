@@ -6,6 +6,7 @@ study:
 
 geometry:
   source_file: DLR_PAR_full_contour.csv
+  source_status: user_reconstruction_scalar_controls_corroborated_not_full_cad
   type: axisymmetric_TOP
   throat_x_m: 0.0
   throat_radius_m: 0.010

@@ -8,6 +8,11 @@
   envelope, but use different hardware.
 - `DLR_PAR_full_contour.csv` is a user-supplied reconstruction, not certified
   official CAD.
+- The reconstruction matches the published 20 mm throat, area ratio 30 and
+  rounded 34/10 degree wall-angle controls; the full contour is still not
+  certified.
+- NASA/MSFC report 20100017649 describes a different PAR article using heated
+  air in a vacuum chamber. Its transition NPRs are not DLR/N2 measurements.
 
 ## Derived quantities
 

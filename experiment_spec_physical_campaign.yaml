@@ -14,7 +14,7 @@ campaigns:
     gas: N2
     geometry: DLR_PAR
     geometry_screen: passed_not_flow_validation
-    status: blocked_pending_published_geometry_boundary_conditions_and_anchors
+    status: blocked_missing_dlr_absolute_conditions_and_digitized_targets
     training_eligible: false
 
   hot_methalox_application:

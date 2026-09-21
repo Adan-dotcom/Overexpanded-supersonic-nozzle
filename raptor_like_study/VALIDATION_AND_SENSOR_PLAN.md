@@ -26,37 +26,40 @@ visualizacion por aceite, schlieren de alta velocidad y galgas. El fenomeno
 incluye FSS, RSS parcial y RSS plena, con oscilacion axial y variacion
 circunferencial de los choques.
 
-El reporte NASA de side loads presenta perfiles de presion normalizados de una
-PAR para barridos de NPR. Es la fuente abierta para digitalizar curvas y
-transiciones:
+Una auditoria de fuentes encontro que las Figuras 11 y 12 del reporte NASA de
+side loads **no corresponden a esta tobera DLR**. La PAR de NASA/MSFC tiene
+garganta de 38.1 mm, relacion de areas 30.5, angulo inicial de 40 grados y usa
+aire seco calentado en camara de vacio. La DLR-PAR objetivo tiene garganta de
+20 mm, relacion de areas 30, angulo de 34 grados despues del arco de garganta,
+N2 seco y descarga atmosferica. Por tanto, los umbrales NASA 23.8, 57.2 y 13.4
+no son objetivos admisibles para la validacion DLR.
 
-| Barrido | Regimen publicado | Uso CFD |
-|---|---|---|
-| NPR creciente | FSS hasta 23.7; RSS desde 23.8 hasta poco mas de 57.2; FSS hasta flujo lleno cerca de 65 | Regimen, perfil y zona de choque |
-| NPR decreciente | Flujo lleno hasta 62.2; FSS hasta 57.5; RSS hasta 13.4; FSS debajo de 13.4 | Histeresis y retransicion |
-| RSS | Picos de presion sobre ambiente y valles cercanos a ambiente | Forma de perfil, choque y reenganche |
-
-Estos limites describen regimenes, no sustituyen condiciones de frontera
-completas. Antes de declarar validacion, digitaliza las figuras y guarda
-direccion de barrido, NPR, resolucion de eje, incertidumbre y referencia
-espacial.
+El articulo DLR objetivo reporta perfiles medios de subida a NPR 30, 33, 35,
+37 y 40. En esa campana la transicion FSS a RSS parcial ocurre entre NPR 33 y
+35, hay RSS parcial entre 35 y 37, el end effect devuelve el flujo a FSS cerca
+de 38 y aparece RSS plena cerca de NPR 34 durante bajada. Los valores exactos
+de las curvas todavia requieren una copia de figura con resolucion suficiente.
+La auditoria completa esta en `cases/cold_n2_validation/SOURCE_AUDIT.md`.
 
 ## Matriz de validacion
 
-| Caso | Condicion | Observable primario | Objetivo |
-|---|---|---|---|
-| N2-01 | NPR 20.0, subida | FSS y `p_wall/Pa` | Reproducir FSS y perfil digitalizado |
-| N2-02 | NPR 23.7/23.8, subida | FSS a RSS | Capturar transicion dentro de resolucion experimental |
-| N2-03 | NPR 30.0, subida | RSS | Perfil, `x_shock`, `x_sep`, `x_reattach` |
-| N2-04 | NPR 40.5, subida | RSS | Perfil medio y estadisticas URANS |
-| N2-05 | NPR 52.8/57.2, subida | Fin de RSS | Capturar retorno a FSS |
-| N2-06 | NPR 13.4, bajada | RSS a FSS | Reproducir histeresis |
-| N2-07 | NPR 57.5/62.2, bajada | FSS a flujo lleno | Regimen y perfil correctos |
+Esta matriz es provisional hasta congelar las condiciones absolutas y los
+puntos digitizados del articulo DLR:
 
-Las NPR se tomaron de las leyendas de las Figuras 11 y 12 del reporte NASA.
-Primero usa RANS para depurar geometria, malla y presion media. Cerca de 23.8,
-57.2 y 13.4 requiere URANS: una solucion RANS estacionaria no puede reproducir
-flapping, rippling ni conmutacion de regimen.
+| Caso | Condicion DLR | Observable primario | Objetivo |
+|---|---|---|---|
+| N2-01 | NPR 30, subida | FSS y `p_wall/Pa` | Reproducir perfil medio DLR Fig. 3a |
+| N2-02 | NPR 33, subida | FSS previo a transicion | Perfil medio y `X_inc` |
+| N2-03 | NPR 35, subida | RSS parcial/intermitente | Media y estadisticas URANS |
+| N2-04 | NPR 37, subida | RSS parcial/intermitente | Media y estadisticas URANS |
+| N2-05 | NPR cercano a 38, subida | End effect, pRSS a FSS | Transicion y movimiento de separacion |
+| N2-06 | NPR 40, subida | FSS posterior al end effect | Perfil medio DLR Fig. 3a |
+| N2-07 | NPR cercano a 34, bajada | Primera RSS plena reportada | Regimen, choque, separacion y reenganche |
+
+Primero usa RANS solo para depurar geometria, malla y perfiles medios FSS.
+Los casos RSS parcial, end effect e histeresis requieren URANS: una solucion
+RANS estacionaria no puede reproducir flapping, rippling ni conmutacion de
+regimen.
 
 Registra por caso `p_wall/Pa(x/Rt)`, RMSE y error maximo contra los puntos
 digitizados, `x_shock`, `x_sep`, `x_reattach`, regimen, direccion de barrido,
@@ -64,7 +67,9 @@ estadisticas URANS, positividad, balances de masa/energia e independencia de
 malla, paso temporal y dominio.
 
 Todavia no hay puntos digitizados ni incertidumbre tabulada en el repositorio.
-No se fijan porcentajes ficticios de error. Al digitalizar se debe congelar:
+La plantilla vacia esta en
+`cases/cold_n2_validation/cold_n2_validation_targets.template.csv`. No se
+fijan porcentajes ficticios de error. Al digitalizar se debe congelar:
 
 ```text
 case_id,sweep_direction,npr,regime_expected,x_rt,pwall_over_pa,
@@ -79,8 +84,9 @@ NPR medido y no se ajusta para favorecer un modelo de turbulencia.
 ## Requisitos de la validacion fria
 
 - Usa N2 consistente con el ensayo, no CEA ni productos LOX/CH4.
-- Trata `DLR_PAR_full_contour.csv` como reconstruccion del usuario hasta
-  contrastarla con la fuente.
+- Trata `DLR_PAR_full_contour.csv` como reconstruccion del usuario. Sus cuatro
+  controles escalares publicados son consistentes, pero el contorno completo
+  no esta certificado.
 - Genera tres mallas, con capas normales a pared y `y+` de orden uno para el
   modelo de bajo Reynolds que se elija.
 - Refina garganta, posible choque en divergente y salida.
@@ -153,10 +159,11 @@ precision de validacion DLR y la necesidad operativa real.
 
 ## Fuentes
 
-- NASA, *Nozzle Side Load Technology*, Figuras 11 y 12:
-  https://ntrs.nasa.gov/api/citations/20100017649/downloads/20100017649.pdf
-- Haidn y Verma, DOI: https://doi.org/10.2514/1.42351
+- Verma y Haidn, campana DLR objetivo: https://doi.org/10.2514/1.42351
+- Verma y Haidn, geometria y efecto del entorno: https://doi.org/10.2514/1.B34320
 - Registro DLR con resumen experimental: https://elib.dlr.de/59893/
 - Prueba P6.2, N2 y area ratio 30:
   https://portal.fis.tum.de/en/publications/study-on-restricted-shock-separation-phenomena-in-rocket-nozzles
+- NASA/MSFC, PAR distinta conservada solo como fuente rechazada para DLR:
+  https://ntrs.nasa.gov/api/citations/20100017649/downloads/20100017649.pdf
 - Kulite HEM-375: https://kulite.com/assets/media/2021/01/HEM-375-CO.pdf
