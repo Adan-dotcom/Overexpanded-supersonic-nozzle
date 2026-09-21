@@ -10,7 +10,8 @@ used to freeze 190 mean-pressure points from Figs. 3a and 11a, 31 oil-derived
 physical-separation points from Fig. 7a, and 23 incipient-pressure points from
 Fig. 7b.  The committed CSV files and full provenance are in `results/`.
 Experimental uncertainty fields remain blank because the article does not
-report the needed profile or oil-line uncertainty.
+report the needed profile or oil-line uncertainty. A separately labeled
+provisional digitization uncertainty of +/-0.055 rt is authorized for `x_sep`.
 
 `SOURCE_AUDIT.md` records a critical source correction.  NASA report
 20100017649 contains useful PAR data, but its article is not the DLR-PAR
@@ -40,3 +41,8 @@ python raptor_like_study/cases/cold_n2_validation/digitize_primary_figures.py \
 The extractor refuses any PDF whose SHA-256 differs from the audited source.
 Digitization uncertainty is kept separate from unavailable experimental
 uncertainty.
+
+`boundary_conditions.yaml` records the user-authorized provisional sensitivity
+ranges. `mesh_family/` contains the executed three-level geometry screen, and
+`flow_screen/` contains the guarded N2 case. Dimensional flow remains blocked
+until numeric `Pa` and the factorial/OFAT design are explicitly declared.

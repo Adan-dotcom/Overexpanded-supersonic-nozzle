@@ -1,0 +1,46 @@
+{
+  "case_id": "dlr_par_cold_n2_mesh_family_v1",
+  "classification": "geometry_screen_pending_flow_based_y_plus_qualification",
+  "started_utc": "2026-09-21T14:07:07Z",
+  "ended_utc": "2026-09-21T14:07:22Z",
+  "eilmer_commit": "f53f4609a0331d48efee69a4e4f3c3598378cc03",
+  "mpi_ranks_planned": 6,
+  "levels": {
+    "coarse": {
+      "cells": 51840,
+      "blocks": 6,
+      "all_checks_pass": true,
+      "minimum_cell_area_m2": 1.0918345568474013e-09,
+      "maximum_aspect_ratio": 18.92858115254903,
+      "maximum_adjacent_area_ratio": 1.043664804350194,
+      "minimum_wall_spacing_m": 1.3259247335873844e-05,
+      "maximum_wall_spacing_m": 7.262389424848165e-05
+    },
+    "medium": {
+      "cells": 103680,
+      "blocks": 6,
+      "all_checks_pass": true,
+      "minimum_cell_area_m2": 5.399564126731576e-10,
+      "maximum_aspect_ratio": 21.414748460867965,
+      "maximum_adjacent_area_ratio": 1.0309057099155263,
+      "minimum_wall_spacing_m": 8.776603042102635e-06,
+      "maximum_wall_spacing_m": 4.80714383738895e-05
+    },
+    "fine": {
+      "cells": 207360,
+      "blocks": 6,
+      "all_checks_pass": true,
+      "minimum_cell_area_m2": 2.679847167136537e-10,
+      "maximum_aspect_ratio": 19.073545314543846,
+      "maximum_adjacent_area_ratio": 1.0216123863370654,
+      "minimum_wall_spacing_m": 6.559028698706337e-06,
+      "maximum_wall_spacing_m": 3.5925282523302515e-05
+    }
+  },
+  "passes_geometry_gate": true,
+  "flow_was_solved": false,
+  "wall_y_plus_evaluated": false,
+  "physics_accepted": false,
+  "training_eligible": false,
+  "heavy_artifact_directory": "/home/adan/eilmer-artifacts/dlr-par-cold-n2-mesh-family-20260921-01"
+}

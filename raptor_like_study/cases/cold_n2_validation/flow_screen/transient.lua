@@ -1,0 +1,86 @@
+print('DLR-PAR provisional cold-N2 internal-domain RANS screen')
+
+dofile('run_parameters.lua')
+config.dimensions = 2
+config.axisymmetric = true
+config.solver_mode = 'transient'
+config.turbulence_model = 'k_log_omega'
+
+local nsp, nmodes, gmodel = setGasModel('gas-model.lua')
+local gas = GasState:new{gmodel}
+gas.p = screen.pa_Pa
+gas.T = screen.T0_K
+gmodel:updateThermoFromPT(gas)
+gmodel:updateSoundSpeed(gas)
+gmodel:updateTransCoeffs(gas)
+
+-- The inlet intensity needs a velocity scale even though the boundary is
+-- specified by stagnation state. Use the subsonic quasi-1D inlet velocity for
+-- Ainlet/Athroat=4, derived from ideal-gas area-Mach theory.
+local gamma = gmodel:gamma(gas)
+local gas_R = gmodel:R(gas)
+local function area_ratio(M)
+   local exponent = (gamma + 1.0)/(2.0*(gamma - 1.0))
+   local term = (2.0/(gamma + 1.0))*(1.0 + 0.5*(gamma - 1.0)*M*M)
+   return (1.0/M)*term^exponent
+end
+local lo, hi = 1.0e-6, 0.999999
+for iteration=1,100 do
+   local mid = 0.5*(lo + hi)
+   if area_ratio(mid) > 4.0 then lo = mid else hi = mid end
+end
+local inlet_M = 0.5*(lo + hi)
+local inlet_T = screen.T0_K/(1.0 + 0.5*(gamma - 1.0)*inlet_M*inlet_M)
+local inlet_velocity = inlet_M*math.sqrt(gamma*gas_R*inlet_T)
+local tke = 1.5*(screen.turbulence_intensity*inlet_velocity)^2
+local Cmu = 0.09
+local omega = math.sqrt(tke)/(Cmu^0.25*screen.turbulence_length_scale_m)
+local log_omega = math.log(omega)
+
+local stagnation = FlowState:new{
+   p=screen.p0_Pa, T=screen.T0_K, tke=tke, omega=log_omega
+}
+local initial = FlowState:new{
+   p=screen.pa_Pa, T=screen.T0_K, tke=tke, omega=log_omega
+}
+local wall_bc
+if screen.wall_type == 'adiabatic' then
+   wall_bc = WallBC_NoSlip_Adiabatic0:new{group='wall'}
+else
+   wall_bc = WallBC_NoSlip_FixedT0:new{
+      Twall=screen.wall_temperature_K, wall_function=false, group='wall'
+   }
+end
+
+local flowDict = {initial=initial}
+local bcDict = {
+   inlet=InFlowBC_FromStagnation:new{stagnationState=stagnation},
+   outlet=OutFlowBC_FixedP:new{p_outside=screen.pa_Pa},
+   wall=wall_bc
+}
+makeFluidBlocks(bcDict, flowDict)
+mpiDistributeBlocks{ntasks=6}
+
+config.flux_calculator = 'adaptive_hanel_ausmdv'
+config.interpolation_order = 2
+config.thermo_interpolator = 'rhop'
+config.viscous = true
+config.spatial_deriv_locn = 'cells'
+config.spatial_deriv_calc = 'least_squares'
+config.include_boundary_faces_in_spatial_deriv_correction = true
+config.write_loads = true
+config.boundary_groups_for_loads = 'wall'
+
+config.gasdynamic_update_scheme = 'classic_rk3'
+config.cfl_value = 0.35
+config.stringent_cfl = true
+config.dt_init = 1.0e-10
+config.max_step = 400000
+config.max_time = 1.0e-2
+config.dt_plot = 1.0e-3
+config.dt_loads = 1.0e-4
+
+print(string.format('Pa=%.9g Pa NPR=%.9g P0=%.9g Pa T0=%.9g K',
+                    screen.pa_Pa, screen.npr, screen.p0_Pa, screen.T0_K))
+print(string.format('Quasi-1D inlet M=%.9g velocity=%.9g m/s tke=%.9g omega=%.9g 1/s',
+                    inlet_M, inlet_velocity, tke, omega))

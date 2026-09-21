@@ -13,11 +13,19 @@
   certified.
 - NASA/MSFC report 20100017649 describes a different PAR article using heated
   air in a vacuum chamber. Its transition NPRs are not DLR/N2 measurements.
+- The cold-N2 sensitivity values T0=285/295/305 K, adiabatic or fixed
+  280/300/320 K wall, inlet turbulence intensity 0.5/1/5% and length scale
+  0.1/1/5 mm are user-authorized provisional assumptions, not recovered DLR
+  run conditions.
+- The provisional +/-0.055 rt bound on `x_sep` represents digitization
+  uncertainty only; it is not a published experimental uncertainty.
 
 ## Derived quantities
 
 - `T0` and composition come from NASA CEA for each `Pc` and O/F.
 - NPR is always `Pc/Pa`.
+- Cold-N2 stagnation pressure is always derived as `P0=NPR*Pa`; numeric `Pa`
+  must be explicitly supplied before dimensional flow execution.
 - Mass flow and thrust are solver outputs, not imposed from another engine.
 - Separation is a persistent downstream wall-shear sign reversal; the maximum
   wall-pressure gradient is stored separately as shock location.

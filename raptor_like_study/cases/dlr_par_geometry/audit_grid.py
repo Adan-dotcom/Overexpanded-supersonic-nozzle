@@ -59,6 +59,7 @@ def main() -> None:
     parser.add_argument("grid_dir", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plot", type=Path, required=True)
+    parser.add_argument("--expected-cells", type=int, default=EXPECTED["cells"])
     args = parser.parse_args()
 
     paths = sorted(args.grid_dir.glob("grid-*.gz"))
@@ -70,6 +71,7 @@ def main() -> None:
     all_aspects: list[np.ndarray] = []
     all_angles: list[np.ndarray] = []
     all_size_ratios: list[np.ndarray] = []
+    ratio_maxima: list[dict[str, object]] = []
     all_wall_spacing: list[np.ndarray] = []
     total_cells = 0
 
@@ -113,9 +115,41 @@ def main() -> None:
         )
         ratios: list[np.ndarray] = []
         if areas.shape[0] > 1:
-            ratios.append(np.maximum(areas[1:, :] / areas[:-1, :], areas[:-1, :] / areas[1:, :]))
+            axial_ratios = np.maximum(
+                areas[1:, :] / areas[:-1, :], areas[:-1, :] / areas[1:, :]
+            )
+            ratios.append(axial_ratios)
+            axial_index = np.unravel_index(np.argmax(axial_ratios), axial_ratios.shape)
+            ratio_maxima.append(
+                {
+                    "grid": path.name,
+                    "direction": "axial",
+                    "cell_pair_index": [int(axial_index[0]), int(axial_index[1])],
+                    "approximate_vertex_location_m": [
+                        float(x[axial_index[0] + 1, axial_index[1] + 1]),
+                        float(y[axial_index[0] + 1, axial_index[1] + 1]),
+                    ],
+                    "ratio": float(axial_ratios[axial_index]),
+                }
+            )
         if areas.shape[1] > 1:
-            ratios.append(np.maximum(areas[:, 1:] / areas[:, :-1], areas[:, :-1] / areas[:, 1:]))
+            radial_ratios = np.maximum(
+                areas[:, 1:] / areas[:, :-1], areas[:, :-1] / areas[:, 1:]
+            )
+            ratios.append(radial_ratios)
+            radial_index = np.unravel_index(np.argmax(radial_ratios), radial_ratios.shape)
+            ratio_maxima.append(
+                {
+                    "grid": path.name,
+                    "direction": "radial",
+                    "cell_pair_index": [int(radial_index[0]), int(radial_index[1])],
+                    "approximate_vertex_location_m": [
+                        float(x[radial_index[0] + 1, radial_index[1] + 1]),
+                        float(y[radial_index[0] + 1, radial_index[1] + 1]),
+                    ],
+                    "ratio": float(radial_ratios[radial_index]),
+                }
+            )
 
         wall_spacing = np.hypot(x[:, -1] - x[:, -2], y[:, -1] - y[:, -2])
         cells = (x.shape[0] - 1) * (x.shape[1] - 1)
@@ -176,7 +210,7 @@ def main() -> None:
     )
     checks = {
         "six_blocks": len(paths) == EXPECTED["blocks"],
-        "expected_cell_count": total_cells == EXPECTED["cells"],
+        "expected_cell_count": total_cells == args.expected_cells,
         "finite_coordinates_and_metrics": bool(finite),
         "positive_signed_cell_area": bool(np.all(areas > 0.0)),
         "axis_is_y_zero": bool(
@@ -227,6 +261,9 @@ def main() -> None:
             "edge_length_aspect_ratio": percentile_summary(aspects),
             "corner_angle_deg": percentile_summary(angles),
             "adjacent_cell_area_ratio": percentile_summary(size_ratios),
+            "maximum_adjacent_area_ratio_location": max(
+                ratio_maxima, key=lambda item: item["ratio"]
+            ),
             "wall_adjacent_vertex_spacing_m": percentile_summary(wall_spacing),
             "maximum_internal_interface_mismatch_m": max(interface_mismatches, default=math.inf),
         },

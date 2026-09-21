@@ -1,5 +1,5 @@
-schema_version: 1
-status: blocked_missing_absolute_conditions_and_model_inputs
+schema_version: 2
+status: provisional_sensitivity_authorized_missing_numeric_ambient_pressure
 target_campaign:
   facility: DLR_P6_2_horizontal_test_bench
   primary_doi: 10.2514/1.42351
@@ -35,7 +35,25 @@ published_targets:
   incipient_separation_pressure: results/incipient_pressure_fig7b.csv
   provenance: results/digitization_provenance.json
   digitization_complete_for_figures: [3a, 7a, 7b, 11a]
-  experimental_uncertainty_status: not_reported_left_blank
+  experimental_uncertainty_status: not_reported
+  provisional_x_sep_uncertainty_rt: 0.055
+  provisional_x_sep_uncertainty_basis: user_authorized_use_of_digitization_uncertainty
+
+provisional_sensitivity:
+  authorization: user_supplied_2026_09_21
+  classification: assumed_screening_ranges_not_measured_run_conditions
+  stagnation_temperature_K: [285.0, 295.0, 305.0]
+  ambient_pressure_Pa: null
+  stagnation_pressure_rule: P0_equals_NPR_times_Pa
+  wall_thermal_conditions:
+    - type: adiabatic
+    - type: fixed_temperature
+      temperature_K: [280.0, 300.0, 320.0]
+  inlet_turbulence_intensity_fraction: [0.005, 0.01, 0.05]
+  inlet_turbulence_length_scale_m: [0.0001, 0.001, 0.005]
+  wall_material: not_used
+  wall_thickness: not_used
+  conjugate_heat_transfer: false
 
 reported_sequences:
   startup_mean_profile_npr: [30.0, 33.0, 35.0, 37.0, 40.0]
@@ -54,13 +72,10 @@ reported_sequences:
     shutdown_near_npr_34: first_fully_formed_RSS_in_reported_campaign
 
 missing_required_values:
-  stagnation_temperature_K: null
   ambient_pressure_Pa_per_run: null
-  stagnation_pressure_Pa_per_run: null
-  wall_temperature_K: null
-  inlet_turbulence_intensity: null
-  inlet_turbulence_length_scale_m: null
-  physical_separation_uncertainty: null
+  measured_stagnation_temperature_K_per_run: null
+  measured_wall_temperature_K_per_run: null
+  measured_inlet_turbulence_per_run: null
 
 prohibited_substitutions:
   nasa_msfc_par_figures_11_12: different_hardware_fluid_and_facility

@@ -14,7 +14,16 @@ campaigns:
     gas: N2
     geometry: DLR_PAR
     geometry_screen: passed_not_flow_validation
-    status: blocked_missing_dlr_absolute_conditions_and_model_inputs
+    status: provisional_screen_authorized_missing_numeric_ambient_pressure
+    stagnation_temperature_K: [285.0, 295.0, 305.0]
+    ambient_pressure_Pa: null
+    stagnation_pressure: derived_as_NPR_times_Pa
+    wall_thermal: [adiabatic, fixed_280K, fixed_300K, fixed_320K]
+    inlet_turbulence_intensity_fraction: [0.005, 0.01, 0.05]
+    inlet_turbulence_length_scale_m: [0.0001, 0.001, 0.005]
+    wall_material_or_thickness_used: false
+    conjugate_heat_transfer: false
+    x_sep_uncertainty_rt: 0.055
     training_eligible: false
 
   hot_methalox_application:

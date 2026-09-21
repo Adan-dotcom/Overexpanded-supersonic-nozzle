@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import bisect
 import csv
 import hashlib
 import json
@@ -25,11 +26,36 @@ def close(actual: float, expected: float, tolerance: float = 5.0e-10) -> bool:
     return abs(actual - expected) <= tolerance
 
 
+def uniformly_resample(
+    points: list[tuple[float, float]], spacing_m: float
+) -> list[tuple[float, float]]:
+    """Linearly resample a monotone-x polyline without moving its endpoints."""
+    x_start, x_end = points[0][0], points[-1][0]
+    interval_count = max(1, math.ceil((x_end - x_start) / spacing_m))
+    source_x = [point[0] for point in points]
+    result: list[tuple[float, float]] = []
+    for index in range(interval_count + 1):
+        x_value = x_start + (x_end - x_start) * index / interval_count
+        right = min(max(bisect.bisect_right(source_x, x_value), 1), len(points) - 1)
+        x0, r0 = points[right - 1]
+        x1, r1 = points[right]
+        fraction = (x_value - x0) / (x1 - x0)
+        result.append((x_value, r0 + fraction * (r1 - r0)))
+    result[0] = points[0]
+    result[-1] = points[-1]
+    return result
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("csv_file", type=Path)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--audit", type=Path, required=True)
+    parser.add_argument(
+        "--resample-spacing-m",
+        type=float,
+        help="Optional uniform-x spacing for generated Eilmer path files",
+    )
     args = parser.parse_args()
 
     raw = args.csv_file.read_bytes()
@@ -94,6 +120,13 @@ def main() -> None:
             "convergent.txt": rows[: throat_index + 1],
             "divergent.txt": rows[throat_index:],
         }
+        if args.resample_spacing_m is not None:
+            if not math.isfinite(args.resample_spacing_m) or args.resample_spacing_m <= 0.0:
+                raise SystemExit("--resample-spacing-m must be finite and positive")
+            sections = {
+                filename: uniformly_resample(points, args.resample_spacing_m)
+                for filename, points in sections.items()
+            }
         for filename, points in sections.items():
             with (args.output_dir / filename).open("w", encoding="ascii", newline="\n") as stream:
                 stream.write("# x_m r_m\n")
@@ -115,6 +148,18 @@ def main() -> None:
         "segment_slope_min": min(slopes),
         "segment_slope_max": max(slopes),
         "checks_pass": not failures,
+        "eilmer_path_conditioning": {
+            "method": (
+                "uniform_x_piecewise_linear"
+                if args.resample_spacing_m is not None
+                else "none"
+            ),
+            "requested_spacing_m": args.resample_spacing_m,
+            "generated_point_counts": {
+                filename: len(points) for filename, points in sections.items()
+            } if not failures else {},
+            "source_csv_modified": False,
+        },
         "failures": failures,
     }
     args.audit.write_text(json.dumps(payload, indent=2) + "\n", encoding="ascii")

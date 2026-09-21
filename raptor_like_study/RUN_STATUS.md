@@ -41,22 +41,27 @@ sensor definitions, ML gates and Eilmer installation files were retained.
   environment. The supplied primary PDF passed its SHA-256 check; 190 mean
   wall-pressure points plus Fig. 7 physical-separation and incipient-pressure
   curves were extracted directly from vector paths and frozen in the repo.
-  Absolute run conditions and experimental separation uncertainty remain
-  missing.
+  Numeric ambient pressure and matched run conditions remain missing. The user
+  authorized provisional assumed T0, wall and inlet-turbulence ranges plus a
+  digitization uncertainty of +/-0.055 rt for `x_sep`; this is not an
+  experimental uncertainty.
+- Cold-N2 mesh family: **geometry gates passed** at 51,840, 103,680 and
+  207,360 cells in six conformal blocks. Flow-based `y+`, separation resolution
+  and convergence remain unqualified.
 - Cold-N2 DLR-PAR validation: not yet reproduced with Eilmer.
 - Hot DLR-PAR/methalox production: blocked.
 - Final ML training: blocked.
 
 ## Immediate order
 
-1. Obtain numeric `T0` and `Pa` (or logged `P0`/`Pa`) for the selected DLR
-   runs; do not substitute standard atmosphere silently.
-2. Obtain experimental uncertainty for the oil-derived separation line and a
-   supported wall-temperature treatment, or predeclare defensible sensitivity
-   brackets before CFD.
-3. Generate the three-level wall-resolved cold-N2 mesh family.
+1. Obtain numeric `Pa`; derive every `P0` as `NPR*Pa` and do not substitute
+   standard atmosphere silently.
+2. Declare whether the authorized provisional ranges are crossed factorially
+   or OFAT and, for OFAT, declare the reference NPR.
+3. Execute the cold-N2 screens and qualify the mesh family using flow-based
+   `y+`, separation resolution and convergence.
 4. Reproduce the now-frozen cold-N2 pressure and separation anchors.
-5. Perform time-step, domain, turbulence and wall-model qualification.
+5. Perform time-step, external-domain, turbulence and wall-model qualification.
 6. Qualify hot chemistry and transport before any hot production case.
 
 The benchmark evidence is in
@@ -74,3 +79,7 @@ The literature eligibility audit, frozen vector-derived targets and explicit
 missing boundary conditions are in `cases/cold_n2_validation/`. No NASA/MSFC
 pressure curve was relabeled as a DLR measurement. Digitization uncertainty is
 reported separately from the unavailable experimental uncertainty.
+
+Cold-N2 mesh-family evidence is in
+`cases/cold_n2_validation/mesh_family/results/`. Heavy grids remain at
+`/home/adan/eilmer-artifacts/dlr-par-cold-n2-mesh-family-20260921-01`.

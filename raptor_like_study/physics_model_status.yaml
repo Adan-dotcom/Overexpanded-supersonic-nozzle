@@ -1,5 +1,5 @@
 schema_version: 2
-updated_utc: "2026-09-21T13:20:52Z"
+updated_utc: "2026-09-21T14:15:11Z"
 active_solver: Eilmer
 accepted_training_labels: 0
 
@@ -34,20 +34,21 @@ tracks:
 
   cold_n2_validation:
     description: Published DLR-PAR cold-nitrogen validation lane.
-    software_screening_enabled: false
+    software_screening_enabled: true
     production_enabled: false
     geometry_screen_passed: true
     geometry_screen_evidence: cases/dlr_par_geometry/results/grid_quality.json
     published_scalar_geometry_controls_consistent: true
     source_audit: cases/cold_n2_validation/SOURCE_AUDIT.md
     boundary_condition_inventory: cases/cold_n2_validation/boundary_conditions.yaml
+    sensitivity_ranges_authorized: true
+    screening_classification: provisional_assumed_ranges_not_matched_experiment
     blockers:
-      - exact_test_total_temperature_and_ambient_pressure_not_recovered
-      - physical_separation_uncertainty_not_recovered
-      - wall_thermal_condition_not_reported_in_primary_source
+      - numeric_ambient_pressure_not_predeclared
+      - measured_run_conditions_not_recovered_provisional_sensitivity_only
       - working_contour_only_partially_verified_not_full_cad
-      - wall_resolved_three_mesh_family_not_generated_or_qualified
-      - turbulence_model_not_qualified
+      - mesh_family_geometry_passed_but_flow_based_y_plus_and_convergence_not_qualified
+      - turbulence_and_wall_sensitivities_not_executed
       - experimental_separation_anchors_not_reproduced
 
   hot_methalox_products_air_plume:
