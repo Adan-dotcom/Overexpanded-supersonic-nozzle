@@ -4,9 +4,11 @@ from io import StringIO
 import json
 from pathlib import Path
 
-import cantera as ct
 import matplotlib.pyplot as plt
 import numpy as np
+
+from generate_equilibrium_lut import state_and_entropy_hessian
+from methalox_equilibrium import assert_thermo_range, new_equilibrium_products
 
 
 def load_drg(path):
@@ -53,9 +55,7 @@ def reconstruct(row):
 
 
 def equilibrium_products(of_ratio):
-    gas = ct.Solution("gri30.yaml")
-    gas.TP = 300.0, 101325.0
-    gas.set_equivalence_ratio(4.0 / of_ratio, "CH4", "O2")
+    gas = new_equilibrium_products(of_ratio)
     return gas, gas.Y.copy()
 
 
@@ -67,17 +67,41 @@ def equilibrate_to_energy(gas, rho, target_energy, initial_composition, minimum_
     for energy in np.linspace(minimum_energy, target_energy, n_steps + 1):
         gas.UV = energy, 1.0 / rho
         gas.equilibrate("UV", max_steps=1000)
+        assert_thermo_range(gas)
 
 
 def validate_chunk(task):
     rho_chunk, energy_chunk, table, rho_values, energy_values, of_ratio = task
     gas, initial_composition = equilibrium_products(of_ratio)
+    perturb, _ = equilibrium_products(of_ratio)
+    delta_energy = 1.0e-4 * (energy_values[-1] - energy_values[0])
     result = []
     for rho, energy in zip(rho_chunk, energy_chunk):
         equilibrate_to_energy(gas, rho, energy, initial_composition, energy_values[0])
+        direct_row, direct_diagnostics, _ = state_and_entropy_hessian(
+            gas,
+            perturb,
+            rho,
+            energy,
+            gas.Y.copy(),
+            max(1.0e-6, 1.0e-4 * rho),
+            delta_energy,
+        )
+        _, _, direct_sound_speed_squared = reconstruct(direct_row)
         row = interpolate_cell(table, rho_values, energy_values, rho, energy)
         temperature, pressure, sound_speed_squared = reconstruct(row)
-        result.append((rho, energy, gas.T, gas.P, temperature, pressure, sound_speed_squared))
+        result.append(
+            (
+                rho,
+                energy,
+                direct_diagnostics["temperature_k"],
+                direct_diagnostics["pressure_pa"],
+                direct_sound_speed_squared,
+                temperature,
+                pressure,
+                sound_speed_squared,
+            )
+        )
     return result
 
 
@@ -139,12 +163,14 @@ def main():
     energy_samples = records[:, 1]
     actual_temperature = records[:, 2]
     actual_pressure = records[:, 3]
-    predicted_temperature = records[:, 4]
-    predicted_pressure = records[:, 5]
-    predicted_a2 = records[:, 6]
+    actual_a2 = records[:, 4]
+    predicted_temperature = records[:, 5]
+    predicted_pressure = records[:, 6]
+    predicted_a2 = records[:, 7]
 
     temperature_error = predicted_temperature / actual_temperature - 1.0
     pressure_error = predicted_pressure / actual_pressure - 1.0
+    sound_speed_squared_error = predicted_a2 / actual_a2 - 1.0
 
     summary = {
         "table": str(args.table.resolve()),
@@ -156,9 +182,13 @@ def main():
         "direct_temperature_range_k": [float(actual_temperature.min()), float(actual_temperature.max())],
         "temperature_error": error_summary(temperature_error),
         "pressure_error": error_summary(pressure_error),
+        "equilibrium_sound_speed_squared_error": error_summary(sound_speed_squared_error),
         "interpolated_sound_speed_squared_min": float(predicted_a2.min()),
         "nonpositive_sound_speed_squared_points": int(np.sum(predicted_a2 <= 0.0)),
-        "points_above_gri30_nominal_thermo_limit_3500k": int(np.sum(actual_temperature > 3500.0)),
+        "reference_thermo_temperature_range_k": [200.0, 6000.0],
+        "points_outside_reference_thermo_range": int(
+            np.sum((actual_temperature < 200.0) | (actual_temperature > 6000.0))
+        ),
     }
     output = args.table.with_suffix(".validation.json")
     output.write_text(json.dumps(summary, indent=2) + "\n", encoding="ascii")

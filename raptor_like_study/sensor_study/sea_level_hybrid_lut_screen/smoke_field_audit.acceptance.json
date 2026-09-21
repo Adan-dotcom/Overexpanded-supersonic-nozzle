@@ -1,31 +1,35 @@
 {
-  "case_id": "effective_ideal_npr20",
+  "case_id": "sea_level_hybrid_lut_screen",
   "case_family": "hot_methalox_application",
-  "stage": "production",
+  "stage": "screen",
   "numerical_checks_pass": false,
   "model_checks_pass": false,
   "all_checks_pass": false,
   "physics_accepted": false,
   "training_eligible": false,
-  "screening_survivor": null,
+  "screening_survivor": false,
   "failed_numerical_checks": [
     "energy_conservation_audit_passed",
     "relative_mass_imbalance",
-    "relative_total_energy_flux_imbalance"
+    "relative_total_energy_flux_imbalance",
+    "inner_residual_drop_decades",
+    "wall_y_plus_p95",
+    "wall_y_plus_max"
   ],
   "failed_model_checks": [
-    "energy_audit_uses_total_enthalpy",
     "energy_reference_method_validated",
+    "gas_model_temperature_range_validated",
     "wall_thermal_model_justified",
     "turbulence_model_sensitivity_completed",
     "experimental_anchor_validated",
     "ambient_is_air",
-    "exhaust_composition_is_methalox_products",
     "products_air_mixing_validated",
     "chemistry_regime_justified",
     "thermochemistry_reference_validated",
     "transport_properties_validated",
-    "chemistry_sensitivity_completed"
+    "chemistry_sensitivity_completed",
+    "lut_interpolation_validated",
+    "lut_qoi_converged"
   ],
   "checks": {
     "numerical": {
@@ -60,39 +64,19 @@
         "pass": false
       },
       "inner_residual_drop_decades": {
-        "value": 2.0,
+        "value": null,
         "criterion": "min 2.0",
-        "pass": true
+        "pass": false
       },
       "wall_y_plus_p95": {
-        "value": 0.30127,
+        "value": 2.8468426999999985,
         "criterion": "max 1.0",
-        "pass": true
+        "pass": false
       },
       "wall_y_plus_max": {
-        "value": 0.711697,
+        "value": 3.471972,
         "criterion": "max 2.0",
-        "pass": true
-      },
-      "separation_persistence_m": {
-        "value": 0.001,
-        "criterion": "min 0.001",
-        "pass": true
-      },
-      "flow_through_times_before_sampling": {
-        "value": 3.8,
-        "criterion": "min 3.0",
-        "pass": true
-      },
-      "x_sep_final_window_drift_m": {
-        "value": 1.0498e-05,
-        "criterion": "max 0.0001",
-        "pass": true
-      },
-      "medium_fine_x_sep_difference_m": {
-        "value": 6.908e-06,
-        "criterion": "max 0.0003",
-        "pass": true
+        "pass": false
       }
     },
     "model": {
@@ -101,16 +85,16 @@
         "pass": true
       },
       "energy_audit_uses_total_enthalpy": {
-        "value": false,
-        "pass": false
+        "value": true,
+        "pass": true
       },
       "energy_reference_method_validated": {
         "value": false,
         "pass": false
       },
       "gas_model_temperature_range_validated": {
-        "value": true,
-        "pass": true
+        "value": false,
+        "pass": false
       },
       "wall_thermal_model_justified": {
         "value": false,
@@ -129,8 +113,8 @@
         "pass": false
       },
       "exhaust_composition_is_methalox_products": {
-        "value": false,
-        "pass": false
+        "value": true,
+        "pass": true
       },
       "products_air_mixing_validated": {
         "value": false,
@@ -149,6 +133,14 @@
         "pass": false
       },
       "chemistry_sensitivity_completed": {
+        "value": false,
+        "pass": false
+      },
+      "lut_interpolation_validated": {
+        "value": false,
+        "pass": false
+      },
+      "lut_qoi_converged": {
         "value": false,
         "pass": false
       }

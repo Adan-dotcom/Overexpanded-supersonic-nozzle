@@ -25,18 +25,22 @@
     "yplus_p95": 0.3012715549999996,
     "yplus_max": 0.7116971
   },
-  "thermal_gate": {
+  "historical_constant_gamma_temperature_diagnostic": {
     "inlet_total_temperature_k": 3485.33,
     "pilot_max_local_total_temperature_k": 4004.8381348438083,
     "fine_max_local_total_temperature_k": 4005.8859791991954,
     "fine_overshoot_percent": 14.935629601764976,
-    "passed": false
+    "below_inlet_t0": false,
+    "is_universal_reacting_flow_acceptance_gate": false
   },
   "acceptance": {
     "pilot_temporal_plateau_passed": true,
     "fine_short_window_drift_passed": true,
     "pilot_to_fine_grid_delta_passed": true,
     "fine_wall_resolution_passed": true,
+    "mass_and_total_energy_conservation_passed": false,
+    "fluid_and_ambient_model_validated": false,
+    "experimental_anchor_validated": false,
     "separation_label_numerically_accepted": true,
     "paper_physics_accepted": false
   }

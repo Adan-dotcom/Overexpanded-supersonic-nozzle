@@ -83,6 +83,28 @@ Primary/public references:
   equilibrium products because one SU2 data-driven fluid is active throughout
   the zone. It demonstrates software coupling, not a final products/air model.
 
+## Corrected solver and energy interpretation
+
+- In SU2 8.5, `DATADRIVEN_FLUID` is a two-coordinate compressible EOS table
+  indexed by density and internal energy. It cannot add mixture fraction or
+  distinguish exhaust from air within the same fluid zone.
+- `FLUID_MIXTURE` and `FLUID_FLAMELET` are wired to SU2's incompressible
+  solver family. Compressible `SPECIES_TRANSPORT` can carry passive scalars,
+  but it does not make the compressible RANS thermodynamics multicomponent.
+- SU2-NEMO provides compressible thermochemical nonequilibrium Euler/Navier-
+  Stokes in this version, not a NEMO-RANS turbulence model. It is therefore not
+  the current answer for a turbulent separation-label campaign.
+- The old GRI-Mech LUT is rejected because part of its state domain exceeded
+  the declared thermodynamic-polynomial temperature range. The replacement
+  NASA-polynomial table passes an interpolation audit but not yet a flow-QoI
+  convergence audit.
+- `Tmax < inlet T0` is not a universal reacting-flow law. Chemical
+  recombination can change sensible temperature while conserving total
+  enthalpy. The production energy gate is instead global mass/total-energy
+  conservation plus local total enthalpy referenced consistently to each
+  inlet composition. The old constant-gamma total-temperature diagnostic is
+  retained only as historical evidence for the rejected effective-gas model.
+
 ## Data and ML truth hierarchy
 
 1. Experimental pressure/schlieren/shear data: physical validation evidence.

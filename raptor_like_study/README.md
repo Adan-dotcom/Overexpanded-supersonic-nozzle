@@ -1,5 +1,10 @@
 # DLR-PAR sparse-sensor nozzle separation study
 
+> Current status: zero physics-accepted CFD labels. Read
+> `physics_model_status.yaml` and run `scripts/check_model_readiness.py` before
+> launching work. The legacy single-LUT hot plume is blocked because its
+> exterior is not air.
+
 This project is a reproducible research scaffold, not a reconstruction of the
 proprietary SpaceX Raptor engine. Publicly reported operating values are used as
 a reference envelope and every assumed value is recorded.
@@ -31,7 +36,8 @@ temperatures from `3365.9` to `3501.7 K`; species are stored in
 2. Generate a parameterized axisymmetric nozzle mesh.
 3. Run a robust RANS continuation, then URANS where the separated shock moves.
 4. Extract `x_sep`, `x_reattach`, shock location and wall-pressure features.
-5. Build a case-level dataset and train/test a neural surrogate by geometry.
+5. Build a case-level dataset and train/test a neural surrogate over operating
+   conditions for this fixed geometry.
 6. Validate against published separated-nozzle data before claiming engine-level
    predictive accuracy.
 

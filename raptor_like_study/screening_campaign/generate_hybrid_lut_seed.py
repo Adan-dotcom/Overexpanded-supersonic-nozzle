@@ -6,35 +6,30 @@ from __future__ import annotations
 import argparse
 import csv
 from pathlib import Path
+import sys
 
-import cantera as ct
 from scipy.interpolate import PchipInterpolator
-
-from generate_quasi1d_seed import (
-    OF_RATIO,
-    P0,
-    T0,
-    equilibrium_isentrope,
-    interpolate_equilibrium,
-    read_mesh_points,
-    transport_and_turbulence,
-)
 
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
+sys.path.insert(0, str(ROOT / "thermochemistry"))
+
 MESH = ROOT / "ambient_mesh" / "hybrid_pilot" / "dlr_par_hybrid.su2"
 GEOMETRY = ROOT.parent / "DLR_PAR_full_contour.csv"
+OF_RATIO = 3.2
 T_AMBIENT = 300.0
 MACH_AMBIENT = 0.001
 R_THROAT = 0.010
 
 
 def ambient_state(pressure: float) -> tuple[float, float, float, float, float]:
-    gas = ct.Solution("gri30.yaml")
+    from methalox_equilibrium import assert_thermo_range, new_equilibrium_products
+
+    gas = new_equilibrium_products(OF_RATIO)
     gas.TP = T_AMBIENT, pressure
-    gas.set_equivalence_ratio(4.0 / OF_RATIO, "CH4", "O2")
     gas.equilibrate("TP", max_steps=1000)
+    assert_thermo_range(gas)
     velocity = MACH_AMBIENT * gas.sound_speed
     return gas.density, velocity, gas.int_energy_mass, gas.T, gas.P
 
@@ -43,7 +38,24 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--ambient-pressure", type=float, default=260_000.0)
     parser.add_argument("--case-name", default="npr20_hybrid_lut_screen")
+    parser.add_argument(
+        "--allow-software-feasibility-only",
+        action="store_true",
+        help="Acknowledge that the exterior will be cold methalox products, not air.",
+    )
     args = parser.parse_args()
+    if not args.allow_software_feasibility_only:
+        parser.error(
+            "Blocked: one DATADRIVEN_FLUID LUT would represent both exhaust and exterior. "
+            "Pass --allow-software-feasibility-only only for a nonphysical integration test."
+        )
+    from generate_quasi1d_seed import (
+        equilibrium_isentrope,
+        interpolate_equilibrium,
+        read_mesh_points,
+        transport_and_turbulence,
+    )
+
     output_dir = ROOT / "sensor_study" / args.case_name
     output = output_dir / "restart_hybrid_lut_seed.csv"
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -91,7 +103,8 @@ def main() -> None:
     print(f"Wrote {output} with {len(points)} points")
     print(
         f"LUT exit seed p={exit_state[4]:.1f} Pa, T={exit_state[3]:.1f} K; "
-        f"cold-products ambient p={outside_state[4]:.1f} Pa, T={outside_state[3]:.1f} K"
+        f"NONPHYSICAL cold-products exterior p={outside_state[4]:.1f} Pa, "
+        f"T={outside_state[3]:.1f} K"
     )
 
 

@@ -63,19 +63,23 @@ summary = {
         "yplus_p95": fine[-1]["yplus_p95"],
         "yplus_max": fine[-1]["yplus_max"],
     },
-    "thermal_gate": {
+    "historical_constant_gamma_temperature_diagnostic": {
         "inlet_total_temperature_k": T0_K,
         "pilot_max_local_total_temperature_k": pilot_temp["local_total_temperature_max"]["value_k"],
         "fine_max_local_total_temperature_k": fine_temp["local_total_temperature_max"]["value_k"],
         "fine_overshoot_percent": 100.0
         * (fine_temp["local_total_temperature_max"]["value_k"] / T0_K - 1.0),
-        "passed": fine_temp["local_total_temperature_max"]["value_k"] <= 1.01 * T0_K,
+        "below_inlet_t0": fine_temp["local_total_temperature_max"]["value_k"] <= 1.01 * T0_K,
+        "is_universal_reacting_flow_acceptance_gate": False,
     },
     "acceptance": {
         "pilot_temporal_plateau_passed": pilot_convergence["last_10_checkpoint_span"]["separation_x_range_mm"] <= 0.05,
         "fine_short_window_drift_passed": abs(fine_time_drift_mm) <= 0.05,
         "pilot_to_fine_grid_delta_passed": abs(fine_mesh_delta_mm) <= 0.05,
         "fine_wall_resolution_passed": fine[-1]["yplus_max"] <= 1.0,
+        "mass_and_total_energy_conservation_passed": False,
+        "fluid_and_ambient_model_validated": False,
+        "experimental_anchor_validated": False,
         "separation_label_numerically_accepted": False,
         "paper_physics_accepted": False,
     },
@@ -91,7 +95,10 @@ numeric_checks["separation_label_numerically_accepted"] = all(
     )
 )
 numeric_checks["paper_physics_accepted"] = bool(
-    numeric_checks["separation_label_numerically_accepted"] and summary["thermal_gate"]["passed"]
+    numeric_checks["separation_label_numerically_accepted"]
+    and numeric_checks["mass_and_total_energy_conservation_passed"]
+    and numeric_checks["fluid_and_ambient_model_validated"]
+    and numeric_checks["experimental_anchor_validated"]
 )
 (HERE / "final_validation_summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="ascii")
 

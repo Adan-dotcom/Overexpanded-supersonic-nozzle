@@ -1,56 +1,68 @@
-# Equilibrium LOX/CH4 thermochemistry prototype
+# Equilibrium LOX/CH4 thermochemistry
 
-This directory couples a gaseous equilibrium-products model to SU2's
-`DATADRIVEN_FLUID` lookup-table interface. It is a reproducible integration
-prototype, not yet a paper-qualified chemistry model.
+This directory contains the thermodynamic-property prototype used with SU2's
+compressible `DATADRIVEN_FLUID` model. It is not a reacting products/air model
+and it is not yet qualified to produce paper or ML labels.
 
-## Contents
+## Current candidate
 
-- `probe_cantera_against_cea.py`: nominal chamber cross-check against NASA CEA.
-- `generate_equilibrium_lut.py`: generates the eight-variable SU2 Dragon LUT.
-- `LUT_lox_ch4_equilibrium.drg`: 36 x 72 production-resolution prototype table.
-- `validate_equilibrium_lut.py`: independent off-node interpolation validation.
-- `LUT_lox_ch4_equilibrium.validation.json`: numerical validation metrics.
-- `npr20_datadriven_lut_smoke.cfg`: integration test on the old ambient mesh.
+`LUT_lox_ch4_equilibrium_nasa_refined.drg` is the only current LUT candidate.
+It contains 72 x 192 = 13,824 density/internal-energy nodes for one fixed
+elemental mixture at O/F 3.2. The equilibrium products use NASA Glenn
+polynomials from Cantera's `nasa_gas.yaml`, valid from 200 to 6000 K for the
+selected species. NASA CEA, using liquid LOX/LCH4 reactant enthalpies, remains
+the source of chamber temperature.
 
-The table coordinates are density and specific internal energy. It contains
-entropy and its first and second derivatives, from which SU2 reconstructs
-temperature, pressure, and speed of sound. The elemental mixture is LOX/CH4 at
-`O/F=3.2` (`phi=1.25`) and is equilibrated at constant `U,V` with Cantera 3.2
-and GRI-Mech 3.0.
+The independent 2,000-point holdout audit reports:
+
+| Reconstructed quantity | p99 error | maximum error |
+|---|---:|---:|
+| Temperature | 0.1323% | 0.2565% |
+| Pressure | 0.1599% | 0.2115% |
+| Equilibrium sound speed squared | 0.1187% | 0.1977% |
+
+No holdout point was outside 200-6000 K and no interpolated sound-speed square
+was nonpositive. This passes the interpolation gate only. It does not establish
+LUT-resolution convergence of separation location.
 
 ## Reproduce
 
-From WSL:
+From the repository Python environment:
 
-```bash
-cd '/mnt/d/PRUEBA SU2_2026/raptor_like_study/thermochemistry'
-PY='/mnt/d/SU2/SU2_DataMiner/.venv312/bin/python'
-$PY generate_equilibrium_lut.py --workers 6 --output LUT_lox_ch4_equilibrium.drg
-$PY validate_equilibrium_lut.py LUT_lox_ch4_equilibrium.drg --samples 200 --workers 6
-export OMPI_MCA_osc=pt2pt
-mpirun -np 6 /mnt/d/SU2/v8.5.0/bin/SU2_CFD npr20_datadriven_lut_smoke.cfg
+```powershell
+cd 'D:\PRUEBA SU2_2026\raptor_like_study\thermochemistry'
+..\.venv\Scripts\python.exe generate_equilibrium_lut.py --workers 6
+..\.venv\Scripts\python.exe validate_equilibrium_lut.py LUT_lox_ch4_equilibrium_nasa_refined.drg --samples 2000 --workers 6
+..\.venv\Scripts\python.exe assess_lut_quality.py LUT_lox_ch4_equilibrium_nasa_refined.validation.json
 ```
 
-The final table spans `rho=0.02..8 kg/m^3` and
-`e=-10.78..12 MJ/kg`. Its 200-point off-node test gave p95 errors of `0.31%`
-for temperature and `0.71%` for pressure; all interpolated sound-speed squares
-were positive. See the JSON and PNG for the full distribution.
+The generator fails if a state leaves the declared thermodynamic-temperature
+range. `assess_lut_quality.py` deliberately leaves `production_ready=false`
+until the flow quantity of interest and the products/air formulation are also
+validated.
 
-## Scientific limits
+## Rejected legacy tables
 
-1. GRI-Mech is being used as a convenient gaseous thermodynamic mechanism.
-   NASA CEA 3.3.4 remains the reference and must be used to cross-check a grid
-   of states, especially above 3500 K.
-2. The table describes one equilibrium products mixture. It does not describe
-   ambient air or products/air mixing. Production calculations therefore use
-   the internal nozzle mesh and a static-pressure outlet.
-3. Transport is still the nominal Sutherland/constant-Prandtl surrogate. A
-   paper model needs state-dependent viscosity and conductivity validation.
-4. Equilibrium chemistry is an assumption. Frozen and finite-rate sensitivity
-   cases are still required before making a general hypersonic chemistry claim.
-5. The effective-gas ideal-model restart files are thermodynamically
-   incompatible with this LUT because their internal-energy reference differs.
+`LUT_lox_ch4_equilibrium.drg` and `LUT_lox_ch4_equilibrium_coarse.drg` are
+retained only to reproduce historical software-integration runs. They were
+generated with GRI-Mech thermodynamics, include states above the declared
+polynomial range, and must not be used for new CFD or labels.
 
-The smoke tests prove software integration only. They must never be exported as
-training labels.
+## Physical limits
+
+1. SU2 `DATADRIVEN_FLUID` accepts density and internal energy as its two table
+   inputs. It has no mixture-fraction coordinate, so one table cannot represent
+   both methalox exhaust and ambient air.
+2. The table assumes instantaneous equilibrium at a fixed elemental mixture.
+   Frozen and finite-rate sensitivity remains required.
+3. State-dependent viscosity and conductivity are not supplied by this table;
+   the current Sutherland/Prandtl treatment is an unvalidated surrogate.
+4. Condensed species are omitted. The chosen gas phase matches the nominal CEA
+   chamber density and molecular weight within about 0.051% and 0.047%, but
+   further state-grid comparison is still required.
+5. A reacting-flow energy audit must use total enthalpy, including chemical
+   energy and a consistent reference state. `Tmax < T0` is not a universal
+   acceptance criterion.
+
+Smoke tests prove file-format and solver integration only. They are never
+training data.

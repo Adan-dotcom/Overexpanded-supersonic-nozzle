@@ -18,7 +18,7 @@ campaigns:
     wall_model: match_published_DLR_setup
     npr_targets: [14.0, 20.0, 22.0, 23.7, 23.8, 30.0, 40.0, 52.8, 57.2, 60.7, 65.0]
     operating_values_source: published_DLR_PAR_data
-    status: requires_full_paper_digitization
+    status: screening_allowed_production_blocked_requires_full_paper_digitization
 
   hot_methalox_nominal:
     purpose: application dataset at unpressurized sea-level-to-altitude backpressure
@@ -28,6 +28,7 @@ campaigns:
     implied_npr_approx: {min: 50.3, max: 108.0}
     chamber_temperature_K: CEA_derived_for_each_Pc_OF
     note: NPR_is_derived_not_independently_sampled
+    status: production_blocked_pending_products_air_solver
 
   hot_methalox_ground_throttle_exploratory:
     purpose: reach strongly separated NPR at one-atmosphere backpressure
@@ -36,6 +37,7 @@ campaigns:
     back_pressure_abs_Pa: 1.01325e5
     implied_npr_approx: {min: 19.7, max: 53.3}
     evidence_status: exploratory_not_LLAMA_validated_below_5.1MPa
+    production_status: blocked_pending_products_air_solver
     note: treat_as_startup_or_throttling_study_not_a_certified_steady_engine_map
 
 forbidden_condition:
@@ -43,9 +45,14 @@ forbidden_condition:
   allowed_only_if: explicitly_modeling_a_pressurized_test_chamber
 
 physics_models:
-  primary_thermochemistry: equilibrium_products_LUT
+  primary_thermochemistry_candidate: nasa_polynomial_equilibrium_products_LUT
+  lut_interpolation_validated: true
+  lut_qoi_converged: false
+  legacy_gri30_lut_status: rejected_outside_declared_thermo_range
   sensitivities: [effective_ideal_gas, frozen_products_LUT]
   finite_rate_status: future_validation_model
+  products_air_plume_status: blocked
+  blocker: stock_SU2_8_5_path_not_validated_for_compressible_RANS_products_air_mixing
   turbulence_screen: [SST_2003m, Spalart_Allmaras]
   wall_primary: adiabatic
   wall_sensitivity_required: fixed_temperature_or_heat_flux_when_supported
@@ -65,7 +72,9 @@ acceptance_gates:
   lut_out_of_domain_points: 0
   relative_mass_imbalance_max: 0.005
   relative_total_energy_flux_imbalance_max: 0.01
-  local_total_enthalpy_above_max_boundary_fraction_max: 0.01
+  energy_audit_uses_total_enthalpy: true
+  energy_reference_method_validated: true
+  note: static_temperature_below_inlet_T0_is_not_a_universal_reacting_flow_gate
   inner_residual_drop_target_decades: 2.0
   wall_y_plus_p95_max: 1.0
   wall_y_plus_max_max: 2.0

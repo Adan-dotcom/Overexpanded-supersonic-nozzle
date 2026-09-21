@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-import cantera as ct
+from methalox_equilibrium import PRODUCT_SPECIES, THERMO_DATABASE, new_equilibrium_products
 
 
 HERE = Path(__file__).resolve().parent
@@ -10,10 +10,12 @@ PHI = 4.0 / OF_RATIO
 
 
 def equilibrium_products():
-    gas = ct.Solution("gri30.yaml")
-    gas.TP = 111.66, 5.2e6
-    gas.set_equivalence_ratio(PHI, "CH4", "O2")
-    gas.equilibrate("HP")
+    # CEA determines the chamber temperature using the liquid-propellant
+    # enthalpies. Here we cross-check only the gaseous products EOS at that
+    # already-established T,P state.
+    gas = new_equilibrium_products(OF_RATIO)
+    gas.TP = 3485.33, 5.2e6
+    gas.equilibrate("TP")
     return gas
 
 
@@ -55,14 +57,17 @@ for key in ("temperature_k", "density_kg_m3", "molecular_weight_kg_kmol"):
     relative_errors_percent[key] = 100.0 * (cantera_chamber[key] / cea_chamber[key] - 1.0)
 
 result = {
-    "model": "Cantera 3.2 gri30 equilibrium, gaseous species only",
+    "model": "Cantera equilibrium using NASA Glenn gaseous-species polynomials",
+    "thermo_database": THERMO_DATABASE,
+    "thermo_species": list(PRODUCT_SPECIES),
     "of_ratio": OF_RATIO,
     "equivalence_ratio": PHI,
     "cantera_chamber": cantera_chamber,
     "cea_chamber_reference": cea_chamber,
     "relative_errors_percent": relative_errors_percent,
     "limitations": [
-        "GRI-Mech 3.0 is a combustion mechanism, not the NASA CEA thermodynamic database.",
+        "CEA, not Cantera, sets the adiabatic chamber state from the liquid reactants.",
+        "Absolute energy and enthalpy are not compared until the two codes' reference conventions are reconciled.",
         "Cantera sound speed and cp reported here are frozen-composition derivatives.",
         "Condensed carbon and liquid water are excluded by the gas-phase mechanism.",
     ],

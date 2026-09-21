@@ -1,0 +1,70 @@
+schema_version: 1
+updated_utc: "2026-09-20"
+accepted_training_labels: 0
+policy:
+  final_dataset_requires: physics_accepted_true
+  static_temperature_below_inlet_t0_is_universal_gate: false
+  energy_gate: total_enthalpy_and_global_energy_flux_with_consistent_thermochemical_reference
+
+tracks:
+  cold_n2_validation:
+    description: Published DLR-PAR cold-nitrogen validation lane.
+    software_screening_enabled: true
+    production_enabled: false
+    blockers:
+      - digitize_published_boundary_conditions_and_uncertainty
+      - reproduce_test_chamber_and_wall_thermal_conditions
+      - validate_sst_and_sa_against_published_separation_data
+
+  hot_methalox_internal:
+    description: Single-composition equilibrium-products internal-nozzle sensitivity.
+    software_screening_enabled: true
+    production_enabled: false
+    thermochemistry:
+      table: thermochemistry/LUT_lox_ch4_equilibrium_nasa_refined.drg
+      interpolation_validated: true
+      qoi_converged_across_lut_resolutions: false
+      temperature_range_k: [200.0, 6000.0]
+    blockers:
+      - internal_supersonic_outlet_does_not_transmit_ambient_backpressure
+      - lut_resolution_qoi_convergence_not_completed
+      - transport_properties_not_validated
+      - wall_thermal_model_not_justified
+      - equilibrium_frozen_finite_rate_sensitivity_not_completed
+
+  hot_methalox_products_air_plume:
+    description: Full nozzle/plume application with methalox exhaust and exterior air.
+    software_screening_enabled: false
+    production_enabled: false
+    blockers:
+      - stock_su2_8_5_compressible_rans_path_has_no_validated_products_air_mixture_model
+      - datadriven_fluid_lut_has_only_density_and_internal_energy_inputs
+      - fluid_mixture_and_fluid_flamelet_are_incompressible_solver_features
+      - nemo_navier_stokes_has_no_rans_turbulence_model_in_this_version
+      - products_air_mixing_and_chemistry_regime_not_validated
+
+legacy_artifacts:
+  gri30_lut:
+    status: rejected
+    reason: Thermodynamic polynomials were used outside their declared temperature range.
+    files:
+      - thermochemistry/LUT_lox_ch4_equilibrium.drg
+      - thermochemistry/LUT_lox_ch4_equilibrium_coarse.drg
+  single_lut_hybrid_plume:
+    status: software_feasibility_only
+    reason: Exterior is cold equilibrium methalox products, not air or pure CO2.
+  effective_ideal_gas_plume:
+    status: numerically_informative_physics_rejected
+    reason: One calorically perfect surrogate represents exhaust and atmosphere.
+
+required_before_any_physics_accepted_label:
+  - solver_exit_success
+  - finite_positive_state
+  - mass_and_total_energy_conservation
+  - validated_total_enthalpy_reference
+  - gas_model_temperature_range
+  - mesh_time_step_and_lut_qoi_convergence_as_applicable
+  - turbulence_model_sensitivity
+  - justified_wall_thermal_model
+  - experimental_anchor
+  - valid_working_fluids_and_mixing_model

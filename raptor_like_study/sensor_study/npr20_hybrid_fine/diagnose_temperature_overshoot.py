@@ -99,8 +99,10 @@ def main():
         "point_fraction_static_temperature_above_inlet_t0": float(np.mean(temperature > INLET_T0)),
         "point_fraction_total_temperature_above_inlet_t0": float(np.mean(total_temperature > INLET_T0)),
         "interpretation": (
-            "A local total temperature above the prescribed inlet total temperature demonstrates "
-            "that the overshoot is in the computed energy field, not only the static-temperature plot."
+            "For this historical calorically-perfect effective-gas model, local total temperature "
+            "above the prescribed inlet value is an energy-field diagnostic, not only a plotting "
+            "artifact. It is not a universal acceptance criterion for reacting gas; that requires "
+            "consistently referenced total enthalpy and global energy-flux closure."
         ),
     }
     args.output.write_text(json.dumps(result, indent=2), encoding="ascii")

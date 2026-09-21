@@ -18,7 +18,7 @@ def fluid_block(kind):
     if kind == "lut":
         return """FLUID_MODEL= DATADRIVEN_FLUID
 INTERPOLATION_METHOD= LUT
-FILENAMES_INTERPOLATOR= ( ../thermochemistry/LUT_lox_ch4_equilibrium.drg )
+FILENAMES_INTERPOLATOR= ( ../thermochemistry/LUT_lox_ch4_equilibrium_nasa_refined.drg )
 USE_PINN= NO"""
     return """FLUID_MODEL= IDEAL_GAS
 GAMMA_VALUE= 1.1982940938

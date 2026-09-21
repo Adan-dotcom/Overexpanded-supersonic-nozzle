@@ -1,5 +1,15 @@
 # Rapid model screening
 
+The historical generated configs that reference
+`LUT_lox_ch4_equilibrium.drg` reproduce the rejected GRI-Mech integration
+prototype only. Regenerate configs with `make_screening_configs.py` to use the
+NASA-refined LUT. Hybrid single-LUT plume cases remain software-feasibility
+tests because their exterior is not air.
+
+`lut_nasa_integration_smoke.cfg` is the one-iteration MPI check for the refined
+table. Its compact log and result JSON are in `lut_nasa_smoke/`; the generated
+restart remains local and is not a physical solution.
+
 These runs use the 76,800-cell internal `screen` mesh. They can reject unstable,
 nonconservative, or qualitatively wrong configurations. They cannot establish
 an accurate separation location and must never be exported as ML labels.

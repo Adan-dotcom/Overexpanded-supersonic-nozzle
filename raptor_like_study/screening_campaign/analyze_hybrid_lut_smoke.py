@@ -90,15 +90,22 @@ def main() -> None:
         and np.all(np.isfinite(h0))
     )
     result = {
+        "case_id": args.case_name,
         "case": args.case_name,
+        "case_family": "hot_methalox_application",
+        "lut_used": True,
         "purpose": "software_feasibility_only",
         "iterations": iterations,
         "iteration_meaning": stage,
         "physical_time_s": 2.5e-7 if stage == "URANS_physical_steps" else None,
         "solver_exit_success": True,
         "finite_solution": finite,
+        "finite_values_everywhere": finite,
         "positive_density_pressure_temperature": bool(
             np.min(rho) > 0.0 and np.min(pressure) > 0.0 and np.min(temperature) > 0.0
+        ),
+        "nonpositive_density_pressure_temperature_points": int(
+            np.count_nonzero((rho <= 0.0) | (pressure <= 0.0) | (temperature <= 0.0))
         ),
         "minimum_density_kg_m3": float(np.min(rho)),
         "minimum_pressure_Pa": float(np.min(pressure)),
@@ -108,13 +115,33 @@ def main() -> None:
         "lut_out_of_domain_points": int(np.count_nonzero(extrapolation > 0.0)),
         "minimum_total_enthalpy_J_kg": float(np.min(h0)),
         "maximum_total_enthalpy_J_kg": float(np.max(h0)),
+        "energy_audit_uses_total_enthalpy": True,
+        "energy_reference_method_validated": False,
+        "energy_conservation_audit_passed": False,
         "wall_y_plus_p95": float(np.percentile(wall_yplus, 95)),
         "wall_y_plus_max": float(np.max(wall_yplus)),
         "negative_cf_runs": separated_runs,
         "persistent_separation_runs": persistent,
         "physics_accepted": False,
         "training_eligible": False,
-        "limitation": "single equilibrium-products LUT also represents the exterior; ambient is not air",
+        "gas_model_temperature_range_validated": False,
+        "wall_thermal_model_justified": False,
+        "turbulence_model_sensitivity_completed": False,
+        "experimental_anchor_validated": False,
+        "ambient_is_air": False,
+        "exhaust_composition_is_methalox_products": True,
+        "products_air_mixing_validated": False,
+        "chemistry_regime_justified": False,
+        "thermochemistry_reference_validated": False,
+        "transport_properties_validated": False,
+        "chemistry_sensitivity_completed": False,
+        "lut_interpolation_validated": False,
+        "lut_qoi_converged": False,
+        "limitations": [
+            "The legacy GRI-Mech LUT exceeds its declared thermodynamic temperature range.",
+            "One equilibrium-products LUT also represents the exterior; ambient is not air.",
+            "The total-enthalpy range is diagnostic only because no validated inlet/ambient reference mapping exists.",
+        ],
     }
     (case_dir / "smoke_field_audit.json").write_text(json.dumps(result, indent=2) + "\n")
     fig, axes = plt.subplots(3, 1, figsize=(9, 8), sharex=True)

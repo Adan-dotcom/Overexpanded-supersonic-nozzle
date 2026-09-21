@@ -2,14 +2,18 @@ import argparse
 import csv
 import math
 from pathlib import Path
+import sys
 
-import cantera as ct
 import numpy as np
 from scipy.interpolate import PchipInterpolator
 
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
+sys.path.insert(0, str(HERE.parent / "thermochemistry"))
+
+from methalox_equilibrium import assert_thermo_range, new_equilibrium_products
+
 MESH = HERE.parent / "internal_mesh" / "screen" / "dlr_par_internal.su2"
 GEOMETRY = ROOT / "DLR_PAR_full_contour.csv"
 
@@ -76,11 +80,10 @@ def ideal_state(area_ratio, supersonic):
 
 
 def equilibrium_isentrope():
-    gas = ct.Solution("gri30.yaml")
-    gas.TP = 300.0, 101325.0
-    gas.set_equivalence_ratio(4.0 / OF_RATIO, "CH4", "O2")
+    gas = new_equilibrium_products(OF_RATIO)
     gas.TP = T0, P0
     gas.equilibrate("TP", max_steps=1000)
+    assert_thermo_range(gas)
     entropy0 = gas.entropy_mass
     enthalpy0 = gas.enthalpy_mass
     pressures = np.geomspace(P0 * (1.0 - 1e-7), 500.0, 2400)
@@ -88,6 +91,7 @@ def equilibrium_isentrope():
     for pressure in pressures:
         gas.SP = entropy0, pressure
         gas.equilibrate("SP", max_steps=1000)
+        assert_thermo_range(gas)
         velocity = math.sqrt(max(0.0, 2.0 * (enthalpy0 - gas.enthalpy_mass)))
         states.append(
             (pressure, gas.density, velocity, gas.int_energy_mass, gas.T, gas.density * velocity)

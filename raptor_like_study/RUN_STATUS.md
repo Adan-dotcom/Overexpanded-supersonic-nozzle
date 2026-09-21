@@ -1,5 +1,35 @@
 # DLR-PAR LOX/CH4 sensor-study status
 
+## 2026-09-20 physics correction (supersedes the model recommendations below)
+
+The chronology below is retained to show what was tested, but its former
+"surviving" hot-plume branch is no longer an eligible physical model.
+
+- The hybrid LUT exterior was not air or pure CO2. It was cold equilibrium
+  methalox products because one `DATADRIVEN_FLUID` table occupied the complete
+  zone. Those results are software-feasibility artifacts only.
+- The 36 x 72 GRI-Mech LUT is rejected: some evaluated states were outside the
+  declared thermodynamic-polynomial range. Do not use it for new runs.
+- The replacement NASA-polynomial LUT has 72 x 192 nodes and passed a
+  2,000-point interpolation audit: maximum errors are 0.257% in temperature,
+  0.212% in pressure and 0.198% in equilibrium sound-speed squared. It remains
+  a single-composition candidate and is not production-ready.
+- The former `Tmax < T0` thermal gate was overgeneralized. For reacting gas,
+  qualify energy using global total-energy flux and consistently referenced
+  total enthalpy, not static temperature alone. Historical constant-gamma
+  diagnostics remain relevant only to the rejected effective-gas surrogate.
+- SU2 8.5 does not supply the required combination of compressible RANS,
+  composition-coupled products/air mixing and hot methalox chemistry in the
+  paths exercised here. Full hot-plume production is blocked pending a
+  validated solver/model choice.
+- There are still zero physics-accepted labels. Long hot runs are paused. The
+  next defensible CFD work is published cold-N2 DLR-PAR validation and cheap
+  single-composition thermochemistry screens, never final labels.
+
+Machine-readable status: `physics_model_status.yaml`. Gate implementation:
+`scripts/evaluate_physics_gate.py`. Preflight:
+`scripts/check_model_readiness.py`.
+
 ## What is validated
 
 - NASA CEA nominal state: `sensor_study/nominal_cea/nominal_summary.json`.
@@ -176,7 +206,9 @@ Cascade outputs:
 
 1. Use second-order spatial reconstruction after the first-order startup is stable.
 2. Reduce inner residuals by at least 2-3 decades per physical step or demonstrate time-step independence of wall pressure and wall shear.
-3. Remove nonphysical temperature overshoots.
+3. Demonstrate global total-energy conservation and audit local total enthalpy
+   with consistent chemical reference states; do not use `Tmax < T0` as a
+   universal reacting-flow criterion.
 4. Sample long enough to discard the transient and cover multiple shock/boundary-layer cycles.
 5. Define separation as the first downstream crossing where signed wall shear stays negative for at least 1 mm.
 6. Report mean, standard deviation, and distribution of `x_sep(t)` for unsteady cases.

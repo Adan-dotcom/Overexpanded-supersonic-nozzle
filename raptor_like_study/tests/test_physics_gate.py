@@ -1,0 +1,72 @@
+import unittest
+
+from scripts.evaluate_physics_gate import evaluate
+
+
+def passing_metrics(case_family="hot_methalox_application", lut_used=True):
+    metrics = {
+        "case_id": "test",
+        "case_family": case_family,
+        "lut_used": lut_used,
+        "solver_exit_success": True,
+        "finite_values_everywhere": True,
+        "energy_conservation_audit_passed": True,
+        "nonpositive_density_pressure_temperature_points": 0,
+        "lut_out_of_domain_points": 0,
+        "relative_mass_imbalance": 0.001,
+        "relative_total_energy_flux_imbalance": 0.002,
+        "inner_residual_drop_decades": 3.0,
+        "wall_y_plus_p95": 0.5,
+        "wall_y_plus_max": 1.0,
+        "separation_persistence_m": 0.002,
+        "flow_through_times_before_sampling": 4.0,
+        "x_sep_final_window_drift_m": 0.00005,
+        "medium_fine_x_sep_difference_m": 0.0002,
+        "energy_audit_uses_total_enthalpy": True,
+        "energy_reference_method_validated": True,
+        "gas_model_temperature_range_validated": True,
+        "wall_thermal_model_justified": True,
+        "turbulence_model_sensitivity_completed": True,
+        "experimental_anchor_validated": True,
+        "ambient_is_air": True,
+        "exhaust_composition_is_methalox_products": True,
+        "products_air_mixing_validated": True,
+        "chemistry_regime_justified": True,
+        "thermochemistry_reference_validated": True,
+        "transport_properties_validated": True,
+        "chemistry_sensitivity_completed": True,
+        "lut_interpolation_validated": True,
+        "lut_qoi_converged": True,
+    }
+    if case_family == "cold_n2_validation":
+        metrics["working_fluid_matches_experiment"] = True
+    return metrics
+
+
+class PhysicsGateTests(unittest.TestCase):
+    def test_hot_production_can_pass_only_with_every_requirement(self):
+        result = evaluate(passing_metrics(), "production")
+        self.assertTrue(result["physics_accepted"])
+
+    def test_fake_products_ambient_fails_closed(self):
+        metrics = passing_metrics()
+        metrics["ambient_is_air"] = False
+        result = evaluate(metrics, "production")
+        self.assertFalse(result["physics_accepted"])
+        self.assertIn("ambient_is_air", result["failed_model_checks"])
+
+    def test_missing_energy_method_fails_closed(self):
+        metrics = passing_metrics()
+        del metrics["energy_audit_uses_total_enthalpy"]
+        result = evaluate(metrics, "production")
+        self.assertFalse(result["physics_accepted"])
+
+    def test_screen_never_becomes_training_data(self):
+        result = evaluate(passing_metrics(), "screen")
+        self.assertTrue(result["screening_survivor"])
+        self.assertFalse(result["physics_accepted"])
+        self.assertFalse(result["training_eligible"])
+
+
+if __name__ == "__main__":
+    unittest.main()

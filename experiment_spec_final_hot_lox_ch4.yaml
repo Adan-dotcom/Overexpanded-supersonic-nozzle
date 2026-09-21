@@ -1,5 +1,6 @@
 study:
   name: dlr_par_lox_ch4_sparse_sensor_placement
+  status: blocked_pending_valid_products_air_solver
   purpose: >
     Sparse fixed wall-pressure sensor placement for localization of shock-induced
     boundary-layer separation in an axisymmetric TOP nozzle using hot LOX/LCH4
@@ -28,15 +29,15 @@ operating_conditions:
     max: 3.60
     nominal: 3.20
     source_basis: "NASA MSFC 31-kN LOX/CH4 hot-fire campaigns"
-  nozzle_pressure_ratio:
-    min: 20.0
-    max: 100.0
-    sampling: latin_hypercube
-    rationale: "study design variable chosen to span strongly overexpanded through weakly-overexpanded/attached regimes"
   back_pressure_Pa:
-    definition: "Pc_abs / NPR"
-    implied_min_approx: 5.10e4
-    implied_max_approx: 2.70e5
+    min: 5.00e4
+    max: 1.01325e5
+    sampling: latin_hypercube
+    rationale: "open-atmosphere altitude-to-sea-level nominal campaign"
+  nozzle_pressure_ratio:
+    definition: "derived as Pc_abs / back_pressure_Pa; never independently sampled"
+    implied_min_approx: 50.3
+    implied_max_approx: 108.0
   chamber_temperature_K:
     definition: "derived by NASA CEA v3 for each (Pc,O/F) case; not independently sampled"
   mass_flow_kg_s:
@@ -61,9 +62,11 @@ thermochemistry:
       LOX/CH4 combustion-products mechanism. Do not claim finite-rate methane chemistry
       in SU2 unless a validated custom mechanism is implemented.
   cfd_property_coupling:
-    method: "CEA-generated variable-property table -> SU2 compressible data-driven fluid model"
+    method: "NASA-polynomial equilibrium-products table -> SU2 DATADRIVEN_FLUID for single-composition screens only"
     independent_variables: [rho, e]
-    required_outputs: [p, T, a, cp, cv, mu, k]
+    validated_outputs: [p, T, equilibrium_a_squared]
+    production_enabled: false
+    blockers: [products_air_mixing, transport_validation, lut_qoi_convergence]
   note: >
     Recent methane-nozzle literature reports finite-rate chemistry gives the best
     agreement, but equilibrium and finite-rate results are close for high-pressure
@@ -82,7 +85,10 @@ wall:
     require invented hardware data.
 
 cfd:
-  code: SU2
+  screening_code: SU2
+  hot_plume_production_code: null
+  hot_plume_production_status: blocked_pending_validated_compressible_rans_multicomponent_formulation
+  numerics_below_apply_to: software_screening_only_until_production_solver_is_selected
   version_target: "8.5.x or current stable"
   dimensionality: 2D_axisymmetric
   governing_equations: compressible_RANS_URANS_Navier_Stokes
@@ -126,7 +132,7 @@ dataset:
   sampled_dimensions:
     - chamber_pressure_abs_Pa
     - mixture_ratio_OF
-    - nozzle_pressure_ratio
+    - back_pressure_Pa
   extra_runs:
     turbulence_model_duplicates: 10
     grid_convergence_additional_runs: 12

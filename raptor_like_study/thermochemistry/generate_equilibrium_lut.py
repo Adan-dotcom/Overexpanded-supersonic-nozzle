@@ -3,8 +3,14 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 import json
 from pathlib import Path
 
-import cantera as ct
 import numpy as np
+
+from methalox_equilibrium import (
+    PRODUCT_SPECIES,
+    THERMO_DATABASE,
+    assert_thermo_range,
+    new_equilibrium_products,
+)
 
 
 HERE = Path(__file__).resolve().parent
@@ -21,10 +27,10 @@ VARIABLES = (
 
 
 def new_products(of_ratio):
-    gas = ct.Solution("gri30.yaml")
-    gas.TP = 111.66, 5.2e6
-    gas.set_equivalence_ratio(4.0 / of_ratio, "CH4", "O2")
-    gas.equilibrate("HP")
+    gas = new_equilibrium_products(of_ratio)
+    gas.TP = 3485.33, 5.2e6
+    gas.equilibrate("TP")
+    assert_thermo_range(gas)
     return gas
 
 
@@ -32,6 +38,7 @@ def equilibrate_uv(gas, rho, energy, composition):
     gas.Y = composition
     gas.UV = energy, 1.0 / rho
     gas.equilibrate("UV", max_steps=1000)
+    assert_thermo_range(gas)
     return gas.T, gas.P, gas.entropy_mass, gas.Y.copy()
 
 
@@ -80,12 +87,9 @@ def generate_row(task):
     i, rho, energy_values, of_ratio, delta_energy = task
     gas = new_products(of_ratio)
     perturb = new_products(of_ratio)
-    reactant = ct.Solution("gri30.yaml")
-    reactant.TP = 300.0, 101325.0
-    reactant.set_equivalence_ratio(4.0 / of_ratio, "CH4", "O2")
-    gas.Y = reactant.Y
     gas.TD = 250.0, rho
     gas.equilibrate("TV", max_steps=1000)
+    assert_thermo_range(gas)
     composition = gas.Y.copy()
 
     rows = []
@@ -138,7 +142,7 @@ def connectivity(n_rho, n_energy):
 def write_drg(path, data, triangles, hull, metadata):
     with path.open("w", encoding="ascii", newline="\n") as stream:
         stream.write("Dragon library\n\n<Header>\n\n[Version]\n1.0.1\n\n")
-        stream.write("Fluid:\nLOX_CH4_equilibrium_products_Cantera_GRI30\n")
+        stream.write("Fluid:\nLOX_CH4_equilibrium_products_NASA_Glenn\n")
         stream.write("Reference:\nNASA_CEA_3.3.4_cross_checked\n\n")
         stream.write(f"[Number of points]\n{len(data)}\n\n")
         stream.write(f"[Number of triangles]\n{len(triangles)}\n\n")
@@ -159,15 +163,19 @@ def write_drg(path, data, triangles, hull, metadata):
 
 def main():
     parser = argparse.ArgumentParser(description="Generate an SU2 equilibrium-products rho-e lookup table.")
-    parser.add_argument("--n-rho", type=int, default=36)
-    parser.add_argument("--n-energy", type=int, default=72)
+    parser.add_argument("--n-rho", type=int, default=72)
+    parser.add_argument("--n-energy", type=int, default=192)
     parser.add_argument("--rho-min", type=float, default=0.02)
-    parser.add_argument("--rho-max", type=float, default=8.0)
+    parser.add_argument("--rho-max", type=float, default=6.0)
     parser.add_argument("--energy-min", type=float, default=-1.078e7)
-    parser.add_argument("--energy-max", type=float, default=1.2e7)
+    parser.add_argument("--energy-max", type=float, default=-1.5e6)
     parser.add_argument("--of-ratio", type=float, default=3.20)
     parser.add_argument("--workers", type=int, default=1)
-    parser.add_argument("--output", type=Path, default=HERE / "LUT_lox_ch4_equilibrium.drg")
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=HERE / "LUT_lox_ch4_equilibrium_nasa_refined.drg",
+    )
     args = parser.parse_args()
 
     rho_values = np.geomspace(args.rho_min, args.rho_max, args.n_rho)
@@ -231,7 +239,10 @@ def main():
     sound_speed_squared = dpdrho - (dsdrho / dsde) * dpde
 
     metadata = {
-        "generator": "Cantera 3.2 gri30 equilibrium at constant internal energy and volume",
+        "generator": "Cantera equilibrium at constant internal energy and volume",
+        "thermo_database": THERMO_DATABASE,
+        "thermo_species": list(PRODUCT_SPECIES),
+        "thermo_valid_temperature_range_k": [200.0, 6000.0],
         "n_rho": args.n_rho,
         "n_energy": args.n_energy,
         "rho_bounds_kg_m3": [args.rho_min, args.rho_max],
@@ -251,8 +262,9 @@ def main():
         "sound_speed_squared_min": float(np.min(sound_speed_squared)),
         "nonpositive_sound_speed_squared_points": int(np.sum(sound_speed_squared <= 0.0)),
         "limitations": [
-            "Prototype gaseous-equilibrium table; NASA CEA remains the reference calculation.",
-            "GRI-Mech thermodynamics omit condensed phases and do not represent ambient air.",
+            "Gaseous equilibrium-products table; NASA CEA remains the combustion reference.",
+            "The phase omits condensed species and does not represent ambient air.",
+            "Equilibrium chemistry is a model choice; frozen and finite-rate sensitivities remain required.",
             "Do not use outside the tabulated rho-e rectangle.",
         ],
     }

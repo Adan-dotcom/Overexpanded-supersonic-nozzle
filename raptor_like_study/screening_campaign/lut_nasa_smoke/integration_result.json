@@ -1,0 +1,18 @@
+{
+  "purpose": "software_integration_only",
+  "solver": "SU2_CFD 8.5.0 Harrier",
+  "mpi_ranks": 2,
+  "mesh_cells": 76800,
+  "iterations_requested": 1,
+  "solver_exit_success": true,
+  "converged": false,
+  "lut_file": "../../thermochemistry/LUT_lox_ch4_equilibrium_nasa_refined.drg",
+  "lut_nodes_loaded_per_rank": 13824,
+  "seed_rows": 77529,
+  "seed_density_range_kg_m3": [0.02792192227899307, 3.726768180954941],
+  "seed_internal_energy_range_j_kg": [-7922673.140855048, -3045333.974978442],
+  "seed_inside_lut_domain": true,
+  "physics_accepted": false,
+  "training_eligible": false,
+  "note": "This verifies LUT loading, MPI partitioning and one solver iteration only."
+}

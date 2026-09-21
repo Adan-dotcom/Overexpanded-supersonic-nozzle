@@ -2,122 +2,129 @@
 
 ## Read this first
 
-This repository contains the reproducible source, configurations, NASA CEA
-outputs, thermochemistry LUT, diagnostics, plots, and decision history. The
-active one-atmosphere pilot mesh, its stable restart, and the latest URANS smoke
-restart are included as a portable handoff. All other raw solver fields,
-restarts, and generated meshes are intentionally excluded because the local
-workspace contains about 31 GiB and individual VTK files exceed GitHub's 100 MB
-limit. `LOCAL_ARTIFACTS_MANIFEST.csv` inventories those local artifacts.
+There are **zero physics-accepted CFD labels** in this repository. Solver
+completion, numerical convergence and physical acceptance are separate states.
+Never train or publish the final sensor model from smoke, screen, mock or
+failed-gate data.
 
-There are currently **zero physics-accepted ML labels**. Do not train or report
-the final sensor model until production cases pass every gate.
+The authoritative readiness file is
+`raptor_like_study/physics_model_status.yaml`. Before launching a case, run:
 
-## Current scientific state
+```powershell
+cd 'D:\PRUEBA SU2_2026\raptor_like_study'
+.\.venv\Scripts\python.exe scripts\check_model_readiness.py cold_n2_validation --stage screen
+.\.venv\Scripts\python.exe scripts\check_model_readiness.py hot_methalox_products_air_plume --stage production
+```
 
-- Geometry: fixed DLR-PAR contour, area ratio 30.
-- Primary application: synthetic DLR-PAR nozzle with LOX/CH4 products. It is
-  not a Raptor reconstruction and not the original DLR cold-N2 experiment.
-- Correct open-atmosphere anchor: `Pc=5.2 MPa`, `Pa=101.325 kPa`,
-  `NPR=51.32`, `O/F=3.2`, `T0` from NASA CEA.
-- `Pa=260 kPa` came from `Pc/NPR=5.2 MPa/20`; it is a pressurized-chamber
-  diagnostic only.
-- NASA CEA completed 48 corrected DOE points. See
-  `raptor_like_study/cases/cea/physical_cea_summary.csv`.
-- Five internal-nozzle screens failed the physics gate. A supersonic outlet
-  remained near 18-21 kPa and did not transmit imposed backpressure upstream.
-- The surviving path is the nozzle-plus-plume LUT/SST/HLLC case at one
-  atmosphere. The steady branch was nonconvergent; the first-order URANS smoke
-  test completed 10 steps at `dt=25 ns`, 30 inner iterations, on six MPI ranks.
-- That smoke test remained finite, positive, and inside the LUT, but covered
-  only `0.25 us`, had `y+ p95=2.847`, and showed no persistent separation. It
-  is software feasibility, not a label.
-- The external domain currently uses cold equilibrium combustion products,
-  not air, because one data-driven fluid occupies the zone. This model-form
-  limitation must remain explicit.
+The second command must currently exit with code 2 and list the physical
+blockers. Do not bypass it by relabeling the run.
 
-The detailed chronology is in `raptor_like_study/RUN_STATUS.md`. Assumptions
-and literature are in `ASSUMPTIONS_AND_EVIDENCE.md` and
-`LITERATURE_REVIEW.md`.
+## Scientific tracks
 
-## Recreate on another Windows machine
+### Cold-N2 validation
 
-The existing scripts assume the clone is at `D:\PRUEBA SU2_2026` and SU2 8.5.0
-is at `D:\SU2\v8.5.0`. Either use those paths or update the scripts.
+The DLR-PAR experiment used gaseous nitrogen. SU2 compressible RANS/URANS is a
+reasonable solver family for this validation lane, but the published boundary
+conditions, test-chamber setup, wall condition and uncertainty still need to be
+digitized and reproduced. Cheap setup screens are allowed. Production
+acceptance is not.
 
-1. Install WSL2 Ubuntu, OpenMPI, SU2 8.5.0 with MPI, Python 3.12, and Gmsh.
-2. Create a Python environment and install:
+### Hot methalox application
+
+The geometry is DLR-PAR while the chamber envelope comes from public NASA
+LOX/LCH4 work. This is a synthetic methodology study, not Raptor hardware and
+not the original DLR experiment.
+
+The corrected open-atmosphere nominal point is `Pc=5.2 MPa`,
+`Pa=101.325 kPa`, `NPR=51.32`, `O/F=3.2`; NASA CEA supplies `T0` from liquid
+reactant enthalpies. `Pc=5.2 MPa` with `NPR=20` implies `Pa=260 kPa` and is only
+a pressurized test-chamber condition.
+
+The previous one-atmosphere hybrid LUT run is rejected as a physical model:
+one methalox-products table represented both nozzle exhaust and the exterior.
+The exterior was neither air nor pure CO2. It proved only that SU2 could load
+the table and march a short URANS segment.
+
+## SU2 capability decision
+
+Source inspection of local SU2 8.5.0 established:
+
+- `DATADRIVEN_FLUID` is a compressible EOS table with exactly two inputs,
+  density and internal energy. It has no mixture-fraction dimension.
+- `FLUID_MIXTURE` and `FLUID_FLAMELET` are incompressible-solver features.
+- Compressible `SPECIES_TRANSPORT` transports scalars but does not couple a
+  multicomponent reacting EOS to RANS.
+- NEMO provides thermochemical nonequilibrium Euler/Navier-Stokes, but this
+  release has no NEMO-RANS turbulence model.
+
+Therefore the current stock-SU2 path cannot yet support the required
+compressible turbulent products/air plume as modeled here. Resolve this with a
+validated solver/formulation before long hot production runs. SU2 remains
+useful for cold-N2 validation and single-composition internal sensitivity.
+
+## Thermochemistry repair
+
+The old `LUT_lox_ch4_equilibrium.drg` and coarse companion are retained only
+for historical reproduction. Their GRI-Mech thermodynamics were evaluated
+outside the declared polynomial temperature range and are rejected.
+
+The candidate replacement is:
+
+`raptor_like_study/thermochemistry/LUT_lox_ch4_equilibrium_nasa_refined.drg`
+
+It uses NASA Glenn gas-species polynomials, 72 x 192 = 13,824 nodes, and spans
+`rho=0.02..6 kg/m3`, `e=-10.78..-1.5 MJ/kg`. A 2,000-point independent audit
+gave maximum interpolation errors of 0.257% for temperature, 0.212% for
+pressure and 0.198% for equilibrium sound-speed squared, with no invalid
+sound-speed squares or temperatures outside 200-6000 K.
+
+That passes only the interpolation gate. It remains blocked on separation-QoI
+convergence across LUT resolutions, products/air treatment, transport, wall
+thermal model and chemistry sensitivity.
+
+## Correct energy interpretation
+
+`Tmax < inlet T0` is not a universal reacting-flow acceptance rule. Chemical
+recombination can trade chemical and sensible enthalpy. Production acceptance
+requires global mass and total-energy-flux closure plus local total enthalpy
+using consistent chemical reference states at every inlet. Historical
+constant-gamma total-temperature plots apply only to the rejected effective
+ideal-gas surrogate.
+
+The fail-closed evaluator is `raptor_like_study/scripts/evaluate_physics_gate.py`.
+It requires numerical, model-form, thermochemistry, transport, wall,
+turbulence and experimental gates. Screens can survive numerically but can
+never become training labels.
+
+## Immediate work order
+
+1. Complete cold-N2 literature digitization and reproduce several published
+   DLR-PAR NPR anchors with SST and SA.
+2. Validate mass/energy conservation, wall resolution, time step and mesh
+   convergence against the cold-flow separation measurements.
+3. Select and verify a compressible turbulent multicomponent solver for the
+   hot products/air plume. Do a tiny benchmark before any full mesh run.
+4. Compare equilibrium, frozen and an appropriate finite-rate model; validate
+   viscosity, conductivity and the wall thermal condition.
+5. Only then reopen hot production and build labels that pass every gate.
+
+## Recreate the environment
+
+The scripts currently assume the clone is at `D:\PRUEBA SU2_2026` and SU2
+8.5.0 is at `D:\SU2\v8.5.0`.
 
 ```powershell
 cd 'D:\PRUEBA SU2_2026\raptor_like_study'
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-3. The active pilot mesh is already included at
-   `ambient_mesh/hybrid_pilot/dlr_par_hybrid.su2`. To regenerate it instead:
+Large VTK, restart and generated mesh files remain local and are inventoried in
+`LOCAL_ARTIFACTS_MANIFEST.csv`. Git contains source, configs, compact results,
+the active portable checkpoint and provenance. `RUN_STATUS.md` preserves the
+full chronology; its top correction supersedes older recommendations.
 
-```powershell
-.\.venv\Scripts\python.exe ambient_mesh\generate_hybrid_mesh.py --profile pilot
-```
-
-4. Regenerate the corrected one-atmosphere LUT seed and configs:
-
-```powershell
-wsl.exe --cd "/mnt/d/PRUEBA SU2_2026/raptor_like_study/screening_campaign" `
-  -e python3 generate_hybrid_lut_seed.py --ambient-pressure 101325 `
-  --case-name sea_level_hybrid_lut_screen
-.\.venv\Scripts\python.exe screening_campaign\make_sea_level_lut_configs.py
-```
-
-The WSL Python used previously had Cantera, NumPy, SciPy, Matplotlib, and
-meshio. Adjust the executable path if those packages are installed elsewhere.
-
-5. The portable stable checkpoint is already included at
-   `sensor_study/sea_level_hybrid_lut_screen/restart_safe.dat`; the last
-   completed transient state is `restart_urans_smoke_00009.dat`. To recreate
-   the stable checkpoint from scratch, run this sequence from
-   `screening_campaign`:
-
-```bash
-export OMPI_MCA_osc=pt2pt
-SU2=/mnt/d/SU2/v8.5.0/bin/SU2_CFD
-mpirun -np 6 "$SU2" sea_level_lut_smoke.cfg
-mpirun -np 6 "$SU2" sea_level_lut_continue.cfg
-mpirun -np 6 "$SU2" sea_level_lut_relax_safe.cfg
-```
-
-For the temporal smoke, copy `restart_safe.dat` to
-`restart_safe_00000.dat`, then run `sea_level_lut_urans_smoke.cfg`.
-
-## Next experiment
-
-Continue the one-atmosphere case with segmented URANS rather than additional
-steady pseudo-iterations. The estimated convective time is `42.842 us`.
-At `dt=25 ns`, one flow-through time is about 1,714 steps and the minimum
-three-flow-through observation window is about 5,142 steps. Use segments of
-100-250 steps, retain restart files locally, and write full VTK fields only at
-checkpoints to control disk usage.
-
-Before accepting a label, require:
-
-- finite positive states and zero LUT extrapolation points;
-- relative mass imbalance <= 0.5% and energy imbalance <= 1%;
-- local total-enthalpy excess <= 1%;
-- adequate inner convergence or demonstrated time-step independence;
-- `y+ p95 <= 1` and `y+ max <= 2`;
-- negative wall shear persisting at least 1 mm;
-- at least three flow-through times and final `x_sep` drift <= 0.1 mm;
-- medium/fine `x_sep` difference <= 0.3 mm;
-- turbulence and thermal/chemistry sensitivity reporting.
-
-Also begin the cold-N2 DLR-PAR anchors around NPR 20, 23.7/23.8, 40, 52.8,
-57.2, and 65. Those provide the experimental validation; the hot methalox
-campaign alone cannot validate the method.
-
-## ML state
-
-`raptor_like_study/ml_pipeline/case_registry.csv` contains 48 planned physical
-cases and zero accepted profiles. `build_training_dataset.py` intentionally
-refuses to create a final dataset until `physics_accepted=true` profiles exist.
-Mock-data plots are development-only and always nonpublishable.
+`UI_SPEC.md` is the implementation brief for a future monitoring and analysis
+interface. It explicitly separates execution status from evidence status and
+must import the current repository as zero physics-accepted labels.
