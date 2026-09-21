@@ -28,6 +28,14 @@ modelos de aprendizaje automático.
 - Las LUT históricas fueron retiradas. No recrearlas como modelo activo.
 - El árbol actual está limpio de mallas, reinicios, VTK y campañas pesadas.
 
+## Limite de responsabilidad de esta computadora
+
+Este agente trabaja **solo** el carril CFD/Eilmer: instalacion, benchmark
+productos/aire, validacion DLR-PAR con N2 y, cuando los gates lo permitan,
+casos calientes. No debe ejecutar redes neuronales, recuperar perfiles SU2
+historicos ni seguir `instrucciones para claude.md`. Ese documento pertenece a
+otra computadora y a un sandbox ML provisional separado.
+
 Referencia histórica de las LUT retiradas:
 
 | Tabla | Resolución | Rango T alcanzado | Rango p alcanzado | Estado |
