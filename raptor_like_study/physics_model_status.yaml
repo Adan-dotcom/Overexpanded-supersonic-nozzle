@@ -65,13 +65,27 @@ tracks:
     startup_npr_values: [30, 33, 35, 37, 40]
     startup_npr_sweep_passed: true
     decision: GO_FOR_LOX_SCREEN_ONLY
+    decision_scope: historical_workflow_stability_screen_before_wall_resolution_gate
+    wall_mesh_geometry_passed: true
+    wall_mesh_levels: [wall-coarse, wall-medium, wall-fine]
+    wall_mesh_cells: [61440, 72960, 84480]
+    wall_resolution_flow_gate_passed: false
+    y_plus_target_max: 1.0
+    y_plus_target_verified: false
+    robust_separation_reaudit_x_sep_m: null
+    robust_separation_reaudit_x_shock_m: 0.10808977992189847
+    current_progression_decision: NO_GO_WALL_RESOLUTION
+    lox_screen_currently_authorized: false
     evidence: cases/cold_n2_external_screen/results/startup_summary.json
+    wall_mesh_evidence: cases/cold_n2_external_screen/results/wall_mesh_family_summary.json
     official_basis_evidence: cases/cold_n2_external_screen/results/official_basis
     limitations:
       - y_plus_is_screen_output_not_wall_resolution
       - open_transient_mass_energy_balance_not_available
       - no_experimental_dlr_match
       - no_physics_accepted_or_training_eligible_labels
+      - wall_resolved_coarse_flow_failed_before_first_newton_step
+      - explicit_wall_resolved_timestep_infeasible_under_60_minute_limit
 
   hot_methalox_products_air_plume:
     description: Synthetic DLR-PAR nozzle/plume with methalox exhaust and air.
@@ -79,6 +93,7 @@ tracks:
     production_enabled: false
     blockers:
       - cold_n2_numerical_screen_decision_no_go
+      - cold_n2_external_wall_resolution_gate_no_go
       - finite_rate_mechanism_not_selected_or_validated
       - thermodynamics_and_transport_not_validated_over_state_domain
       - turbulence_model_not_validated_for_separation

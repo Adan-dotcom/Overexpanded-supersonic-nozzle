@@ -20,6 +20,17 @@ Stages are deliberately incremental:
 4. steady acceleration is only a consideration from a saved transient using
    the official `FlowSolution` restart pattern. It is not enabled by default.
 
+The wall-resolution family is generated with:
+
+```bash
+bash prepare_wall_mesh_family.sh /home/adan/eilmer-artifacts/cold-n2-wall-mesh-family
+```
+
+It defines `wall-coarse`, `wall-medium` and `wall-fine` with 112, 136 and 160
+wall-normal cells. `audit_wall_mesh.py` checks the generated first-cell sizes
+and positive cell areas. The flow gate currently fails on the coarse mesh, so
+the smaller meshes are not automatically launched.
+
 Run one case into an external artifact directory with:
 
 ```bash

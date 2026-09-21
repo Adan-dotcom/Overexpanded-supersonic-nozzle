@@ -1,0 +1,81 @@
+{
+  "case_family": "cold_n2_external_screen",
+  "classification": "synthetic_wall_resolution_qualification_not_dlr_validation",
+  "artifact_root": "/home/adan/eilmer-artifacts/cold-n2-wall-mesh-family-20260921-04",
+  "wall_function": false,
+  "y_plus_target_max": 1.0,
+  "meshes": [
+    {
+      "level": "wall-coarse",
+      "cells": 61440,
+      "wall_normal_cells": 112,
+      "nominal_edge_first_cell_m": 4e-08,
+      "actual_first_cell_min_m": 3.585222383355555e-08,
+      "actual_first_cell_max_m": 9.250328684187396e-08,
+      "positive_cell_areas": true,
+      "geometry_gate": "pass",
+      "flow_gate": "fail_solver_sigsegv_at_newton_step_1"
+    },
+    {
+      "level": "wall-medium",
+      "cells": 72960,
+      "wall_normal_cells": 136,
+      "nominal_edge_first_cell_m": 2e-08,
+      "actual_first_cell_min_m": 1.7926111914176558e-08,
+      "actual_first_cell_max_m": 4.6251643410197706e-08,
+      "positive_cell_areas": true,
+      "geometry_gate": "pass",
+      "flow_gate": "not_run_coarse_flow_gate_failed"
+    },
+    {
+      "level": "wall-fine",
+      "cells": 84480,
+      "wall_normal_cells": 160,
+      "nominal_edge_first_cell_m": 1e-08,
+      "actual_first_cell_min_m": 8.963055958822425e-09,
+      "actual_first_cell_max_m": 2.312582171549442e-08,
+      "positive_cell_areas": true,
+      "geometry_gate": "pass",
+      "flow_gate": "not_run_coarse_flow_gate_failed"
+    }
+  ],
+  "solver_attempts": [
+    {
+      "method": "official_Hakkinen_explicit_transient_with_saved_solution",
+      "result": "stopped_after_preflight_as_infeasible_within_60_minute_limit",
+      "observed_step": 140,
+      "observed_time_s": 5.206e-11,
+      "observed_dt_s": 5.123e-13,
+      "artifact": "/home/adan/eilmer-artifacts/cold-n2-wall-mesh-20260921-01/wall-coarse-r1p3"
+    },
+    {
+      "method": "official_Mabey_steady_Newton_Krylov_from_saved_transient_solution",
+      "result": "fail_sigsegv_in_gradients_leastsq_during_first_jacobian",
+      "newton_step": 1,
+      "artifact": "/home/adan/eilmer-artifacts/cold-n2-wall-mesh-family-20260921-04/wall-coarse-flow-official-steady"
+    }
+  ],
+  "legacy_screen_reaudit": {
+    "artifact": "/home/adan/eilmer-artifacts/cold-n2-external-screen-20260921/stage3-npr35/audit-robust.json",
+    "x_sep_m": null,
+    "x_shock_m": 0.10808977992189847,
+    "y_plus_max_nozzle": 7183.112609756476,
+    "interpretation": "previous_lip_x_sep_was_rejected_by_persistent_shear_detector"
+  },
+  "separation_detector": {
+    "throat_exclusion_m": 0.002,
+    "lip_exclusion_m": 0.002,
+    "median_window_points": 3,
+    "persistence_points_each_side": 4,
+    "definition": "first_persistent_positive_to_negative_tangential_wall_shear_crossing"
+  },
+  "shock_detector": {
+    "definition": "maximum_positive_centered_wall_pressure_gradient_in_usable_divergent",
+    "independent_of_separation_detector": true
+  },
+  "wall_resolution_flow_gate_passed": false,
+  "y_plus_target_verified": false,
+  "physics_accepted": false,
+  "training_eligible": false,
+  "lox_screen_authorized_after_this_gate": false
+}

@@ -120,3 +120,13 @@ provisional numerical-audit gates. It does not authorize hot-flow production,
 experimental validation claims, DOE for ML, or physics-accepted labels. The
 internal cold-N2 case remains the separately preserved `NO_GO` documented in
 `COLD_N2_SCREEN_DECISION.md`.
+
+## Subsequent wall-resolution gate
+
+The GO above is retained as the historical workflow-stability decision. A
+later user-required wall-resolution gate now blocks LOX progression. Three
+wall meshes pass geometry, but the explicit timestep is infeasible under the
+60-minute limit and the official Mabey steady continuation fails at Newton
+step 1 with `SIGSEGV` in `gradients_leastsq`. Consequently `y+ <= 1` is not
+verified and the current progression decision is **NO_GO_WALL_RESOLUTION**.
+See `WALL_MESH_AND_SEPARATION_STATUS.md`.

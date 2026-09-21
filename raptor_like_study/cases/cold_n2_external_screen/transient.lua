@@ -3,7 +3,7 @@ dofile('run_parameters.lua')
 
 config.dimensions = 2
 config.axisymmetric = true
-config.solver_mode = 'transient'
+config.solver_mode = screen.solver_mode
 if screen.stage == 3 then
    config.turbulence_model = 'k_log_omega'
 end
@@ -52,6 +52,16 @@ else
 end
 
 local flowDict = {reservoir=reservoir, ambient=ambient_state}
+if screen.initial_solution_dir then
+   -- Official fine-grid continuation pattern:
+   -- examples/lmr/2D/diffuser-busemann/fine-grid/job.lua
+   flowDict.initial = FlowSolution:new{
+      dir=screen.initial_solution_dir,
+      snapshot='final',
+      nBlocks=9,
+      make_kdtree=true
+   }
+end
 local bcDict = {
    inlet=InFlowBC_FromStagnation:new{stagnationState=reservoir},
    ambient=InOutFlowBC_Ambient:new{flowState=ambient_state},
@@ -61,10 +71,16 @@ local bcDict = {
 makeFluidBlocks(bcDict, flowDict)
 mpiDistributeBlocks{ntasks=6}
 
--- Stage 1 keeps the official underexpanded-jet transient controls exactly:
--- no explicit flux/time-step knobs.  Viscous stages use the official
--- Hakkinen transient settings for the additional viscous terms.
-if screen.stage == 1 then
+-- Stage 1 keeps the official underexpanded-jet transient controls exactly.
+-- Wall-mesh qualification uses the official Mabey k-log-omega Newton/Krylov
+-- settings from examples/lmr/2D/flat-plate-turbulent-mabey/job.lua, starting
+-- from an interpolated transient solution.
+if screen.solver_mode == 'steady' then
+   config.flux_calculator = 'ausmdv'
+   config.apply_entropy_fix = false
+   config.interpolation_order = 2
+   config.extrema_clipping = false
+elseif screen.stage == 1 then
    config.max_time = screen.max_time_s
    config.max_step = 100000
    config.dt_plot = config.max_time/10.0
@@ -86,6 +102,65 @@ end
 -- Load output follows the official Mabey example.
 config.write_loads = true
 config.boundary_groups_for_loads = 'wall'
+
+if screen.solver_mode == 'steady' then
+   NewtonKrylovGlobalConfig{
+      number_of_phases = 3,
+      max_steps_in_initial_phases = {500, 500},
+      phase_changes_at_relative_residual = {1.0e-3, 1.0e-6},
+      use_preconditioner = true,
+      preconditioner_perturbation = 1.0e-50,
+      preconditioner = 'ilu',
+      ilu_fill = 0,
+      max_newton_steps = 2000,
+      max_consecutive_bad_steps = 10,
+      stop_on_relative_residual = 1.0e-10,
+      frechet_derivative_perturbation = 1.0e-50,
+      use_scaling = true,
+      max_linear_solver_iterations = 100,
+      max_linear_solver_restarts = 0,
+      inviscid_cfl_only = true,
+      use_line_search = true,
+      line_search_order = 3,
+      use_physicality_check = true,
+      allowable_relative_mass_change = 0.9,
+      min_relaxation_factor_for_update = 0.1,
+      min_relaxation_factor_for_cfl_growth = 0.5,
+      number_of_steps_for_setting_reference_residuals = 5,
+      steps_between_status = 1,
+      write_loads = true,
+      total_snapshots = 5,
+      steps_between_snapshots = 50,
+      steps_between_diagnostics = 1
+   }
+   NewtonKrylovPhase:new{
+      frozen_preconditioner = true,
+      use_adaptive_preconditioner = true,
+      steps_between_preconditioner_update = 5,
+      linear_solve_tolerance = 1.0e-2,
+      residual_interpolation_order = 2,
+      jacobian_interpolation_order = 1,
+      use_residual_smoothing = true,
+      use_auto_cfl = true,
+      use_local_timestep = true,
+      threshold_relative_residual_for_cfl_growth = 0.9,
+      start_cfl = 1.0,
+      max_cfl = 1.0e6,
+      auto_cfl_exponent = 0.75
+   }
+   NewtonKrylovPhase:new{
+      residual_interpolation_order = 2,
+      jacobian_interpolation_order = 2,
+      use_residual_smoothing = false,
+      start_cfl = -1.0
+   }
+   NewtonKrylovPhase:new{
+      frozen_shock_detector = true,
+      frozen_limiter_for_residual = true,
+      frozen_limiter_for_jacobian = true,
+      start_cfl = -1.0
+   }
+end
 
 print(string.format('stage=%d Pa=%.9g NPR=%.9g P0=%.9g T0=%.9g',
                     screen.stage, screen.pa_Pa, screen.npr,

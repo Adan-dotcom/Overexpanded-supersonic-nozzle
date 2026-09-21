@@ -1,4 +1,6 @@
 print('DLR-PAR cold-N2 external-plume screening grid')
+dofile('run_parameters.lua')
+dofile('mesh_parameters.lua')
 
 config.dimensions = 2
 config.axisymmetric = true
@@ -31,33 +33,70 @@ local patches = {
    CoonsPatch:new{north=ambient_top, east=outer_far, south=plume_interface, west=back_plate}
 }
 
--- Screening resolution only; this is not a validation or wall-resolution mesh.
-local ni_convergent, ni_divergent, ni_external = 32, 128, 160
-local nj_core, nj_outer = 48, 48
+local ni_convergent = mesh.ni_convergent
+local ni_divergent = mesh.ni_divergent
+local ni_external = mesh.ni_external
+local nj_core = mesh.nj_core
+local nj_outer = mesh.nj_outer
+
+-- The wall meshes use the official GeometricFunction form documented in
+-- gdtk/doc/geom/cluster_functions and used by the official turbulent flat
+-- plate examples.  The nondimensional a value is set independently on each
+-- radial edge so that the requested dimensional first-cell height is shared.
+local cf_convergent, cf_divergent, cf_external = {}, {}, {}
+if mesh.wall_first_cell_m then
+   -- r=1.3 is the official laminar-flat-plate value; it also leaves enough
+   -- nodes for the very small first cell before the distribution becomes
+   -- uniform across the core.
+   local growth = 1.3
+   cf_convergent = {
+      south=RobertsFunction:new{end0=false, end1=true, beta=1.1},
+      north=RobertsFunction:new{end0=false, end1=true, beta=1.1},
+      west=GeometricFunction:new{a=mesh.wall_first_cell_m/r_inlet, r=growth, N=nj_core+1, reverse=true},
+      east=GeometricFunction:new{a=mesh.wall_first_cell_m/r_throat, r=growth, N=nj_core+1, reverse=true}
+   }
+   cf_divergent = {
+      south=RobertsFunction:new{end0=true, end1=true, beta=1.1},
+      north=RobertsFunction:new{end0=true, end1=true, beta=1.1},
+      west=GeometricFunction:new{a=mesh.wall_first_cell_m/r_throat, r=growth, N=nj_core+1, reverse=true},
+      east=GeometricFunction:new{a=mesh.wall_first_cell_m/r_exit, r=growth, N=nj_core+1, reverse=true}
+   }
+   cf_external = {
+      west=GeometricFunction:new{a=mesh.wall_first_cell_m/r_exit, r=growth, N=nj_core+1, reverse=true},
+      east=GeometricFunction:new{a=mesh.wall_first_cell_m/r_exit, r=growth, N=nj_core+1, reverse=true}
+   }
+end
 local grids = {
-   StructuredGrid:new{psurface=patches[1], niv=ni_convergent+1, njv=nj_core+1},
-   StructuredGrid:new{psurface=patches[2], niv=ni_divergent+1, njv=nj_core+1},
-   StructuredGrid:new{psurface=patches[3], niv=ni_external+1, njv=nj_core+1},
+   StructuredGrid:new{psurface=patches[1], niv=ni_convergent+1, njv=nj_core+1, cfList=cf_convergent},
+   StructuredGrid:new{psurface=patches[2], niv=ni_divergent+1, njv=nj_core+1, cfList=cf_divergent},
+   StructuredGrid:new{psurface=patches[3], niv=ni_external+1, njv=nj_core+1, cfList=cf_external},
    StructuredGrid:new{psurface=patches[4], niv=ni_external+1, njv=nj_outer+1}
 }
 
+local initial_tag = screen.initial_solution_dir and 'initial' or nil
+local reservoir_tag = initial_tag or 'reservoir'
+local ambient_tag = initial_tag or 'ambient'
+
 registerFluidGridArray{
-   grid=grids[1], nib=1, njb=1, fsTag='reservoir',
+   grid=grids[1], nib=1, njb=1, fsTag=reservoir_tag,
    bcTags={west='inlet', north='wall'}
 }
 registerFluidGridArray{
-   grid=grids[2], nib=2, njb=1, fsTag='reservoir',
+   grid=grids[2], nib=2, njb=1, fsTag=reservoir_tag,
    bcTags={north='wall'}
 }
 registerFluidGridArray{
-   grid=grids[3], nib=3, njb=1, fsTag='ambient',
+   grid=grids[3], nib=3, njb=1, fsTag=ambient_tag,
    bcTags={east='outflow'}
 }
 registerFluidGridArray{
-   grid=grids[4], nib=3, njb=1, fsTag='ambient',
+   grid=grids[4], nib=3, njb=1, fsTag=ambient_tag,
    bcTags={west='wall', north='ambient', east='outflow'}
 }
 identifyGridConnections()
 
-local cells = (ni_convergent + ni_divergent + 2*ni_external)*nj_core
-print(string.format('External screening grid: %d cells in 9 blocks', cells))
+local cells = (ni_convergent + ni_divergent + ni_external)*nj_core + ni_external*nj_outer
+print(string.format('External grid %s: %d cells in 9 blocks', mesh.level, cells))
+if mesh.wall_first_cell_m then
+   print(string.format('Requested wall-normal first cell: %.9g m', mesh.wall_first_cell_m))
+end

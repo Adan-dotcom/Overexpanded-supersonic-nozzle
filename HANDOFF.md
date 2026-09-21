@@ -52,6 +52,14 @@ loads. Its decision is **GO_FOR_LOX_SCREEN_ONLY**, in
 `OFFICIAL_BASIS_AND_DECISION.md`. This does not override the internal NO_GO and
 does not permit production, validation claims or ML labels.
 
+A later wall-resolution gate now blocks progression despite that historical
+workflow-screen GO. The three external wall meshes pass geometry, but the
+coarse explicit path is impractical under the 60-minute limit and the official
+Mabey steady continuation segfaults in the first Jacobian. No wall-mesh `y+`
+exists. The corrected detector rejects the earlier lip artifact as separation
+and reports `x_sep=null`; shock remains an independent provisional metric.
+See `WALL_MESH_AND_SEPARATION_STATUS.md`.
+
 The complete fresh-machine procedure and execution order are in
 `instrucciones iniciales.md`. The separate development-only ML task is in
 `instrucciones para claude.md`.
@@ -77,10 +85,11 @@ coarse NPR=35 baseline gate. Do not launch LOX/CH4 until a new numerical
 decision permits that screen. No existing result validates nozzle separation,
 turbulence or finite-rate chemistry.
 
-For the separate external lane, the next authorized action is only the LOX/CH4
-screen using the same audit gates. Its y+ values are large and its open-
-transient global mass/energy balance is unavailable, so it remains a workflow
-gate rather than a physical result.
+For the separate external lane, LOX/CH4 is no longer authorized until a
+wall-resolved cold-N2 coarse flow completes with `y+ <= 1`. Diagnose the
+reproducible Eilmer `gradients_leastsq` steady crash from the official-basis
+configuration before attempting medium or fine flow. The open-transient global
+mass/energy balance also remains unavailable.
 
 ## Verification
 

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [[ $# -lt 3 ]]; then
-    echo "usage: $0 STAGE NPR ARTIFACT_DIR [MAX_TIME_S]" >&2
+    echo "usage: $0 STAGE NPR ARTIFACT_DIR [MAX_TIME_S] [MESH_LEVEL] [INITIAL_SOLUTION_DIR] [SOLVER_MODE]" >&2
     exit 2
 fi
 
@@ -10,6 +10,9 @@ stage="$1"
 npr="$2"
 artifact_dir="$3"
 max_time="${4:-0.001}"
+mesh_level="${5:-screen}"
+initial_solution_dir="${6:-}"
+solver_mode="${7:-transient}"
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 source "$repo_dir/raptor_like_study/eilmer/eilmer5-env.sh"
 
@@ -21,14 +24,22 @@ python "$repo_dir/raptor_like_study/cases/dlr_par_geometry/prepare_contour.py" \
     "$repo_dir/DLR_PAR_full_contour.csv" \
     --output-dir "$artifact_dir" --audit "$artifact_dir/contour_audit.json" \
     --resample-spacing-m 0.0005
-python "$repo_dir/raptor_like_study/cases/cold_n2_external_screen/prepare_run.py" \
-    --stage "$stage" --npr "$npr" --max-time-s "$max_time" \
-    --lua-output "$artifact_dir/run_parameters.lua" \
+prepare_args=(
+    --stage "$stage" --npr "$npr" --max-time-s "$max_time"
+    --mesh-level "$mesh_level"
+    --solver-mode "$solver_mode"
+    --lua-output "$artifact_dir/run_parameters.lua"
+    --mesh-lua-output "$artifact_dir/mesh_parameters.lua"
     --json-output "$artifact_dir/run_parameters.json"
+)
+if [[ -n "$initial_solution_dir" ]]; then
+    prepare_args+=(--initial-solution-dir "$initial_solution_dir")
+fi
+python "$repo_dir/raptor_like_study/cases/cold_n2_external_screen/prepare_run.py" "${prepare_args[@]}"
 
 cd "$artifact_dir"
 {
-    echo "command: make-like external screen stage=$stage NPR=$npr"
+    echo "command: external screen stage=$stage NPR=$npr mesh=$mesh_level solver=$solver_mode"
     echo "solver revision: $(lmr revision-id)"
     date -u +%FT%TZ
     lmr prep-gas -i ideal-n2.lua -o ideal-n2.gas
