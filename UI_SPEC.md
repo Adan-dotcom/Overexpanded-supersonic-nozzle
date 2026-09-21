@@ -638,3 +638,23 @@ artefactos previos.
 
 La interfaz debe hacer más fácil ejecutar el estudio, pero sobre todo más
 difícil confundir factibilidad numérica con verdad física.
+
+## 14. Backend Eilmer 5
+
+La arquitectura no debe asumir que todo run es SU2. Debe implementar un
+adaptador `EilmerBackend` junto al adaptador SU2, con el mismo contrato de
+preflight, lanzamiento, eventos, artefactos, cancelación y provenance.
+
+- Mostrar versión/commit de GDTk, build flavour, number type y parallel flavour.
+- Modelar por separado `prep-gas`, `prep-chem`, `prep-grid`, `prep-sim`, solver
+  y `snapshot2vtk`; un prep exitoso no equivale a un solve exitoso.
+- Visualizar especies, modos de energía, mecanismo químico, transporte,
+  turbulencia, pared, bloques y asignación MPI como entradas auditables.
+- Parsear `STOP-REASON`, `FINAL-STEP`, `FINAL-TIME`, residuales, CFL, memoria y
+  snapshots sin inferir aceptación física.
+- Permitir backend `lmr-run`, `lmr-mpi-run`, `lmrZ-run` y `lmrZ-mpi-run` sin
+  confundir el binario complejo de JFNK con el transitorio real de producción.
+- Usar seis ranks como preset local de producción, pero conservar benchmarks
+  por caso y no forzarlo en ejemplos con menos bloques.
+- Importar `raptor_like_study/eilmer/installation_report.json` como evidencia
+  de instalación solamente, nunca como caso CFD ni label.

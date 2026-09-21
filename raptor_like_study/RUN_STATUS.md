@@ -30,6 +30,20 @@ Machine-readable status: `physics_model_status.yaml`. Gate implementation:
 `scripts/evaluate_physics_gate.py`. Preflight:
 `scripts/check_model_readiness.py`.
 
+## 2026-09-20 Eilmer 5 installation and solver selection
+
+Eilmer `v5.0.0` was built from official source at commit
+`f53f4609a0331d48efee69a4e4f3c3598378cc03` under WSL2. The optimized build
+includes OpenMPI, multiespecies, multitemperature and turbulence support.
+Official convex-corner tests passed in serial and two-rank MPI modes and wrote
+VTK. A real-number transient underexpanded-jet smoke test also ran with six MPI
+ranks over 32 blocks. Exact paths and results are in
+`eilmer/installation_report.json`.
+
+Eilmer is now the candidate hot products/air solver; SU2 remains the cold-N2
+validation and cross-solver lane. No hot case is production-ready merely from
+this install. The active blockers are recorded in `physics_model_status.yaml`.
+
 ## What is validated
 
 - NASA CEA nominal state: `sensor_study/nominal_cea/nominal_summary.json`.

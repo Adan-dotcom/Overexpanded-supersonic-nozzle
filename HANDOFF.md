@@ -62,6 +62,20 @@ compressible turbulent products/air plume as modeled here. Resolve this with a
 validated solver/formulation before long hot production runs. SU2 remains
 useful for cold-N2 validation and single-composition internal sensitivity.
 
+## Eilmer 5 candidate installation
+
+Eilmer 5.0.0, commit `f53f4609a0331d48efee69a4e4f3c3598378cc03`,
+is installed in WSL2 at `/home/adan/gdtkinst` from source in
+`/home/adan/gdtk`. It was built optimized with OpenMPI, multiespecies,
+multitemperature and turbulence support. Official serial and two-rank MPI
+steady tests converged and exported VTK; a real-number, transient six-rank MPI
+jet smoke test also completed. See `raptor_like_study/eilmer/README.md` and
+`installation_report.json`.
+
+This resolves software installation only. Hot production remains blocked on
+the products/air benchmark, methalox mechanism, transport, turbulence, wall,
+conservation, discretization, stationarity and experimental-validation gates.
+
 ## Thermochemistry repair
 
 The old `LUT_lox_ch4_equilibrium.drg` and coarse companion are retained only
@@ -102,8 +116,8 @@ never become training labels.
    DLR-PAR NPR anchors with SST and SA.
 2. Validate mass/energy conservation, wall resolution, time step and mesh
    convergence against the cold-flow separation measurements.
-3. Select and verify a compressible turbulent multicomponent solver for the
-   hot products/air plume. Do a tiny benchmark before any full mesh run.
+3. Qualify the installed Eilmer candidate with a tiny compressible turbulent
+   multicomponent products/air benchmark before any full mesh run.
 4. Compare equilibrium, frozen and an appropriate finite-rate model; validate
    viscosity, conductivity and the wall thermal condition.
 5. Only then reopen hot production and build labels that pass every gate.

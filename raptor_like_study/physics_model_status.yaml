@@ -36,12 +36,29 @@ tracks:
     description: Full nozzle/plume application with methalox exhaust and exterior air.
     software_screening_enabled: false
     production_enabled: false
+    candidate_solver:
+      name: Eilmer
+      version: 5.0.0
+      commit: f53f4609a0331d48efee69a4e4f3c3598378cc03
+      install_verified: true
+      serial_smoke_verified: true
+      mpi_steady_verified: true
+      mpi_transient_real_verified: true
+      physics_qualified: false
     blockers:
-      - stock_su2_8_5_compressible_rans_path_has_no_validated_products_air_mixture_model
-      - datadriven_fluid_lut_has_only_density_and_internal_energy_inputs
-      - fluid_mixture_and_fluid_flamelet_are_incompressible_solver_features
-      - nemo_navier_stokes_has_no_rans_turbulence_model_in_this_version
-      - products_air_mixing_and_chemistry_regime_not_validated
+      - eilmer_products_air_multicomponent_benchmark_not_completed
+      - methalox_finite_rate_mechanism_not_selected_or_validated
+      - species_thermodynamics_and_transport_not_validated_over_case_domain
+      - supported_turbulence_models_not_validated_for_dlr_par_separation
+      - wall_thermal_model_not_justified
+      - conservation_mesh_time_step_and_stationarity_gates_not_completed
+      - no_experimental_hot_methalox_dlr_par_anchor_exists
+    excluded_stock_su2_path:
+      reason: Stock SU2 8.5 does not provide the required compressible turbulent products-air model used by this study.
+      evidence:
+        - datadriven_fluid_lut_has_only_density_and_internal_energy_inputs
+        - fluid_mixture_and_fluid_flamelet_are_incompressible_solver_features
+        - nemo_navier_stokes_has_no_rans_turbulence_model_in_this_version
 
 legacy_artifacts:
   gri30_lut:

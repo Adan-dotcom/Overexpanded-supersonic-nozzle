@@ -45,7 +45,10 @@ temperatures from `3365.9` to `3501.7 K`; species are stored in
 
 NASA CEA v3.3.4 binaries are in `tools/cea-3.3.4`. The Linux executable is run
 from WSL because the Windows gfortran executable needs an external Fortran
-runtime. SU2 and MPI remain the CFD solver layer.
+runtime. SU2 remains the cold-N2 validation and cross-solver lane. Eilmer
+5.0.0 is the selected candidate for the multicomponent hot products/air lane;
+its installation and qualification plan are in `eilmer/README.md`. Selection
+does not remove the production blockers in `physics_model_status.yaml`.
 
 ## Reproduce the chemistry stage
 

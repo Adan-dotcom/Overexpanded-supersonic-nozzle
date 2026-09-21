@@ -1,0 +1,65 @@
+{
+  "report_date": "2026-09-20",
+  "platform": "WSL2 Ubuntu 24.04.3 LTS",
+  "eilmer": {
+    "tag": "v5.0.0",
+    "commit": "f53f4609a0331d48efee69a4e4f3c3598378cc03",
+    "source_dir": "/home/adan/gdtk",
+    "install_dir": "/home/adan/gdtkinst",
+    "build_flavour": "fast",
+    "mpi_enabled": true,
+    "multispecies_enabled": true,
+    "multitemperature_enabled": true,
+    "turbulence_enabled": true
+  },
+  "compiler": {
+    "name": "LDC",
+    "version": "1.42.0",
+    "install_dir": "/home/adan/opt/ldc2-1.42.0-linux-x86_64",
+    "archive_sha256": "a7bc9c956138f558cadf9c962352f59d41c80df6eb3ae3f8039f25be14a69303"
+  },
+  "mpi": {
+    "implementation": "Open MPI",
+    "version": "4.1.6"
+  },
+  "tests": [
+    {
+      "name": "official_convex_corner_serial",
+      "mode": "steady_shared",
+      "ranks": 1,
+      "final_step": 32,
+      "stop_reason": "relative-global-residual-target",
+      "final_relative_global_residual": 9.778215e-14,
+      "vtk_exported": true,
+      "passed": true,
+      "local_artifact_dir": "/home/adan/eilmer-work/convex-corner-serial"
+    },
+    {
+      "name": "official_convex_corner_mpi",
+      "mode": "steady_openmpi_complex_step_jfnk",
+      "ranks": 2,
+      "final_step": 32,
+      "stop_reason": "relative-global-residual-target",
+      "final_relative_global_residual": 5.813410e-14,
+      "vtk_exported": true,
+      "passed": true,
+      "local_artifact_dir": "/home/adan/eilmer-work/convex-corner-mpi"
+    },
+    {
+      "name": "official_underexpanded_jet_mpi_smoke",
+      "mode": "transient_openmpi_real",
+      "ranks": 6,
+      "blocks": 32,
+      "final_step": 1,
+      "stop_reason": "maximum-time",
+      "vtk_exported": true,
+      "passed": true,
+      "local_artifact_dir": "/home/adan/eilmer-work/underexpanded-jet-mpi6-smoke"
+    }
+  ],
+  "physics_qualification": {
+    "accepted_training_labels": 0,
+    "hot_products_air_production_ready": false,
+    "note": "These are installation tests, not validated nozzle-separation cases."
+  }
+}
