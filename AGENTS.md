@@ -1,6 +1,6 @@
 # Agent instructions
 
-Read `HANDOFF.md`, `raptor_like_study/RUN_STATUS.md`, and
+Read `instrucciones iniciales.md`, `HANDOFF.md`, `raptor_like_study/RUN_STATUS.md`, and
 `raptor_like_study/physics_model_status.yaml` before running CFD.
 
 - Eilmer 5 is the only active CFD backend. Do not recreate retired solver cases.

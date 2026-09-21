@@ -17,6 +17,10 @@ Eilmer `v5.0.0` at commit
 Serial, two-rank steady MPI, and six-rank real transient installation tests
 passed. These tests verify software only, not nozzle physics.
 
+The complete fresh-machine procedure and execution order are in
+`instrucciones iniciales.md`. The separate development-only ML task is in
+`instrucciones para claude.md`.
+
 ## Retained evidence
 
 - `DLR_PAR_full_contour.csv`: user-supplied working contour.
