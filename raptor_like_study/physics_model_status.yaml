@@ -1,5 +1,5 @@
 schema_version: 2
-updated_utc: "2026-09-21T04:29:14Z"
+updated_utc: "2026-09-21T12:42:36Z"
 active_solver: Eilmer
 accepted_training_labels: 0
 
@@ -36,9 +36,12 @@ tracks:
     description: Published DLR-PAR cold-nitrogen validation lane.
     software_screening_enabled: false
     production_enabled: false
+    geometry_screen_passed: true
+    geometry_screen_evidence: cases/dlr_par_geometry/results/grid_quality.json
     blockers:
       - published_boundary_conditions_not_fully_digitized
-      - eilmer_grid_not_generated
+      - working_contour_not_verified_against_published_geometry
+      - wall_resolved_three_mesh_family_not_generated_or_qualified
       - turbulence_model_not_qualified
       - experimental_separation_anchors_not_reproduced
 

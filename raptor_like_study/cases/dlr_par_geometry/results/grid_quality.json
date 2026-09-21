@@ -1,0 +1,85 @@
+{
+  "case_id": "dlr_par_geometry_screen_v1",
+  "classification": "geometry_and_mesh_quality_only_not_flow_validation",
+  "source_classification": "user_reconstruction_not_certified_cad",
+  "block_count": 6,
+  "cell_count": 92160,
+  "cells_per_block": [15360, 15360, 15360, 15360, 15360, 15360],
+  "landmarks": {
+    "inlet_x_m": -0.02268,
+    "inlet_radius_m": 0.02,
+    "throat_x_m": 0.0,
+    "throat_radius_m": 0.01,
+    "exit_x_m": 0.12502,
+    "exit_radius_m": 0.05477226,
+    "exit_area_ratio": 30.000004655075998
+  },
+  "mesh_quality": {
+    "signed_cell_area_m2": {
+      "min": 7.163074868006542e-10,
+      "p05": 2.6474395652138346e-09,
+      "median": 2.763813679315468e-08,
+      "p95": 2.0349465564342725e-07,
+      "max": 2.9112282422174163e-07
+    },
+    "edge_length_aspect_ratio": {
+      "min": 1.0005962505628097,
+      "p05": 1.0715650202703968,
+      "median": 1.9055081248483772,
+      "p95": 4.932973279278958,
+      "max": 14.004968619376672
+    },
+    "corner_angle_deg": {
+      "min": 56.124210668712834,
+      "p05": 63.92863975456042,
+      "median": 90.0,
+      "p95": 116.07136024544006,
+      "max": 123.9369324886034
+    },
+    "adjacent_cell_area_ratio": {
+      "min": 1.0000013184746648,
+      "p05": 1.0019616346511453,
+      "median": 1.0094990450137002,
+      "p95": 1.0275698976329501,
+      "max": 1.2813218743877397
+    },
+    "wall_adjacent_vertex_spacing_m": {
+      "min": 1.4358112140368945e-05,
+      "p05": 1.4525240773956935e-05,
+      "median": 3.345744148788159e-05,
+      "p95": 7.504599344274622e-05,
+      "max": 7.864262512614212e-05
+    },
+    "maximum_internal_interface_mismatch_m": 0.0
+  },
+  "interfaces": [
+    ["grid-0000.gz:east", "grid-0001.gz:west"],
+    ["grid-0001.gz:east", "grid-0002.gz:west"],
+    ["grid-0002.gz:east", "grid-0003.gz:west"],
+    ["grid-0003.gz:east", "grid-0004.gz:west"],
+    ["grid-0004.gz:east", "grid-0005.gz:west"]
+  ],
+  "checks": {
+    "six_blocks": true,
+    "expected_cell_count": true,
+    "finite_coordinates_and_metrics": true,
+    "positive_signed_cell_area": true,
+    "axis_is_y_zero": true,
+    "no_negative_radius": true,
+    "five_conformal_internal_interfaces": true,
+    "interface_mismatch_le_1e-12_m": true,
+    "minimum_corner_angle_ge_20_deg": true,
+    "maximum_corner_angle_le_160_deg": true,
+    "maximum_edge_aspect_ratio_le_50": true,
+    "maximum_adjacent_area_ratio_le_1p30": true,
+    "inlet_landmark_matches": true,
+    "throat_landmark_matches": true,
+    "exit_landmark_matches": true,
+    "exit_area_ratio_matches": true
+  },
+  "all_checks_pass": true,
+  "flow_was_solved": false,
+  "wall_y_plus_evaluated": false,
+  "physics_accepted": false,
+  "training_eligible": false
+}

@@ -3,7 +3,7 @@ active_solver: Eilmer_5.0.0
 
 campaigns:
   products_air_benchmark:
-    status: ready_to_implement
+    status: screen_passed_not_training_eligible
     cells: [20000, 60000]
     mpi_ranks: 6
     target_wall_minutes: 30
@@ -13,7 +13,8 @@ campaigns:
   cold_n2_validation:
     gas: N2
     geometry: DLR_PAR
-    status: blocked_pending_eilmer_grid_and_literature_digitization
+    geometry_screen: passed_not_flow_validation
+    status: blocked_pending_published_geometry_boundary_conditions_and_anchors
     training_eligible: false
 
   hot_methalox_application:
@@ -22,7 +23,7 @@ campaigns:
     mixture_ratio_of: [3.10, 3.30]
     back_pressure_abs_pa: [5.00e4, 1.01325e5]
     npr: derived_as_Pc_over_Pa
-    status: blocked_pending_benchmark_and_validation
+    status: blocked_pending_hot_model_and_cold_n2_validation_gates
     training_eligible: false
 
 acceptance:

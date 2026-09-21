@@ -1,7 +1,7 @@
 study:
   name: dlr_par_methalox_sparse_sensor_eilmer
   purpose: predict shock-induced boundary-layer separation from sparse wall pressure
-  status: blocked_pending_products_air_benchmark
+  status: blocked_pending_hot_model_and_validation_gates
   claim_scope: synthetic_methodology_study_not_raptor_hardware
 
 geometry:
@@ -29,9 +29,10 @@ thermochemistry:
   fuel: CH4_L
   eilmer_primary_candidate: thermally_perfect_multispecies_finite_rate
   comparison_models: [equilibrium, frozen, finite_rate]
-  exhaust_species_set: pending_benchmark_selection
+  exhaust_species_set: [H2O, CO2, CO, H2, OH, O2, O, H]
+  species_set_basis: products_air_screen_only_pending_finite_rate_mechanism
   exterior_composition: dry_air
-  transport_model: pending_validation
+  transport_model: thermally_perfect_fick_binary_screened_pending_hot_validation
   chemical_reference_state_must_be_consistent: true
 
 solver:

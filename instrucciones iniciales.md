@@ -25,6 +25,9 @@ modelos de aprendizaje automático.
 - El benchmark multicomponente productos/aire pasó su screen de seis rangos;
   su evidencia pequeña está en
   `raptor_like_study/cases/products_air_benchmark/results/`.
+- El contorno reconstruido DLR-PAR pasó una revisión geométrica y de calidad
+  de malla: 92 160 celdas positivas en seis bloques conformes. No fue una
+  corrida de flujo ni una validación experimental.
 - La validación DLR-PAR con N2 frío todavía no está reproducida en Eilmer.
 - La campaña caliente está bloqueada hasta cerrar los gates documentados.
 - Las LUT históricas fueron retiradas. No recrearlas como modelo activo.
@@ -186,13 +189,16 @@ Adapta los comandos a la API concreta del caso y a la documentación de Eilmer
 ## Orden después del benchmark
 
 1. Benchmark productos/aire: completado como screen, no como dato físico.
-2. Portar `DLR_PAR_full_contour.csv` y revisar geometría y calidad de malla.
-3. Digitalizar las condiciones y anclas experimentales DLR-PAR de N2 frío.
-4. Reproducir presión de pared y posición de separación del experimento.
-5. Hacer convergencia de malla, paso temporal y dominio.
-6. Calificar turbulencia y condición térmica de pared.
-7. Seleccionar y validar química/termodinámica/transporte LOX/CH4.
-8. Ejecutar el DOE caliente y sólo entonces producir etiquetas para ML.
+2. Portar el contorno y revisar geometría/malla: completado como screen, no
+   como malla de validación.
+3. Contrastar la reconstrucción con la geometría publicada y digitalizar las
+   condiciones y anclas experimentales DLR-PAR de N2 frío.
+4. Generar tres mallas de validación con resolución de pared justificada.
+5. Reproducir presión de pared y posición de separación del experimento.
+6. Hacer convergencia de malla, paso temporal y dominio.
+7. Calificar turbulencia y condición térmica de pared.
+8. Seleccionar y validar química/termodinámica/transporte LOX/CH4.
+9. Ejecutar el DOE caliente y sólo entonces producir etiquetas para ML.
 
 La separación se define como el primer cruce persistente posgarganta de
 esfuerzo cortante de pared positivo a negativo. El choque se guarda aparte como
@@ -234,5 +240,6 @@ esté probado. No reescribas la historia remota sin autorización explícita.
 El repositorio ya es suficiente para continuar en otra computadora: contiene
 la geometría, CEA, DOE, reglas físicas, gates, scripts ML, instalación fijada de
 Eilmer y este procedimiento. No contiene resultados CFD aceptados para ML. Sí
-contiene el primer screen Eilmer auditado; la siguiente responsabilidad es la
-geometría y validación fría, no anunciar que la campaña física ya está lista.
+contiene el benchmark y el screen geométrico auditados; la siguiente
+responsabilidad es congelar la evidencia publicada y realizar la validación
+fría, no anunciar que la campaña física ya está lista.

@@ -1,0 +1,18 @@
+{
+  "case_id": "dlr_par_geometry_screen_v1",
+  "classification": "geometry_and_mesh_quality_only_not_flow_validation",
+  "started_utc": "2026-09-21T12:42:29Z",
+  "ended_utc": "2026-09-21T12:42:36Z",
+  "wall_seconds": 7,
+  "eilmer_commit": "f53f4609a0331d48efee69a4e4f3c3598378cc03",
+  "contour_sha256": "8984b016bbebb3b6816d92c0b30ef46a84ffa1867edb9888cc525efb68fee116",
+  "grid_lua_sha256": "9b09f0905d693a171ddf93eaa5ca19fd89c981f4ffa793333a2bf8974797a6c3",
+  "cell_count": 92160,
+  "block_count": 6,
+  "solver_executed": false,
+  "mpi_ranks_used": 0,
+  "hostname": "Adan-Pc",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "artifact_directory": "/home/adan/eilmer-artifacts/dlr-par-geometry-20260921-02",
+  "source_repository": "/home/adan/Overexpanded-supersonic-nozzle"
+}

@@ -25,8 +25,9 @@ additional geometries are introduced.
 - ParaView: interactive VTK inspection; Matplotlib: repeatable paper figures.
 
 See `eilmer/README.md` for installation and commands. The bounded products/air
-benchmark described in `HANDOFF.md` has passed its screen; the active CFD task
-is the DLR-PAR geometry and cold-N2 validation lane.
+benchmark and the DLR-PAR geometry-only grid check described in `HANDOFF.md`
+have passed their screens. The active CFD task is to freeze the published
+cold-N2 inputs and anchors before constructing validation meshes.
 
 ## Safety rule
 

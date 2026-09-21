@@ -1,0 +1,24 @@
+{
+  "source_file": "/home/adan/eilmer-artifacts/dlr-par-geometry-20260921-02/DLR_PAR_full_contour.csv",
+  "source_sha256": "8984b016bbebb3b6816d92c0b30ef46a84ffa1867edb9888cc525efb68fee116",
+  "sha256_line_ending_policy": "canonical_lf",
+  "source_classification": "user_reconstruction_not_certified_cad",
+  "units_input": "mm",
+  "units_output": "m",
+  "row_count": 385,
+  "strictly_increasing_x": true,
+  "throat_index_zero_based": 106,
+  "landmarks": {
+    "inlet_x_m": -0.02268,
+    "inlet_radius_m": 0.02,
+    "throat_x_m": -0.0,
+    "throat_radius_m": 0.01,
+    "exit_x_m": 0.12502,
+    "exit_radius_m": 0.05477226
+  },
+  "exit_area_ratio": 30.000004655075998,
+  "segment_slope_min": -0.5773488244442463,
+  "segment_slope_max": 0.6725674491087925,
+  "checks_pass": true,
+  "failures": []
+}

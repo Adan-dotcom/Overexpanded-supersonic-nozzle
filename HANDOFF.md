@@ -22,6 +22,11 @@ conservation screen in 18.0 minutes of solver wall time. Its small evidence is
 under `raptor_like_study/cases/products_air_benchmark/results/`; it is not a
 physics-accepted result or an ML label.
 
+The reconstructed DLR-PAR contour has also passed a geometry-only Eilmer grid
+screen: 92,160 positive-area cells in six conformal blocks.  Evidence is under
+`raptor_like_study/cases/dlr_par_geometry/results/`.  This is not a flow run,
+a wall-resolved validation mesh or an experimental validation result.
+
 The complete fresh-machine procedure and execution order are in
 `instrucciones iniciales.md`. The separate development-only ML task is in
 `instrucciones para claude.md`.
@@ -40,11 +45,12 @@ hardware and is not the original DLR cold-N2 experiment.
 
 ## Next execution
 
-Port the DLR-PAR contour and perform a geometry and mesh-quality-only check.
-Then freeze the cold-N2 experimental inputs, generate a wall-resolved
-axisymmetric grid, and reproduce the literature anchors before attempting the
-hot application campaign. Do not interpret the passed mixing benchmark as
-validation of nozzle separation, turbulence or finite-rate chemistry.
+Verify the reconstructed contour against the published geometry, then freeze
+the cold-N2 experimental inputs and anchors. Generate a three-level
+wall-resolved axisymmetric grid family and reproduce the literature anchors
+before attempting the hot application campaign. Do not interpret either
+screen as validation of nozzle separation, turbulence or finite-rate
+chemistry.
 
 ## Verification
 
