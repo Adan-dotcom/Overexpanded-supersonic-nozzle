@@ -1,6 +1,6 @@
 # Run status
 
-Updated: 2026-09-21 UTC
+Updated: 2026-09-22 UTC
 
 ## Solver
 
@@ -76,21 +76,26 @@ The external screen's large y+ and unavailable open-transient global balance
 remain explicit limitations.
 
 The subsequent wall-resolution qualification supersedes permission to launch
-LOX immediately. Three external meshes now pass geometry at 61,440, 72,960
-and 84,480 cells, with maximum generated first-cell heights of 0.0925, 0.0463
-and 0.0231 micrometres. The coarse explicit solver was infeasible under the
-60-minute limit (`dt` near `5.1e-13 s`), and the official Mabey steady
-continuation crashed at Newton step 1 with `SIGSEGV` in `gradients_leastsq`.
-Thus no wall-mesh `y+` has been obtained; medium/fine flow runs and LOX are
-gated off. The robust re-audit rejects the old lip artifact (`x_sep=null`) and
-keeps shock separate at provisional `x_shock=0.10808978 m`.
+LOX immediately. Three external meshes pass geometry at 61,440, 72,960 and
+84,480 cells. The steady `SIGSEGV` was traced to mixing transient derivative
+settings with Newton's WLSQ Jacobian and was corrected with the exact official
+Mabey gradient configuration. The official `lmrZ` path then converged the
+screen continuation in 1,421 steps to residual `9.23e-11`, with positive
+states, VTK and loads. Its `y+` is still 6,811.9.
+
+Direct continuation to wall-coarse failed at step 56 after turbulence
+residual growth and repeated rejected steps drove CFL below the unchanged
+official minimum. A decade-by-decade, coarse-to-fine bridge queue is now
+running without a wall-time limit. No wall-mesh `y+` exists yet; medium/fine
+and LOX remain gated off.
 
 ## Immediate order
 
-1. Replace or bypass the singular steady Newton preconditioner path using a
-   separately tested transient initialization or continuation/restart method.
-2. Re-run one coarse NPR=35 baseline and require normal exit plus all audits.
-3. Only after that gate, execute medium, startup NPR sweep and OFAT screens.
+1. Complete the decade wall-spacing continuation ladder without changing
+   numerical controls.
+2. Require wall-coarse normal convergence plus state, VTK, load and `y+`
+   audits before launching medium and fine.
+3. Quantify mesh dependence only after all three wall meshes pass.
 4. Keep LOX/CH4 screening disabled until a wall-resolved cold-N2 flow proves
    `y+ <= 1` and the robust separation detector can be evaluated.
 5. Reproduce the frozen experimental anchors before any physics acceptance.

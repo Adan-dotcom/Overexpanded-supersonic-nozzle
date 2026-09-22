@@ -1,5 +1,5 @@
 schema_version: 2
-updated_utc: "2026-09-21T14:54:25Z"
+updated_utc: "2026-09-22T15:20:00Z"
 active_solver: Eilmer
 accepted_training_labels: 0
 
@@ -70,6 +70,12 @@ tracks:
     wall_mesh_levels: [wall-coarse, wall-medium, wall-fine]
     wall_mesh_cells: [61440, 72960, 84480]
     wall_resolution_flow_gate_passed: false
+    corrected_steady_screen_converged: true
+    corrected_steady_screen_final_step: 1421
+    corrected_steady_screen_relative_residual: 9.234486e-11
+    corrected_steady_screen_y_plus_max: 6811.912816277036
+    direct_wall_coarse_continuation_passed: false
+    bridge_continuation_in_progress: true
     y_plus_target_max: 1.0
     y_plus_target_verified: false
     robust_separation_reaudit_x_sep_m: null
@@ -84,7 +90,7 @@ tracks:
       - open_transient_mass_energy_balance_not_available
       - no_experimental_dlr_match
       - no_physics_accepted_or_training_eligible_labels
-      - wall_resolved_coarse_flow_failed_before_first_newton_step
+      - direct_wall_coarse_continuation_failed_after_turbulence_residual_growth
       - explicit_wall_resolved_timestep_infeasible_under_60_minute_limit
 
   hot_methalox_products_air_plume:

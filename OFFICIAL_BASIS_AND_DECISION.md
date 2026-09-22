@@ -126,7 +126,11 @@ internal cold-N2 case remains the separately preserved `NO_GO` documented in
 The GO above is retained as the historical workflow-stability decision. A
 later user-required wall-resolution gate now blocks LOX progression. Three
 wall meshes pass geometry, but the explicit timestep is infeasible under the
-60-minute limit and the official Mabey steady continuation fails at Newton
-step 1 with `SIGSEGV` in `gradients_leastsq`. Consequently `y+ <= 1` is not
-verified and the current progression decision is **NO_GO_WALL_RESOLUTION**.
-See `WALL_MESH_AND_SEPARATION_STATUS.md`.
+60-minute limit. The former steady `SIGSEGV` was traced to incompatible
+transient gradient settings and removed with Mabey's exact official WLSQ
+configuration; the corrected screen converged normally with `lmrZ`. Direct
+continuation to wall-coarse nevertheless failed after turbulence residual
+growth drove CFL below the unchanged official minimum. A decade wall-spacing
+bridge is in progress. Consequently `y+ <= 1` is not verified and the current
+progression decision remains **NO_GO_WALL_RESOLUTION**. See
+`WALL_MESH_AND_SEPARATION_STATUS.md`.
