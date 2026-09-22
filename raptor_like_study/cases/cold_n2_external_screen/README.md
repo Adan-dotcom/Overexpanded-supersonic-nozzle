@@ -31,6 +31,18 @@ wall-normal cells. `audit_wall_mesh.py` checks the generated first-cell sizes
 and positive cell areas. The flow gate currently fails on the coarse mesh, so
 the smaller meshes are not automatically launched.
 
+The official-example and minimal steady-crash diagnostic ladder can be left in
+a persistent terminal with:
+
+```bash
+tmux new-session -d -s eilmer-overnight \
+  "bash run_overnight_diagnostics.sh /home/adan/eilmer-artifacts/overnight-eilmer-diagnostics"
+```
+
+It retains per-step logs and `status.tsv`, enforces a 60-minute limit per CFD
+run, and builds a separate debug installation plus MPI backtrace if a
+segmentation fault is reproduced. It never replaces the optimized install.
+
 Run one case into an external artifact directory with:
 
 ```bash
