@@ -137,13 +137,9 @@ def solver_log(path: Path) -> dict:
     }
 
 
-def read_wall_loads(root: Path) -> list[dict[str, float]]:
-    loads = root / "lmrsim" / "loads"
-    snapshots = sorted(path for path in loads.iterdir() if path.is_dir() and path.name.isdigit())
-    if not snapshots:
-        return []
+def read_wall_load_snapshot(snapshot: Path) -> list[dict[str, float]]:
     rows: list[dict[str, float]] = []
-    for path in sorted(snapshots[-1].glob("*.dat")):
+    for path in sorted(snapshot.glob("*.dat")):
         with path.open(encoding="ascii") as stream:
             headers = stream.readline().split()
             for line in stream:
@@ -151,6 +147,14 @@ def read_wall_loads(root: Path) -> list[dict[str, float]]:
                 if values:
                     rows.append(dict(zip(headers, map(float, values), strict=True)))
     return rows
+
+
+def read_wall_loads(root: Path) -> list[dict[str, float]]:
+    loads = root / "lmrsim" / "loads"
+    snapshots = sorted(path for path in loads.iterdir() if path.is_dir() and path.name.isdigit())
+    if not snapshots:
+        return []
+    return read_wall_load_snapshot(snapshots[-1])
 
 
 def main() -> None:

@@ -68,3 +68,7 @@ fi
 python "$repo_dir/raptor_like_study/cases/cold_n2_external_screen/audit_external.py" \
     --artifact-dir "$artifact_dir" --output "$artifact_dir/audit.json" \
     --wall-profile-output "$artifact_dir/wall-profile.csv"
+python "$repo_dir/raptor_like_study/cases/cold_n2_external_screen/audit_wall_history.py" \
+    --artifact-dir "$artifact_dir" \
+    --output-json "$artifact_dir/wall-history.json" \
+    --output-csv "$artifact_dir/wall-history.csv"

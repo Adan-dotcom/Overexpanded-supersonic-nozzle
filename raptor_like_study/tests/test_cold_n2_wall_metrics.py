@@ -7,6 +7,7 @@ from cases.cold_n2_external_screen.audit_external import (
     pressure_shock,
     solver_log,
 )
+from cases.cold_n2_external_screen.audit_wall_history import load_metadata
 
 
 def sample(x, tau, pressure=100_000.0):
@@ -89,6 +90,20 @@ class ColdN2WallMetricsTests(unittest.TestCase):
             path.write_text("FINAL-STEP: 2000\n", encoding="ascii")
             result = solver_log(path)
         self.assertFalse(result["normal_stop_recorded"])
+
+    def test_load_metadata_preserves_steady_iteration(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "loads-metadata"
+            path.write_text(
+                "loads_index sim_time step\n"
+                "0000 -1.0 20\n"
+                "0001 -1.0 40\n",
+                encoding="ascii",
+            )
+            result = load_metadata(path)
+        self.assertEqual(result[1]["loads_index"], "0001")
+        self.assertEqual(result[1]["step"], 40)
+        self.assertEqual(result[1]["sim_time_s"], -1.0)
 
 
 if __name__ == "__main__":
