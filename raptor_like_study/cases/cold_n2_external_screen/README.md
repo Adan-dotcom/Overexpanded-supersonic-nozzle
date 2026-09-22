@@ -43,6 +43,11 @@ It retains per-step logs and `status.tsv`, enforces a 60-minute limit per CFD
 run, and builds a separate debug installation plus MPI backtrace if a
 segmentation fault is reproduced. It never replaces the optimized install.
 
+`run_overnight_fallback.sh` may be queued in a second tmux session. It waits
+for the primary campaign, then runs the official Busemann coarse-to-fine
+`FlowSolution` continuation, any matrix cases not already passed, and a
+real-versus-complex Frechet diagnostic for crashing prepared cases.
+
 Run one case into an external artifact directory with:
 
 ```bash
