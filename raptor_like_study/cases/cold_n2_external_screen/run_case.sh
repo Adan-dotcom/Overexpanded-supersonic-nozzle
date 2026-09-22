@@ -45,6 +45,10 @@ cd "$artifact_dir"
     date -u +%FT%TZ
     lmr prep-gas -i ideal-n2.lua -o ideal-n2.gas
     lmr prep-grid --job=grid.lua
+    if [[ "$mesh_level" != "screen" ]]; then
+        python "$repo_dir/raptor_like_study/cases/cold_n2_external_screen/audit_wall_mesh.py" \
+            --artifact-dir "$artifact_dir" --output "$artifact_dir/mesh-audit.json"
+    fi
     lmr prep-sim --job=transient.lua
     mpirun -np 6 --oversubscribe "$solver_runner"
 } 2>&1 | tee solver.log

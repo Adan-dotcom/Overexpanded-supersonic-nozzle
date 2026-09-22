@@ -31,6 +31,13 @@ wall-normal cells. `audit_wall_mesh.py` checks the generated first-cell sizes
 and positive cell areas. The flow gate currently fails on the coarse mesh, so
 the smaller meshes are not automatically launched.
 
+The direct `screen` to `wall-coarse` interpolation spans roughly four orders
+of magnitude in first-cell height.  The continuation-only `bridge-100um`,
+`bridge-10um` and `bridge-1um` grids reduce that spacing one decade at a time,
+using the official coarse-to-fine `FlowSolution` pattern.  They do not belong
+to the three-grid convergence family and their outputs are never eligible as
+measurements or labels.
+
 The official-example and minimal steady-crash diagnostic ladder can be left in
 a persistent terminal with:
 

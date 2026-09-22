@@ -27,7 +27,15 @@ def main() -> None:
     parser.add_argument("--max-time-s", type=float, default=0.001)
     parser.add_argument(
         "--mesh-level",
-        choices=("screen", "wall-coarse", "wall-medium", "wall-fine"),
+        choices=(
+            "screen",
+            "bridge-100um",
+            "bridge-10um",
+            "bridge-1um",
+            "wall-coarse",
+            "wall-medium",
+            "wall-fine",
+        ),
         default="screen",
     )
     parser.add_argument("--initial-solution-dir", type=Path)
@@ -56,6 +64,36 @@ def main() -> None:
             "nj_core": 48,
             "nj_outer": 48,
             "wall_first_cell_m": None,
+        },
+        # Continuation-only meshes reduce the wall-normal spacing by one
+        # decade at a time.  They are not members of the three-grid
+        # convergence family and cannot produce accepted measurements.
+        "bridge-100um": {
+            "ni_convergent": 64,
+            "ni_divergent": 256,
+            "ni_external": 160,
+            "nj_core": 64,
+            "nj_outer": 48,
+            "wall_first_cell_m": 4.0e-5,
+            "wall_first_cell_max_goal_m": 1.0e-4,
+        },
+        "bridge-10um": {
+            "ni_convergent": 64,
+            "ni_divergent": 256,
+            "ni_external": 160,
+            "nj_core": 80,
+            "nj_outer": 48,
+            "wall_first_cell_m": 4.0e-6,
+            "wall_first_cell_max_goal_m": 1.0e-5,
+        },
+        "bridge-1um": {
+            "ni_convergent": 64,
+            "ni_divergent": 256,
+            "ni_external": 160,
+            "nj_core": 96,
+            "nj_outer": 48,
+            "wall_first_cell_m": 4.0e-7,
+            "wall_first_cell_max_goal_m": 1.0e-6,
         },
         "wall-coarse": {
             "ni_convergent": 64,
