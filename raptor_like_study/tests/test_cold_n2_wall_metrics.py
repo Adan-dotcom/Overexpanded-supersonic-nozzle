@@ -1,8 +1,11 @@
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from cases.cold_n2_external_screen.audit_external import (
     persistent_separation,
     pressure_shock,
+    solver_log,
 )
 
 
@@ -66,6 +69,26 @@ class ColdN2WallMetricsTests(unittest.TestCase):
         x_shock, gradient = pressure_shock(samples)
         self.assertEqual(x_shock, 0.012)
         self.assertGreater(gradient, 0.0)
+
+    def test_steady_normal_stop_does_not_require_final_time(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "solver.log"
+            path.write_text(
+                "STOP-REASON: relative-global-residual-target\n"
+                "FINAL-STEP: 1421\n",
+                encoding="ascii",
+            )
+            result = solver_log(path)
+        self.assertTrue(result["normal_stop_recorded"])
+        self.assertEqual(result["final_step"], 1421)
+        self.assertIsNone(result["final_time_s"])
+
+    def test_exit_without_stop_reason_is_not_normal(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "solver.log"
+            path.write_text("FINAL-STEP: 2000\n", encoding="ascii")
+            result = solver_log(path)
+        self.assertFalse(result["normal_stop_recorded"])
 
 
 if __name__ == "__main__":

@@ -13,6 +13,7 @@ max_time="${4:-0.001}"
 mesh_level="${5:-screen}"
 initial_solution_dir="${6:-}"
 solver_mode="${7:-transient}"
+solver_runner="${EILMER_RUNNER:-lmr-mpi-run}"
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 source "$repo_dir/raptor_like_study/eilmer/eilmer5-env.sh"
 
@@ -39,14 +40,19 @@ python "$repo_dir/raptor_like_study/cases/cold_n2_external_screen/prepare_run.py
 
 cd "$artifact_dir"
 {
-    echo "command: external screen stage=$stage NPR=$npr mesh=$mesh_level solver=$solver_mode"
+    echo "command: external screen stage=$stage NPR=$npr mesh=$mesh_level solver=$solver_mode runner=$solver_runner"
     echo "solver revision: $(lmr revision-id)"
     date -u +%FT%TZ
     lmr prep-gas -i ideal-n2.lua -o ideal-n2.gas
     lmr prep-grid --job=grid.lua
     lmr prep-sim --job=transient.lua
-    mpirun -np 6 --oversubscribe lmr-mpi-run
+    mpirun -np 6 --oversubscribe "$solver_runner"
 } 2>&1 | tee solver.log
+if [[ "$solver_mode" == "steady" ]] && \
+   ! grep -q 'STOP-REASON: relative-global-residual-target' solver.log; then
+    echo "steady solver did not reach the declared residual target" >&2
+    exit 1
+fi
 lmr snapshot2vtk --all --add-vars=mach,pitot 2>&1 | tee post-vtk.log
 if [[ -d lmrsim/loads ]] && find lmrsim/loads -mindepth 2 -type f -name '*.dat' -print -quit | grep -q .; then
     echo "wall loads exported under lmrsim/loads"

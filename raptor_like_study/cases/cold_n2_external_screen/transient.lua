@@ -95,8 +95,19 @@ else
 end
 config.viscous = screen.stage >= 2
 if config.viscous then
-   config.spatial_deriv_locn = 'vertices'
-   config.spatial_deriv_calc = 'divergence'
+   if screen.solver_mode == 'steady' then
+      -- Exact viscous-gradient formulation used by the official Mabey
+      -- k_log_omega steady example.  Newton's Jacobian evaluates the WLSQ
+      -- path, so retaining Hakkinen's transient vertex/divergence settings
+      -- leaves the 2D WLSQ workspace incomplete (flowgradients.d:699).
+      config.spatial_deriv_calc = 'least_squares'
+      config.spatial_deriv_locn = 'cells'
+      config.viscous_least_squares_type = 'weighted_qr'
+      config.include_boundary_faces_in_spatial_deriv_correction = true
+   else
+      config.spatial_deriv_locn = 'vertices'
+      config.spatial_deriv_calc = 'divergence'
+   end
 end
 
 -- Load output follows the official Mabey example.

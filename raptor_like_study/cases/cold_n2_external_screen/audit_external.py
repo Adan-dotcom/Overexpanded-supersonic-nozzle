@@ -124,7 +124,10 @@ def solver_log(path: Path) -> dict:
     final_time = re.findall(r"FINAL-TIME:\s*([0-9.eE+-]+)", text)
     stop = re.findall(r"STOP-REASON:\s*([^\r\n]+)", text)
     return {
-        "normal_stop_recorded": bool(step and final_time and stop),
+        # Steady lmr runs report FINAL-STEP and STOP-REASON but no FINAL-TIME.
+        # A final time is therefore informative for transient runs, not a
+        # prerequisite for recognizing a normal steady stop.
+        "normal_stop_recorded": bool(step and stop),
         "stop_reason": stop[-1].strip() if stop else None,
         "final_step": int(step[-1]) if step else None,
         "final_time_s": float(final_time[-1]) if final_time else None,
@@ -157,6 +160,7 @@ def main() -> None:
     parser.add_argument("--artifact-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--wall-profile-output", type=Path, required=True)
+    parser.add_argument("--solver-log", type=Path, default=Path("solver.log"))
     parser.add_argument("--detector-profile-output", type=Path)
     parser.add_argument("--throat-exclusion-m", type=float, default=0.002)
     parser.add_argument("--lip-exclusion-m", type=float, default=0.002)
@@ -218,6 +222,18 @@ def main() -> None:
     lip_band = [sample for sample in nozzle if sample["x_m"] >= EXIT_X_M - args.lip_exclusion_m]
     yplus_nozzle = finite_max_with_location(nozzle, "y_plus")
     vtk_files = [path for path in Path(sim.vtk_dir).rglob("*") if path.suffix in {".vtu", ".pvtu", ".pvd"}]
+    log_path = args.solver_log
+    if not log_path.is_absolute():
+        log_path = root / log_path
+    solver = solver_log(log_path)
+    run_checks = {
+        "normal_solver_stop": solver["normal_stop_recorded"],
+        "no_nonphysical_error_text": not solver["nonphysical_error_text_present"],
+        "finite_pressure_density_temperature": finite,
+        "positive_pressure_density_temperature": nonpositive == 0,
+        "vtk_export_present": bool(vtk_files),
+        "wall_load_export_present": bool(rows),
+    }
     payload = {
         "case_family": "cold_n2_external_screen",
         "final_snapshot": sim.snapshots[-1],
@@ -226,7 +242,7 @@ def main() -> None:
         "nonpositive_pressure_density_temperature_points": nonpositive,
         "state_min": minima,
         "state_max": maxima,
-        "solver": solver_log(root / "solver.log"),
+        "solver": solver,
         "vtk_export_present": bool(vtk_files),
         "vtk_file_count": len(vtk_files),
         "wall_load_export_present": bool(rows),
@@ -262,11 +278,15 @@ def main() -> None:
             "nozzle_max": max((sample["cell_width_normal_m"] for sample in nozzle), default=None),
         },
         "mass_energy_balance": {"available": False, "reason": "open ambient and transient accumulation require a dedicated control-volume audit"},
+        "run_checks": run_checks,
+        "all_run_checks_pass": all(run_checks.values()),
         "physics_accepted": False,
         "training_eligible": False,
     }
     args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="ascii")
     print(json.dumps(payload, indent=2))
+    if not payload["all_run_checks_pass"]:
+        raise SystemExit("External-screen run audit failed")
 
 
 if __name__ == "__main__":
